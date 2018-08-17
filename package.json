@@ -1,0 +1,94 @@
+{
+  "name": "@wojtekmaj/react-datetimerange-picker",
+  "version": "1.0.0",
+  "description": "A datetime range picker for your React app.",
+  "main": "dist/entry.js",
+  "es6": "src/entry.js",
+  "scripts": {
+    "build": "yarn run build-js && yarn run copy-styles && yarn run build-styles",
+    "build-js": "babel src -d dist --ignore __tests__",
+    "build-styles": "lessc ./dist/DateTimeRangePicker.less ./dist/DateTimeRangePicker.css",
+    "copy-styles": "node ./copy-styles.js",
+    "prepublishOnly": "yarn run build",
+    "test": "yarn run test-eslint && yarn run test-jest",
+    "test-eslint": "eslint src/ test/ --ext .jsx,.js",
+    "test-jest": "jest",
+    "test-jest-coverage": "jest --coverage"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**.{js,jsx}",
+      "!**/src/entry.js",
+      "!**/src/entry.nostyle.js"
+    ]
+  },
+  "keywords": [
+    "calendar",
+    "date",
+    "date-picker",
+    "date-range",
+    "date-range-picker",
+    "datetime",
+    "datetime-picker",
+    "datetime-range",
+    "datetime-range-picker",
+    "react",
+    "time",
+    "time-picker"
+  ],
+  "author": {
+    "name": "Wojciech Maj",
+    "email": "kontakt@wojtekmaj.pl"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "detect-element-overflow": "^1.1.1",
+    "lodash.once": "^4.1.1",
+    "merge-class-names": "^1.1.1",
+    "prop-types": "^15.6.0",
+    "react-calendar": "^2.16.1",
+    "react-clock": "^2.2.1",
+    "react-datetime-picker": "^1.4.2",
+    "react-lifecycles-compat": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.9.1",
+    "jest": "^22.1.4",
+    "jest-cli": "^22.1.4",
+    "less": "^2.7.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  },
+  "peerDependencies": {
+    "react": ">=15.5",
+    "react-dom": ">=15.5"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/",
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wojtekmaj/react-datetimerange-picker.git"
+  }
+}
