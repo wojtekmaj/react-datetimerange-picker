@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { getISOLocalDate } from '../src/shared/dates';
+import { getISOLocalDateTime } from './shared/dates';
 
 export default class ValidityOptions extends PureComponent {
   onMinChange = (event) => {
@@ -32,14 +32,14 @@ export default class ValidityOptions extends PureComponent {
         </legend>
 
         <div>
-          <label htmlFor="minDate">
+          <label htmlFor="minDatetime">
             Minimum date
           </label>
           <input
-            id="minDate"
+            id="minDatetime"
             onChange={this.onMinChange}
-            type="date"
-            value={minDate ? getISOLocalDate(minDate) : ''}
+            type="datetime-local"
+            value={minDate ? getISOLocalDateTime(minDate) : ''}
           />
           &nbsp;
           <button
@@ -51,14 +51,14 @@ export default class ValidityOptions extends PureComponent {
         </div>
 
         <div>
-          <label htmlFor="maxDate">
+          <label htmlFor="maxDatetime">
             Maximum date
           </label>
           <input
-            id="maxDate"
+            id="maxDatetime"
             onChange={this.onMaxChange}
-            type="date"
-            value={maxDate ? getISOLocalDate(maxDate) : ''}
+            type="datetime-local"
+            value={maxDate ? getISOLocalDateTime(maxDate) : ''}
           />
           &nbsp;
           <button

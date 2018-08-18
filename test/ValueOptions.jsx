@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  getISOLocalDate,
-  getBeginOfDay,
-  getEndOfDay,
-} from './shared/dates';
+import { getISOLocalDateTime } from './shared/dates';
 
 export default class ValueOptions extends PureComponent {
   get startDate() {
@@ -58,12 +54,12 @@ export default class ValueOptions extends PureComponent {
 
   onStartChange = (event) => {
     const { value } = event.target;
-    this.setStartValue(getBeginOfDay(new Date(value)));
+    this.setStartValue(new Date(value));
   }
 
   onEndChange = (event) => {
     const { value } = event.target;
-    this.setEndValue(getEndOfDay(new Date(value)));
+    this.setEndValue(new Date(value));
   }
 
   render() {
@@ -74,14 +70,14 @@ export default class ValueOptions extends PureComponent {
         </legend>
 
         <div>
-          <label htmlFor="startDate">
+          <label htmlFor="startDatetime">
             Start date
           </label>
           <input
-            id="startDate"
+            id="startDatetime"
             onChange={this.onStartChange}
-            type="date"
-            value={this.startDate ? getISOLocalDate(this.startDate) : ''}
+            type="datetime-local"
+            value={this.startDate ? getISOLocalDateTime(this.startDate) : ''}
           />
           &nbsp;
           <button
@@ -99,14 +95,14 @@ export default class ValueOptions extends PureComponent {
         </div>
 
         <div>
-          <label htmlFor="endDate">
+          <label htmlFor="endDatetime">
             End date
           </label>
           <input
-            id="endDate"
+            id="endDatetime"
             onChange={this.onEndChange}
-            type="date"
-            value={this.endDate ? getISOLocalDate(this.endDate) : ''}
+            type="datetime-local"
+            value={this.endDate ? getISOLocalDateTime(this.endDate) : ''}
           />
           &nbsp;
           <button
