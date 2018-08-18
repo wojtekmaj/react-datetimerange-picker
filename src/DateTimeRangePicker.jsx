@@ -348,7 +348,7 @@ export default class DateTimeRangePicker extends PureComponent {
 
   render() {
     const { className, disabled } = this.props;
-    const { isOpen } = this.state;
+    const { isCalendarOpen, isClockOpen } = this.state;
 
     const baseClassName = 'react-datetimerange-picker';
 
@@ -356,7 +356,7 @@ export default class DateTimeRangePicker extends PureComponent {
       <div
         className={mergeClassNames(
           baseClassName,
-          `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
+          `${baseClassName}--${isCalendarOpen || isClockOpen ? 'open' : 'closed'}`,
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
           className,
         )}
@@ -393,7 +393,8 @@ const ClearIcon = (
 DateTimeRangePicker.defaultProps = {
   calendarIcon: CalendarIcon,
   clearIcon: ClearIcon,
-  isOpen: null,
+  isCalendarOpen: null,
+  isClockOpen: null,
 };
 
 DateTimeRangePicker.propTypes = {
@@ -409,7 +410,8 @@ DateTimeRangePicker.propTypes = {
   ]),
   clearIcon: PropTypes.node,
   disabled: PropTypes.bool,
-  isOpen: PropTypes.bool,
+  isCalendarOpen: PropTypes.bool,
+  isClockOpen: PropTypes.bool,
   maxDetail: PropTypes.oneOf(allViews),
   name: PropTypes.string,
   required: PropTypes.bool,

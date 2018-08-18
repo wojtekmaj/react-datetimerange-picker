@@ -22,17 +22,17 @@ const mockDocumentListeners = () => {
 };
 
 describe('DateTimeRangePicker', () => {
-  it('passes name to DateInput', () => {
+  it('passes name to DateTimeInput', () => {
     const name = 'testName';
 
     const component = mount(
       <DateTimeRangePicker name={name} />
     );
 
-    const dateInput = component.find('DateInput');
+    const dateTimeInput = component.find('DateTimeInput');
 
-    expect(dateInput.at(0).prop('name')).toBe(`${name}_from`);
-    expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
+    expect(dateTimeInput.at(0).prop('name')).toBe(`${name}_from`);
+    expect(dateTimeInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
   it('applies className to its wrapper when given a string', () => {
@@ -53,7 +53,7 @@ describe('DateTimeRangePicker', () => {
     const component = mount(
       <DateTimeRangePicker
         calendarClassName={calendarClassName}
-        isOpen
+        isCalendarOpen
       />
     );
 
@@ -63,14 +63,30 @@ describe('DateTimeRangePicker', () => {
     expect(calendarWrapperClassName.includes(calendarClassName)).toBe(true);
   });
 
-  it('renders DateInput components', () => {
+  it('applies clockClassName to the clock when given a string', () => {
+    const clockClassName = 'testClassName';
+
+    const component = mount(
+      <DateTimeRangePicker
+        clockClassName={clockClassName}
+        isClockOpen
+      />
+    );
+
+    const clock = component.find('Clock');
+    const calendarWrapperClassName = clock.prop('className');
+
+    expect(calendarWrapperClassName.includes(clockClassName)).toBe(true);
+  });
+
+  it('renders DateTimeInput components', () => {
     const component = mount(
       <DateTimeRangePicker />
     );
 
-    const dateInput = component.find('DateInput');
+    const dateTimeInput = component.find('DateTimeInput');
 
-    expect(dateInput).toHaveLength(2);
+    expect(dateTimeInput).toHaveLength(2);
   });
 
   it('renders clear button', () => {
@@ -93,19 +109,31 @@ describe('DateTimeRangePicker', () => {
     expect(calendarButton).toHaveLength(1);
   });
 
-  it('renders DateInput and Calendar components when given isOpen flag', () => {
+  it('renders DateTimeInput and Calendar components when given isCalendarOpen flag', () => {
     const component = mount(
-      <DateTimeRangePicker isOpen />
+      <DateTimeRangePicker isCalendarOpen />
     );
 
-    const dateInput = component.find('DateInput');
+    const dateTimeInput = component.find('DateTimeInput');
     const calendar = component.find('Calendar');
 
-    expect(dateInput).toHaveLength(2);
+    expect(dateTimeInput).toHaveLength(2);
     expect(calendar).toHaveLength(1);
   });
 
-  it('opens Calendar component when given isOpen flag by changing props', () => {
+  it('renders DateTimeInput and Clock components when given isClockOpen flag', () => {
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />
+    );
+
+    const dateTimeInput = component.find('DateTimeInput');
+    const calendar = component.find('Clock');
+
+    expect(dateTimeInput).toHaveLength(2);
+    expect(calendar).toHaveLength(1);
+  });
+
+  it('opens Calendar component when given isCalendarOpen flag by changing props', () => {
     const component = mount(
       <DateTimeRangePicker />
     );
@@ -114,10 +142,27 @@ describe('DateTimeRangePicker', () => {
 
     expect(calendar).toHaveLength(0);
 
-    component.setProps({ isOpen: true });
+    component.setProps({ isCalendarOpen: true });
     component.update();
 
     const calendar2 = component.find('Calendar');
+
+    expect(calendar2).toHaveLength(1);
+  });
+
+  it('opens Clock component when given isClockOpen flag by changing props', () => {
+    const component = mount(
+      <DateTimeRangePicker />
+    );
+
+    const calendar = component.find('Clock');
+
+    expect(calendar).toHaveLength(0);
+
+    component.setProps({ isClockOpen: true });
+    component.update();
+
+    const calendar2 = component.find('Clock');
 
     expect(calendar2).toHaveLength(1);
   });
@@ -158,11 +203,29 @@ describe('DateTimeRangePicker', () => {
     expect(calendar2).toHaveLength(1);
   });
 
-  it('closes Calendar component when clicked outside', () => {
+  it('opens Clock component when focusing on a time input inside', () => {
+    const component = mount(
+      <DateTimeRangePicker />
+    );
+
+    const clock = component.find('Clock');
+    const input = component.find('input[name^="hour"]').first();
+
+    expect(clock).toHaveLength(0);
+
+    input.simulate('focus');
+    component.update();
+
+    const clock2 = component.find('Clock');
+
+    expect(clock2).toHaveLength(1);
+  });
+
+  it('closes Calendar and Clock component when clicked outside', () => {
     const { simulate } = mockDocumentListeners();
 
     const component = mount(
-      <DateTimeRangePicker isOpen />
+      <DateTimeRangePicker isCalendarOpen isClockOpen />
     );
 
     simulate('mousedown', {
@@ -170,14 +233,15 @@ describe('DateTimeRangePicker', () => {
     });
     component.update();
 
-    expect(component.state('isOpen')).toBe(false);
+    expect(component.state('isCalendarOpen')).toBe(false);
+    expect(component.state('isClockOpen')).toBe(false);
   });
 
-  it('does not close Calendar component when clicked inside', () => {
+  it('does not close Calendar and Clock component when clicked inside', () => {
     const { simulate } = mockDocumentListeners();
 
     const component = mount(
-      <DateTimeRangePicker isOpen />
+      <DateTimeRangePicker isCalendarOpen isClockOpen />
     );
 
     simulate('mousedown', {
@@ -185,6 +249,25 @@ describe('DateTimeRangePicker', () => {
     });
     component.update();
 
-    expect(component.state('isOpen')).toBe(true);
+    expect(component.state('isCalendarOpen')).toBe(true);
+    expect(component.state('isClockOpen')).toBe(true);
+  });
+
+  it('closes Clock when Calendar is opened by a click on the calendar icon', () => {
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />
+    );
+
+    const clock = component.find('Clock');
+    const button = component.find('button.react-datetimerange-picker__calendar-button');
+
+    expect(clock).toHaveLength(1);
+
+    button.simulate('click');
+    component.update();
+
+    const clock2 = component.find('Clock');
+
+    expect(clock2).toHaveLength(1);
   });
 });

@@ -87,7 +87,8 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |calendarIcon|Defines the content of the calendar button.|<ul><li>String: `"Calendar"`</li><li>React element: `<CalendarIcon />`</li></ul>|
 |className|Defines class name(s) that will be added along with "react-datetimerange-picker" to the main React-DateTimeRange-Picker `<div>` element.|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |clearIcon|Defines the content of the clear button.|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
-|isOpen|Defines whether the calendar should be opened. Defaults to false.|`true`|
+|isCalendarOpen|Defines whether the calendar should be opened. Defaults to false.|`true`|
+|isClockOpen|Defines whether the clock should be opened. Defaults to false.|`true`|
 |locale|Defines which locale should be used by the date range picker and the calendar. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag). Defaults to user's browser settings.|`"hu-HU"`|
 |maxDate|Defines maximum date that the user can select. Periods partially overlapped by maxDate will also be selectable, although React-DateTimeRange-Picker will ensure that no later date is selected.|Date: `new Date()`|
 |maxDetail|Defines the most detailed calendar view that the user shall see. View defined here also becomes the one on which clicking an item in the calendar will select a date and pass it to onChange. Can be "month", "year", "decade" or "century". Defaults to "month".|`"month"`|
