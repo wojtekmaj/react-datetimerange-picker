@@ -395,6 +395,7 @@ DateTimeRangePicker.defaultProps = {
   clearIcon: ClearIcon,
   isCalendarOpen: null,
   isClockOpen: null,
+  maxDetail: 'minute',
 };
 
 DateTimeRangePicker.propTypes = {
