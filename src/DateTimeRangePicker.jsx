@@ -294,9 +294,10 @@ export default class DateTimeRangePicker extends PureComponent {
   }
 
   renderClock() {
+    const { disableClock } = this.props;
     const { isClockOpen } = this.state;
 
-    if (isClockOpen === null) {
+    if (isClockOpen === null || disableClock) {
       return null;
     }
 
@@ -411,6 +412,7 @@ DateTimeRangePicker.propTypes = {
   ]),
   clearIcon: PropTypes.node,
   disabled: PropTypes.bool,
+  disableClock: PropTypes.bool,
   isCalendarOpen: PropTypes.bool,
   isClockOpen: PropTypes.bool,
   maxDetail: PropTypes.oneOf(allViews),
