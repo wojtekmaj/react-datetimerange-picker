@@ -82,10 +82,6 @@ export default class DateTimeRangePicker extends PureComponent {
     this.onChange([nextValueFrom, nextValueTo], closeWidgets);
   }
 
-  onTimeChange = (value, closeWidgets = true) => {
-    this.onChange(value, closeWidgets);
-  }
-
   onChange = (value, closeWidgets = true) => {
     this.setState(prevState => ({
       isCalendarOpen: prevState.isCalendarOpen && !closeWidgets,
@@ -98,16 +94,16 @@ export default class DateTimeRangePicker extends PureComponent {
     }
   }
 
-  onTimeChangeFrom = (valueFrom, closeWidgets = true) => {
+  onChangeFrom = (valueFrom, closeWidgets = true) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
-    this.onTimeChange([valueFrom, valueTo], closeWidgets);
+    this.onChange([valueFrom, valueTo], closeWidgets);
   }
 
-  onTimeChangeTo = (valueTo, closeWidgets = true) => {
+  onChangeTo = (valueTo, closeWidgets = true) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
-    this.onTimeChange([valueFrom, valueTo], closeWidgets);
+    this.onChange([valueFrom, valueTo], closeWidgets);
   }
 
   onFocus = (event) => {
@@ -201,7 +197,7 @@ export default class DateTimeRangePicker extends PureComponent {
         <DateTimeInput
           {...commonProps}
           name={`${name}_from`}
-          onChange={this.onTimeChangeFrom}
+          onChange={this.onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
@@ -209,7 +205,7 @@ export default class DateTimeRangePicker extends PureComponent {
         <DateTimeInput
           {...commonProps}
           name={`${name}_to`}
-          onChange={this.onTimeChangeTo}
+          onChange={this.onChangeTo}
           returnValue="end"
           value={valueTo}
         />

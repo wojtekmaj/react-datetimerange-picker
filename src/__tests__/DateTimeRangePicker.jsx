@@ -294,4 +294,116 @@ describe('DateTimeRangePicker', () => {
 
     expect(clock2).toHaveLength(1);
   });
+
+  describe('onChangeFrom', () => {
+    it('calls onChange properly given no initial value', () => {
+      const component = mount(
+        <DateTimeRangePicker />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueFrom = new Date();
+      componentInstance.onChangeFrom(nextValueFrom);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], true);
+    });
+
+    it('calls onChange properly given single initial value', () => {
+      const value = new Date(2018, 0, 1);
+
+      const component = mount(
+        <DateTimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueFrom = new Date();
+      componentInstance.onChangeFrom(nextValueFrom);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], true);
+    });
+
+    it('calls onChange properly given initial value as an array', () => {
+      const valueFrom = new Date(2018, 0, 1);
+      const valueTo = new Date(2018, 6, 1);
+      const value = [valueFrom, valueTo];
+
+      const component = mount(
+        <DateTimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueFrom = new Date();
+      componentInstance.onChangeFrom(nextValueFrom);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], true);
+    });
+  });
+
+  describe('onChangeTo', () => {
+    it('calls onChange properly given no initial value', () => {
+      const component = mount(
+        <DateTimeRangePicker />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueTo = new Date();
+      componentInstance.onChangeTo(nextValueTo);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], true);
+    });
+
+    it('calls onChange properly given single initial value', () => {
+      const value = new Date(2018, 0, 1);
+
+      const component = mount(
+        <DateTimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueTo = new Date();
+      componentInstance.onChangeTo(nextValueTo);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], true);
+    });
+
+    it('calls onChange properly given initial value as an array', () => {
+      const valueFrom = new Date(2018, 0, 1);
+      const valueTo = new Date(2018, 6, 1);
+      const value = [valueFrom, valueTo];
+
+      const component = mount(
+        <DateTimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueTo = new Date();
+      componentInstance.onChangeTo(nextValueTo);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], true);
+    });
+  });
 });
