@@ -98,16 +98,16 @@ export default class DateTimeRangePicker extends PureComponent {
     }
   }
 
-  onTimeChangeFrom = (valueFrom, closeCalendar = true) => {
+  onTimeChangeFrom = (valueFrom, closeWidgets = true) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
-    this.onTimeChange([valueFrom, valueTo], closeCalendar);
+    this.onTimeChange([valueFrom, valueTo], closeWidgets);
   }
 
-  onTimeChangeTo = (valueTo, closeCalendar = true) => {
+  onTimeChangeTo = (valueTo, closeWidgets = true) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
-    this.onTimeChange([valueFrom, valueTo], closeCalendar);
+    this.onTimeChange([valueFrom, valueTo], closeWidgets);
   }
 
   onFocus = (event) => {
