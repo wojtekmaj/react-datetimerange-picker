@@ -7,8 +7,6 @@ import '@wojtekmaj/react-datetimerange-picker/src/DateTimeRangePicker.less';
 import 'react-calendar/src/Calendar.less';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-clock/src/Clock.less';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import ValidityOptions from './ValidityOptions';
 import MaxDetailOptions from './MaxDetailOptions';

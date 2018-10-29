@@ -1,6 +1,5 @@
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import DateTimeRangePicker from './DateTimeRangePicker';
 

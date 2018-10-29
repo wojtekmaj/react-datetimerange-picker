@@ -10,6 +10,7 @@ import Clock from 'react-clock/dist/entry.nostyle';
 import DateTimeInput from 'react-datetime-picker/dist/DateTimeInput';
 
 const allViews = ['hour', 'minute', 'second'];
+const baseClassName = 'react-datetimerange-picker';
 
 export default class DateTimeRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -197,6 +198,7 @@ export default class DateTimeRangePicker extends PureComponent {
     const [valueFrom, valueTo] = [].concat(value);
 
     const commonProps = {
+      className: `${baseClassName}__inputGroup`,
       disabled,
       isWidgetOpen: isCalendarOpen || isClockOpen,
       locale,
@@ -208,7 +210,7 @@ export default class DateTimeRangePicker extends PureComponent {
     };
 
     return (
-      <div className="react-datetimerange-picker__button">
+      <div className={`${baseClassName}__wrapper`}>
         <DateTimeInput
           {...commonProps}
           name={`${name}_from`}
@@ -226,7 +228,7 @@ export default class DateTimeRangePicker extends PureComponent {
         />
         {clearIcon !== null && (
           <button
-            className="react-datetimerange-picker__clear-button react-datetimerange-picker__button__icon"
+            className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.clear}
             onFocus={this.stopPropagation}
@@ -237,7 +239,7 @@ export default class DateTimeRangePicker extends PureComponent {
         )}
         {calendarIcon !== null && (
           <button
-            className="react-datetimerange-picker__calendar-button react-datetimerange-picker__button__icon"
+            className={`${baseClassName}__calendar-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.toggleCalendar}
             onFocus={this.stopPropagation}
@@ -267,7 +269,7 @@ export default class DateTimeRangePicker extends PureComponent {
       ...calendarProps
     } = this.props;
 
-    const className = 'react-datetimerange-picker__calendar';
+    const className = `${baseClassName}__calendar`;
 
     return (
       <div
@@ -317,7 +319,7 @@ export default class DateTimeRangePicker extends PureComponent {
       ...clockProps
     } = this.props;
 
-    const className = 'react-datetimerange-picker__clock';
+    const className = `${baseClassName}__clock`;
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
 
@@ -357,8 +359,6 @@ export default class DateTimeRangePicker extends PureComponent {
   render() {
     const { className, disabled } = this.props;
     const { isCalendarOpen, isClockOpen } = this.state;
-
-    const baseClassName = 'react-datetimerange-picker';
 
     return (
       <div
