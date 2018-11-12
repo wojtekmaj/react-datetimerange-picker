@@ -20,6 +20,7 @@ const now = new Date();
 
 export default class Test extends Component {
   state = {
+    disabled: false,
     locale: null,
     maxDate: new Date(now.getUTCFullYear(), now.getUTCMonth() + 1, 15, 12),
     maxDetail: 'minute',
@@ -35,6 +36,7 @@ export default class Test extends Component {
 
   render() {
     const {
+      disabled,
       locale,
       maxDate,
       maxDetail,
@@ -76,6 +78,7 @@ export default class Test extends Component {
               value={value}
             />
             <ViewOptions
+              disabled={disabled}
               setState={setState}
               showLeadingZeros={showLeadingZeros}
               showNeighboringMonth={showNeighboringMonth}
@@ -96,7 +99,7 @@ export default class Test extends Component {
               <DateTimeRangePicker
                 className="myCustomDateTimeRangePickerClassName"
                 calendarClassName="myCustomCalendarClassName"
-                disabled={false}
+                disabled={disabled}
                 locale={locale}
                 maxDate={maxDate}
                 maxDetail={maxDetail}
