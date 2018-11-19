@@ -5,22 +5,6 @@ import DateTimeRangePicker from '../DateTimeRangePicker';
 
 /* eslint-disable comma-dangle */
 
-const mockDocumentListeners = () => {
-  const eventMap = {};
-  document.addEventListener = jest.fn((method, cb) => {
-    if (!eventMap[method]) {
-      eventMap[method] = [];
-    }
-    eventMap[method].push(cb);
-  });
-
-  return {
-    simulate: (method, args) => {
-      eventMap[method].forEach(cb => cb(args));
-    },
-  };
-};
-
 describe('DateTimeRangePicker', () => {
   it('passes default name to DateTimeInput', () => {
     const component = mount(
@@ -245,35 +229,52 @@ describe('DateTimeRangePicker', () => {
     expect(clock2).toHaveLength(1);
   });
 
-  it('closes Calendar and Clock component when clicked outside', () => {
-    const { simulate } = mockDocumentListeners();
-
+  it('closes Calendar and Clock component when focused outside', () => {
     const component = mount(
       <DateTimeRangePicker isCalendarOpen isClockOpen />
     );
 
-    simulate('mousedown', {
-      target: document,
-    });
+    const customInputs = component.find('input[type="number"]');
+    const dayInput = customInputs.at(0);
+
+    dayInput.simulate('blur');
     component.update();
 
     expect(component.state('isCalendarOpen')).toBe(false);
     expect(component.state('isClockOpen')).toBe(false);
   });
 
-  it('does not close Calendar and Clock component when clicked inside', () => {
-    const { simulate } = mockDocumentListeners();
-
+  it('does not close Calendar component when focused within date inputs', () => {
     const component = mount(
-      <DateTimeRangePicker isCalendarOpen isClockOpen />
+      <DateTimeRangePicker isCalendarOpen />
     );
 
-    simulate('mousedown', {
-      target: component.getDOMNode(),
-    });
+    const customInputs = component.find('input[type="number"]');
+    const dayInput = customInputs.at(0);
+    const monthInput = customInputs.at(1);
+
+    dayInput.simulate('blur');
+    monthInput.simulate('focus');
     component.update();
 
     expect(component.state('isCalendarOpen')).toBe(true);
+    expect(component.state('isClockOpen')).toBe(false);
+  });
+
+  it('does not close Clock component when focused within time inputs', () => {
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />
+    );
+
+    const customInputs = component.find('input[type="number"]');
+    const hourInput = customInputs.at(3);
+    const minuteInput = customInputs.at(4);
+
+    hourInput.simulate('blur');
+    minuteInput.simulate('focus');
+    component.update();
+
+    expect(component.state('isCalendarOpen')).toBe(false);
     expect(component.state('isClockOpen')).toBe(true);
   });
 
