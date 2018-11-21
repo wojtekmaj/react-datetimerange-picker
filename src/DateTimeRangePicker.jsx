@@ -35,20 +35,6 @@ export default class DateTimeRangePicker extends PureComponent {
     return makeEventProps(this.props);
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.onClick);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.onClick);
-  }
-
-  onClick = (event) => {
-    if (this.wrapper && !this.wrapper.contains(event.target)) {
-      this.closeWidgets();
-    }
-  }
-
   onDateChange = ([valueFrom, valueTo], closeWidgets = true) => {
     const { value } = this.props;
     const [prevValueFrom, prevValueTo] = [].concat(value);
@@ -138,6 +124,16 @@ export default class DateTimeRangePicker extends PureComponent {
         break;
       default:
     }
+  }
+
+  onBlur = () => {
+    const { onBlur } = this.props;
+
+    if (onBlur) {
+      onBlur(event);
+    }
+
+    this.closeWidgets();
   }
 
   openClock = () => {
@@ -384,6 +380,7 @@ export default class DateTimeRangePicker extends PureComponent {
         )}
         {...this.eventProps}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         ref={(ref) => {
           if (!ref) {
             return;
