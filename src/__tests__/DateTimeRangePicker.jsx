@@ -128,7 +128,6 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toHaveLength(1);
   });
 
-
   it('does not render Clock component when given disableClock & isClockOpen flags', () => {
     const component = mount(
       <DateTimeRangePicker disableClock isClockOpen />
@@ -229,18 +228,71 @@ describe('DateTimeRangePicker', () => {
     expect(clock2).toHaveLength(1);
   });
 
-  it('closes Calendar and Clock component when focused outside', () => {
+  it('closes Calendar component when clicked outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
     const component = mount(
-      <DateTimeRangePicker isCalendarOpen isClockOpen />
+      <DateTimeRangePicker isCalendarOpen />,
+      { attachTo: root }
     );
 
-    const customInputs = component.find('input[type="number"]');
-    const dayInput = customInputs.at(0);
-
-    dayInput.simulate('blur');
+    const event = document.createEvent('MouseEvent');
+    event.initEvent('mousedown', true, true);
+    document.body.dispatchEvent(event);
     component.update();
 
     expect(component.state('isCalendarOpen')).toBe(false);
+  });
+
+  it('closes Calendar component when focused outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <DateTimeRangePicker isCalendarOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('FocusEvent');
+    event.initEvent('focusin', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
+
+    expect(component.state('isCalendarOpen')).toBe(false);
+  });
+
+  it('closes Clock component when clicked outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('MouseEvent');
+    event.initEvent('mousedown', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
+
+    expect(component.state('isClockOpen')).toBe(false);
+  });
+
+  it('closes Clock component when focused outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('FocusEvent');
+    event.initEvent('focusin', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
+
     expect(component.state('isClockOpen')).toBe(false);
   });
 
