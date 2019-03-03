@@ -52,7 +52,7 @@
     "react-calendar": "^2.18.0",
     "react-clock": "^2.3.0",
     "react-fit": "^1.0.3",
-    "react-datetime-picker": "^2.0.0",
+    "react-datetime-picker": "^2.2.1",
     "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {
