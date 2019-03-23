@@ -422,6 +422,11 @@ DateTimeRangePicker.propTypes = {
   isClockOpen: PropTypes.bool,
   maxDetail: PropTypes.oneOf(allViews),
   name: PropTypes.string,
+  onCalendarClose: PropTypes.func,
+  onCalendarOpen: PropTypes.func,
+  onChange: PropTypes.func,
+  onClockClose: PropTypes.func,
+  onClockOpen: PropTypes.func,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
 };
