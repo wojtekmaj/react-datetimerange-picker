@@ -9,6 +9,8 @@ import Calendar from 'react-calendar/dist/entry.nostyle';
 import Clock from 'react-clock/dist/entry.nostyle';
 import DateTimeInput from 'react-datetime-picker/dist/DateTimeInput';
 
+import { callIfDefined } from './shared/utils';
+
 const allViews = ['hour', 'minute', 'second'];
 const baseClassName = 'react-datetimerange-picker';
 
@@ -38,6 +40,24 @@ export default class DateTimeRangePicker extends PureComponent {
   componentDidMount() {
     document.addEventListener('mousedown', this.onOutsideAction);
     document.addEventListener('focusin', this.onOutsideAction);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { isCalendarOpen, isClockOpen } = this.state;
+    const {
+      onCalendarClose,
+      onCalendarOpen,
+      onClockClose,
+      onClockOpen,
+    } = this.props;
+
+    if (isCalendarOpen !== prevState.isCalendarOpen) {
+      callIfDefined(isCalendarOpen ? onCalendarOpen : onCalendarClose);
+    }
+
+    if (isClockOpen !== prevState.isClockOpen) {
+      callIfDefined(isClockOpen ? onClockOpen : onClockClose);
+    }
   }
 
   componentWillUnmount() {
