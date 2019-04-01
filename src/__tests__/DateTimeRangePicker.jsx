@@ -348,6 +348,161 @@ describe('DateTimeRangePicker', () => {
     expect(clock2).toHaveLength(1);
   });
 
+  it('closes Calendar when calling internal onChange', () => {
+    const component = mount(
+      <DateTimeRangePicker isCalendarOpen />
+    );
+
+    const { onChange } = component.instance();
+
+    onChange(new Date());
+
+    expect(component.state('isCalendarOpen')).toBe(false);
+  });
+
+  it('does not close Calendar when calling internal onChange with closeWidgets = false', () => {
+    const component = mount(
+      <DateTimeRangePicker isCalendarOpen />
+    );
+
+    const { onChange } = component.instance();
+
+    onChange(new Date(), false);
+
+    expect(component.state('isCalendarOpen')).toBe(true);
+  });
+
+  it('closes Clock when calling internal onChange', () => {
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />
+    );
+
+    const { onChange } = component.instance();
+
+    onChange(new Date());
+
+    expect(component.state('isClockOpen')).toBe(false);
+  });
+
+  it('does not close Clock when calling internal onChange with closeWidgets = false', () => {
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />
+    );
+
+    const { onChange } = component.instance();
+
+    onChange(new Date(), false);
+
+    expect(component.state('isClockOpen')).toBe(true);
+  });
+
+  it('calls onChange callback when calling internal onChange', () => {
+    const nextValue = new Date(2019, 0, 1);
+    const onChange = jest.fn();
+
+    const component = mount(
+      <DateTimeRangePicker onChange={onChange} />
+    );
+
+    const { onChange: onChangeInternal } = component.instance();
+
+    onChangeInternal(nextValue);
+
+    expect(onChange).toHaveBeenCalledWith(nextValue);
+  });
+
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange', () => {
+    const hours = 21;
+    const minutes = 40;
+    const seconds = 11;
+    const ms = 458;
+
+    const valueFrom = new Date(2018, 6, 17, hours, minutes, seconds, ms);
+    const nextValueFrom = new Date(2019, 0, 1);
+    const valueTo = new Date(2019, 6, 17);
+    const onChange = jest.fn();
+
+    const component = mount(
+      <DateTimeRangePicker
+        onChange={onChange}
+        value={[valueFrom, valueTo]}
+      />
+    );
+
+    const { onDateChange } = component.instance();
+
+    onDateChange([nextValueFrom, valueTo]);
+
+    expect(onChange).toHaveBeenCalledWith([
+      new Date(2019, 0, 1, hours, minutes, seconds, ms),
+      valueTo
+    ]);
+  });
+
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange', () => {
+    const hours = 21;
+    const minutes = 40;
+    const seconds = 11;
+    const ms = 458;
+
+    const valueFrom = new Date(2018, 6, 17);
+    const valueTo = new Date(2019, 6, 17, hours, minutes, seconds, ms);
+    const nextValueTo = new Date(2019, 0, 1);
+    const onChange = jest.fn();
+
+    const component = mount(
+      <DateTimeRangePicker
+        onChange={onChange}
+        value={[valueFrom, valueTo]}
+      />
+    );
+
+    const { onDateChange } = component.instance();
+
+    onDateChange([valueFrom, nextValueTo]);
+
+    expect(onChange).toHaveBeenCalledWith([
+      valueFrom,
+      new Date(2019, 0, 1, hours, minutes, seconds, ms),
+    ]);
+  });
+
+  it('calls onChange callback when calling internal onChange', () => {
+    const nextValue = new Date(2019, 0, 1, 21, 40, 11, 458);
+    const onChange = jest.fn();
+
+    const component = mount(
+      <DateTimeRangePicker
+        onChange={onChange}
+        value={new Date(2018, 6, 17)}
+      />
+    );
+
+    const { onChange: onChangeInternal } = component.instance();
+
+    onChangeInternal(nextValue);
+
+    expect(onChange).toHaveBeenCalledWith(nextValue);
+  });
+
+  it('clears the value when clicking on a button', () => {
+    const onChange = jest.fn();
+
+    const component = mount(
+      <DateTimeRangePicker onChange={onChange} />
+    );
+
+    const calendar = component.find('Calendar');
+    const button = component.find('button.react-datetimerange-picker__clear-button');
+
+    expect(calendar).toHaveLength(0);
+
+    button.simulate('click');
+    component.update();
+
+    expect(onChange).toHaveBeenCalledWith(null);
+  });
+
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
       const component = mount(
