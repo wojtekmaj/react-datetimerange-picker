@@ -84,6 +84,16 @@ describe('DateTimeRangePicker', () => {
     expect(dateTimeInput).toHaveLength(2);
   });
 
+  it('renders range divider', () => {
+    const component = mount(
+      <DateTimeRangePicker />
+    );
+
+    const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+  });
+
   it('renders clear button', () => {
     const component = mount(
       <DateTimeRangePicker />
