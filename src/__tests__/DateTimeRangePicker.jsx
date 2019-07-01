@@ -272,6 +272,23 @@ describe('DateTimeRangePicker', () => {
     expect(component.state('isCalendarOpen')).toBe(false);
   });
 
+  it('closes Calendar component when tapped outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <DateTimeRangePicker isCalendarOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('TouchEvent');
+    event.initEvent('touchstart', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
+
+    expect(component.state('isCalendarOpen')).toBe(false);
+  });
+
   it('closes Clock component when clicked outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
@@ -300,6 +317,23 @@ describe('DateTimeRangePicker', () => {
 
     const event = document.createEvent('FocusEvent');
     event.initEvent('focusin', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
+
+    expect(component.state('isClockOpen')).toBe(false);
+  });
+
+  it('closes Clock component when tapped outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <DateTimeRangePicker isClockOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('TouchEvent');
+    event.initEvent('touchstart', true, true);
     document.body.dispatchEvent(event);
     component.update();
 

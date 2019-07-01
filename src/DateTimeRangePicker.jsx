@@ -13,6 +13,7 @@ import { callIfDefined } from './shared/utils';
 
 const allViews = ['hour', 'minute', 'second'];
 const baseClassName = 'react-datetimerange-picker';
+const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 
 export default class DateTimeRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -38,8 +39,9 @@ export default class DateTimeRangePicker extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.onOutsideAction);
-    document.addEventListener('focusin', this.onOutsideAction);
+    outsideActionEvents.forEach(
+      eventName => document.addEventListener(eventName, this.onOutsideAction),
+    );
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -61,8 +63,9 @@ export default class DateTimeRangePicker extends PureComponent {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.onOutsideAction);
-    document.removeEventListener('focusin', this.onOutsideAction);
+    outsideActionEvents.forEach(
+      eventName => document.removeEventListener(eventName, this.onOutsideAction),
+    );
   }
 
   onOutsideAction = (event) => {
