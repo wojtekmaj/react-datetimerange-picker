@@ -220,6 +220,7 @@ export default class DateTimeRangePicker extends PureComponent {
       calendarIcon,
       clearIcon,
       disabled,
+      format,
       locale,
       maxDetail,
       maxDate,
@@ -237,6 +238,7 @@ export default class DateTimeRangePicker extends PureComponent {
     const commonProps = {
       className: `${baseClassName}__inputGroup`,
       disabled,
+      format,
       isWidgetOpen: isCalendarOpen || isClockOpen,
       locale,
       maxDate,
@@ -446,6 +448,7 @@ DateTimeRangePicker.propTypes = {
   clearIcon: PropTypes.node,
   disableClock: PropTypes.bool,
   disabled: PropTypes.bool,
+  format: PropTypes.string,
   isCalendarOpen: PropTypes.bool,
   isClockOpen: PropTypes.bool,
   maxDetail: PropTypes.oneOf(allViews),
