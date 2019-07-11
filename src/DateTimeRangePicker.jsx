@@ -365,15 +365,14 @@ export default class DateTimeRangePicker extends PureComponent {
       className: dateTimeRangePickerClassName, // Unused, here to exclude it from clockProps
       maxDetail,
       onChange,
-      value: dateTimeRangePickerValue,
+      value,
       ...clockProps
     } = this.props;
 
     const className = `${baseClassName}__clock`;
+    const [valueFrom] = [].concat(value);
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
-
-    const value = [].concat(dateTimeRangePickerValue)[0]; // TODO: Show clock for "date to" inputs
 
     return (
       <Fit>
@@ -382,7 +381,7 @@ export default class DateTimeRangePicker extends PureComponent {
             className={clockClassName}
             renderMinuteHand={maxDetailIndex > 0}
             renderSecondHand={maxDetailIndex > 1}
-            value={value}
+            value={valueFrom}
             {...clockProps}
           />
         </div>
@@ -459,6 +458,11 @@ DateTimeRangePicker.defaultProps = {
   name: 'datetimerange',
 };
 
+const isValue = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.instanceOf(Date),
+]);
+
 DateTimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
   calendarAriaLabel: PropTypes.string,
@@ -501,6 +505,10 @@ DateTimeRangePicker.propTypes = {
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    isValue,
+    PropTypes.arrayOf(isValue),
+  ]),
   yearAriaLabel: PropTypes.string,
 };
 
