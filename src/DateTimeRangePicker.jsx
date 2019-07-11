@@ -9,6 +9,7 @@ import Calendar from 'react-calendar/dist/entry.nostyle';
 import Clock from 'react-clock/dist/entry.nostyle';
 import DateTimeInput from 'react-datetime-picker/dist/DateTimeInput';
 
+import { isMaxDate, isMinDate } from './shared/propTypes';
 import { callIfDefined } from './shared/utils';
 
 const allViews = ['hour', 'minute', 'second'];
@@ -217,25 +218,47 @@ export default class DateTimeRangePicker extends PureComponent {
 
   renderInputs() {
     const {
+      amPmAriaLabel,
+      calendarAriaLabel,
       calendarIcon,
+      clearAriaLabel,
       clearIcon,
+      dayAriaLabel,
       disabled,
       format,
+      hourAriaLabel,
       locale,
       maxDate,
       maxDetail,
       minDate,
+      minuteAriaLabel,
+      monthAriaLabel,
       name,
+      nativeInputAriaLabel,
       required,
+      secondAriaLabel,
       showLeadingZeros,
       value,
+      yearAriaLabel,
     } = this.props;
 
     const { isCalendarOpen, isClockOpen } = this.state;
 
     const [valueFrom, valueTo] = [].concat(value);
 
+    const ariaLabelProps = {
+      amPmAriaLabel,
+      dayAriaLabel,
+      hourAriaLabel,
+      minuteAriaLabel,
+      monthAriaLabel,
+      nativeInputAriaLabel,
+      secondAriaLabel,
+      yearAriaLabel,
+    };
+
     const commonProps = {
+      ...ariaLabelProps,
       className: `${baseClassName}__inputGroup`,
       disabled,
       format,
@@ -269,6 +292,7 @@ export default class DateTimeRangePicker extends PureComponent {
         />
         {clearIcon !== null && (
           <button
+            aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.clear}
@@ -280,6 +304,7 @@ export default class DateTimeRangePicker extends PureComponent {
         )}
         {calendarIcon !== null && (
           <button
+            aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.toggleCalendar}
@@ -436,6 +461,9 @@ DateTimeRangePicker.defaultProps = {
 
 DateTimeRangePicker.propTypes = {
   ...Calendar.propTypes,
+  ...Clock.propTypes,
+  amPmAriaLabel: PropTypes.string,
+  calendarAriaLabel: PropTypes.string,
   calendarClassName: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
@@ -445,21 +473,36 @@ DateTimeRangePicker.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
+  clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
+  clockClassName: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
+  dayAriaLabel: PropTypes.string,
   disableClock: PropTypes.bool,
   disabled: PropTypes.bool,
   format: PropTypes.string,
+  hourAriaLabel: PropTypes.string,
   isCalendarOpen: PropTypes.bool,
   isClockOpen: PropTypes.bool,
+  locale: PropTypes.string,
+  maxDate: isMaxDate,
   maxDetail: PropTypes.oneOf(allViews),
+  minDate: isMinDate,
+  minuteAriaLabel: PropTypes.string,
+  monthAriaLabel: PropTypes.string,
   name: PropTypes.string,
+  nativeInputAriaLabel: PropTypes.string,
   onCalendarClose: PropTypes.func,
   onCalendarOpen: PropTypes.func,
   onChange: PropTypes.func,
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   required: PropTypes.bool,
+  secondAriaLabel: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
+  yearAriaLabel: PropTypes.string,
 };
 
 polyfill(DateTimeRangePicker);

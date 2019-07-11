@@ -30,6 +30,59 @@ describe('DateTimeRangePicker', () => {
     expect(dateTimeInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
+  it('passes format to DateTimeInput components', () => {
+    const format = 'y-MM-dd h:mm:ss a';
+
+    const component = mount(
+      <DateTimeRangePicker format={format} />
+    );
+
+    const dateTimeInput = component.find('DateTimeInput');
+
+    expect(dateTimeInput.at(0).prop('format')).toBe(format);
+    expect(dateTimeInput.at(1).prop('format')).toBe(format);
+  });
+
+  it('passes aria-label props to DateTimeInput components', () => {
+    const ariaLabelProps = {
+      amPmAriaLabel: 'Select AM/PM',
+      calendarAriaLabel: 'Toggle calendar',
+      clearAriaLabel: 'Clear value',
+      dayAriaLabel: 'Day',
+      hourAriaLabel: 'Hour',
+      minuteAriaLabel: 'Minute',
+      monthAriaLabel: 'Month',
+      nativeInputAriaLabel: 'Date and time',
+      secondAriaLabel: 'Second',
+      yearAriaLabel: 'Year'
+    };
+
+    const component = mount(
+      <DateTimeRangePicker {...ariaLabelProps} />
+    );
+
+    const calendarButton = component.find('button.react-datetimerange-picker__calendar-button');
+    const clearButton = component.find('button.react-datetimerange-picker__clear-button');
+    const dateTimeInput = component.find('DateTimeInput');
+
+    expect(calendarButton.prop('aria-label')).toBe(ariaLabelProps.calendarAriaLabel);
+    expect(clearButton.prop('aria-label')).toBe(ariaLabelProps.clearAriaLabel);
+    expect(dateTimeInput.at(0).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
+    expect(dateTimeInput.at(0).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
+    expect(dateTimeInput.at(0).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
+    expect(dateTimeInput.at(0).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
+    expect(dateTimeInput.at(0).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
+    expect(dateTimeInput.at(0).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
+    expect(dateTimeInput.at(0).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
+    expect(dateTimeInput.at(1).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
+    expect(dateTimeInput.at(1).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
+    expect(dateTimeInput.at(1).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
+    expect(dateTimeInput.at(1).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
+    expect(dateTimeInput.at(1).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
+    expect(dateTimeInput.at(1).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
+    expect(dateTimeInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
