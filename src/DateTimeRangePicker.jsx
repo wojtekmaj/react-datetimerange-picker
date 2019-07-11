@@ -460,8 +460,6 @@ DateTimeRangePicker.defaultProps = {
 };
 
 DateTimeRangePicker.propTypes = {
-  ...Calendar.propTypes,
-  ...Clock.propTypes,
   amPmAriaLabel: PropTypes.string,
   calendarAriaLabel: PropTypes.string,
   calendarClassName: PropTypes.oneOfType([
@@ -499,6 +497,7 @@ DateTimeRangePicker.propTypes = {
   onChange: PropTypes.func,
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
+  onFocus: PropTypes.func,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
