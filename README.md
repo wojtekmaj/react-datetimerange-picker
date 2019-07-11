@@ -98,7 +98,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |maxDetail|The most detailed calendar view that the user shall see. View defined here also becomes the one on which clicking an item in the calendar will select a date and pass it to onChange. Can be `"month"`, `"year"`, `"decade"` or `"century"`.|`"month"`|`"year"`|
 |minDate|Minimum date that the user can select. Periods partially overlapped by minDate will also be selectable, although React-DateTimeRange-Picker will ensure that no earlier date is selected.|n/a|Date: `new Date()`|
 |minDetail|The least detailed calendar view that the user shall see. Can be `"month"`, `"year"`, `"decade"` or `"century"`.|`"century"`|`"decade"`|
-name|Input name prefix. Date from/Date to fields will be named `"yourprefix_from"` and `"yourprefix_to"` respectively.|`"datetimerange"`|`"myCustomName"`|
+|name|Input name prefix. Date from/Date to fields will be named `"yourprefix_from"` and `"yourprefix_to"` respectively.|`"datetimerange"`|`"myCustomName"`|
 |onCalendarClose|Function called when the calendar closes.|n/a|`() => alert('Calendar closed')`|
 |onCalendarOpen|Function called when the calendar opens.|n/a|`() => alert('Calendar opened')`|
 |onChange|Function called when the user clicks an item on the most detailed view available.|n/a|`(value) => alert('New date is: ', value)`|
