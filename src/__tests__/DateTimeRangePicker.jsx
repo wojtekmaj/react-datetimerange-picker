@@ -6,7 +6,7 @@ import DateTimeRangePicker from '../DateTimeRangePicker';
 /* eslint-disable comma-dangle */
 
 describe('DateTimeRangePicker', () => {
-  it('passes default name to DateTimeInput', () => {
+  it('passes default name to DateTimeInput components', () => {
     const component = mount(
       <DateTimeRangePicker />
     );
@@ -17,7 +17,7 @@ describe('DateTimeRangePicker', () => {
     expect(dateTimeInput.at(1).prop('name')).toBe('datetimerange_to');
   });
 
-  it('passes custom name to DateTimeInput', () => {
+  it('passes custom name to DateTimeInput components', () => {
     const name = 'testName';
 
     const component = mount(
