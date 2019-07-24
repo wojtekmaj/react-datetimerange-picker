@@ -83,6 +83,36 @@ describe('DateTimeRangePicker', () => {
     expect(dateTimeInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
   });
 
+  it('passes aria-label props to DateTimeInput components', () => {
+    const placeholderProps = {
+      dayPlaceholder: 'dd',
+      hourPlaceholder: 'hh',
+      minutePlaceholder: 'mm',
+      monthPlaceholder: 'mm',
+      secondPlaceholder: 'ss',
+      yearPlaceholder: 'yyyy'
+    };
+
+    const component = mount(
+      <DateTimeRangePicker {...placeholderProps} />
+    );
+
+    const dateTimeInput = component.find('DateTimeInput');
+
+    expect(dateTimeInput.at(0).prop('dayPlaceholder')).toBe(placeholderProps.dayPlaceholder);
+    expect(dateTimeInput.at(0).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
+    expect(dateTimeInput.at(0).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
+    expect(dateTimeInput.at(0).prop('monthPlaceholder')).toBe(placeholderProps.monthPlaceholder);
+    expect(dateTimeInput.at(0).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
+    expect(dateTimeInput.at(0).prop('yearPlaceholder')).toBe(placeholderProps.yearPlaceholder);
+    expect(dateTimeInput.at(1).prop('dayPlaceholder')).toBe(placeholderProps.dayPlaceholder);
+    expect(dateTimeInput.at(1).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
+    expect(dateTimeInput.at(1).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
+    expect(dateTimeInput.at(1).prop('monthPlaceholder')).toBe(placeholderProps.monthPlaceholder);
+    expect(dateTimeInput.at(1).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
+    expect(dateTimeInput.at(1).prop('yearPlaceholder')).toBe(placeholderProps.yearPlaceholder);
+  });
+
   describe('passes value to DateTimeInput components', () => {
     it('passes single value to DateTimeInput components', () => {
       const value = new Date(2019, 0, 1);
