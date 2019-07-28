@@ -52,8 +52,7 @@
     "react-calendar": "^2.18.0",
     "react-clock": "^2.3.0",
     "react-datetime-picker": "^2.7.1",
-    "react-fit": "^1.0.3",
-    "react-lifecycles-compat": "^3.0.4"
+    "react-fit": "^1.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
