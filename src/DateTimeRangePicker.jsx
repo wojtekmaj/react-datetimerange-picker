@@ -219,6 +219,7 @@ export default class DateTimeRangePicker extends PureComponent {
   renderInputs() {
     const {
       amPmAriaLabel,
+      autoFocus,
       calendarAriaLabel,
       calendarIcon,
       clearAriaLabel,
@@ -292,6 +293,7 @@ export default class DateTimeRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <DateTimeInput
           {...commonProps}
+          autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
@@ -483,6 +485,7 @@ const isValue = PropTypes.oneOfType([
 
 DateTimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
+  autoFocus: PropTypes.bool,
   calendarAriaLabel: PropTypes.string,
   calendarClassName: PropTypes.oneOfType([
     PropTypes.string,
