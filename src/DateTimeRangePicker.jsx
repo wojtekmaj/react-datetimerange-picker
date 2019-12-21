@@ -241,6 +241,7 @@ export default class DateTimeRangePicker extends PureComponent {
       monthPlaceholder,
       name,
       nativeInputAriaLabel,
+      rangeDivider,
       required,
       secondAriaLabel,
       secondPlaceholder,
@@ -300,7 +301,7 @@ export default class DateTimeRangePicker extends PureComponent {
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>
-          –
+          {rangeDivider}
         </span>
         <DateTimeInput
           {...commonProps}
@@ -476,6 +477,7 @@ DateTimeRangePicker.defaultProps = {
   isClockOpen: null,
   maxDetail: 'minute',
   name: 'datetimerange',
+  rangeDivider: '–',
 };
 
 const isValue = PropTypes.oneOfType([
@@ -528,6 +530,7 @@ DateTimeRangePicker.propTypes = {
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
+  rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,

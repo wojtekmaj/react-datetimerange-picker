@@ -218,7 +218,7 @@ describe('DateTimeRangePicker', () => {
     expect(dateTimeInput).toHaveLength(2);
   });
 
-  it('renders range divider', () => {
+  it('renders range divider with default divider', () => {
     const component = mount(
       <DateTimeRangePicker />
     );
@@ -226,6 +226,18 @@ describe('DateTimeRangePicker', () => {
     const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
 
     expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('–');
+  });
+
+  it('renders range divider with custom divider', () => {
+    const component = mount(
+      <DateTimeRangePicker rangeDivider="to" />
+    );
+
+    const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('to');
   });
 
   it('renders clear button', () => {
