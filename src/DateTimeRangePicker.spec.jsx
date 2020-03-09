@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import DateTimeRangePicker from '../DateTimeRangePicker';
+import DateTimeRangePicker from './DateTimeRangePicker';
 
 /* eslint-disable comma-dangle */
 
@@ -28,6 +28,28 @@ describe('DateTimeRangePicker', () => {
 
     expect(dateTimeInput.at(0).prop('name')).toBe(`${name}_from`);
     expect(dateTimeInput.at(1).prop('name')).toBe(`${name}_to`);
+  });
+
+  it('passes autoFocus flag to first DateTimeInput component', () => {
+    const component = mount(
+      <DateTimeRangePicker autoFocus />
+    );
+
+    const dateTimeInput = component.find('DateTimeInput');
+
+    expect(dateTimeInput.at(0).prop('autoFocus')).toBeTruthy();
+    expect(dateTimeInput.at(1).prop('autoFocus')).toBe(undefined);
+  });
+
+  it('passes disabled flag to DateTimeInput components', () => {
+    const component = mount(
+      <DateTimeRangePicker disabled />
+    );
+
+    const dateTimeInput = component.find('DateTimeInput');
+
+    expect(dateTimeInput.at(0).prop('disabled')).toBeTruthy();
+    expect(dateTimeInput.at(1).prop('disabled')).toBeTruthy();
   });
 
   it('passes format to DateTimeInput components', () => {
@@ -196,7 +218,7 @@ describe('DateTimeRangePicker', () => {
     expect(dateTimeInput).toHaveLength(2);
   });
 
-  it('renders range divider', () => {
+  it('renders range divider with default divider', () => {
     const component = mount(
       <DateTimeRangePicker />
     );
@@ -204,6 +226,18 @@ describe('DateTimeRangePicker', () => {
     const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
 
     expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('–');
+  });
+
+  it('renders range divider with custom divider', () => {
+    const component = mount(
+      <DateTimeRangePicker rangeDivider="to" />
+    );
+
+    const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('to');
   });
 
   it('renders clear button', () => {

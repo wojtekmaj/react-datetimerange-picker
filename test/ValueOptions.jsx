@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { getISOLocalDateTime } from './shared/dates';
+import { getISOLocalDateTime } from '@wojtekmaj/date-utils';
 
 export default function ValueOptions({
   setState,
@@ -43,12 +42,12 @@ export default function ValueOptions({
 
   function onStartChange(event) {
     const { value: nextValue } = event.target;
-    setStartValue(new Date(nextValue));
+    setStartValue(nextValue ? new Date(nextValue) : null);
   }
 
   function onEndChange(event) {
     const { value: nextValue } = event.target;
-    setEndValue(new Date(nextValue));
+    setEndValue(nextValue ? new Date(nextValue) : null);
   }
 
   return (

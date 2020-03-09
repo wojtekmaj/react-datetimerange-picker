@@ -84,6 +84,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |Prop name|Description|Default value|Example values|
 |----|----|----|----|
 |amPmAriaLabel|`aria-label` for the AM/PM select input.|n/a|`"Select AM/PM"`|
+|autoFocus|Automatically focuses the input on mount.|n/a|`true`|
 |calendarAriaLabel|`aria-label` for the calendar button.|n/a|`"Toggle calendar"`|
 |calendarClassName|Class name(s) that will be added along with `"react-calendar"` to the main React-Calendar `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |calendarIcon|Content of the calendar button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Calendar"`</li><li>React element: `<CalendarIcon />`</li></ul>|
@@ -92,7 +93,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |clockClassName|Class name(s) that will be added along with `"react-clock"` to the main React-Calendar `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |className|Class name(s) that will be added along with `"react-datetimerange-picker"` to the main React-DateTimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |dayAriaLabel|`aria-label` for the day input.|n/a|`"Day"`|
-|disabled|Whether the date picker should be disabled.|`false`|`true`|
+|disabled|Whether the datetime range picker should be disabled.|`false`|`true`|
 |disableCalendar|When set to `true`, will remove the calendar and the button toggling its visibility.|`false`|`true`|
 |disableClock|When set to `true`, will remove the clock.|`false`|`true`|
 |format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `y`, `M`, `MM`, `MMM`, `MMMM`, `d`, `dd`, `H`, `HH`, `h`, `hh`, `m`, `mm`, `s`, `ss`, `a`.|n/a|`"y-MM-dd h:mm:ss a"`|
@@ -101,7 +102,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |isClockOpen|Whether the clock should be opened.|`false`|`true`|
 |locale|Locale that should be used by the datetime range picker and the calendar. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).|User's browser settings|`"hu-HU"`|
 |maxDate|Maximum date that the user can select. Periods partially overlapped by maxDate will also be selectable, although React-DateTimeRange-Picker will ensure that no later date is selected.|n/a|Date: `new Date()`|
-|maxDetail|The most detailed calendar view that the user shall see. View defined here also becomes the one on which clicking an item in the calendar will select a date and pass it to onChange. Can be `"month"`, `"year"`, `"decade"` or `"century"`.|`"month"`|`"year"`|
+|maxDetail|The most detailed calendar view that the user shall see. View defined here also becomes the one on which clicking an item in the calendar will select a date and pass it to onChange. Can be `"hour"`, `"minute"` or `"second"`. Don't need hour picking? Try [React-DateRange-Picker](https://github.com/wojtekmaj/react-daterange-picker)!|`"minute"`|`"second"`|
 |minDate|Minimum date that the user can select. Periods partially overlapped by minDate will also be selectable, although React-DateTimeRange-Picker will ensure that no earlier date is selected.|n/a|Date: `new Date()`|
 |minDetail|The least detailed calendar view that the user shall see. Can be `"month"`, `"year"`, `"decade"` or `"century"`.|`"century"`|`"decade"`|
 |minuteAriaLabel|`aria-label` for the minute input.|n/a|`"Minute"`|
@@ -113,6 +114,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |onChange|Function called when the user clicks an item on the most detailed view available.|n/a|`(value) => alert('New date is: ', value)`|
 |onClockClose|Function called when the clock closes.|n/a|`() => alert('Clock closed')`|
 |onClockOpen|Function called when the clock opens.|n/a|`() => alert('Clock opened')`|
+|rangeDivider|Divider between datetime inputs.|`"–"`|`" to "`|
 |required|Whether datetime input should be required.|`false`|`true`|
 |secondAriaLabel|`aria-label` for the second input.|n/a|`"Second"`|
 |showLeadingZeros|Whether leading zeros should be rendered in datetime inputs.|`false`|`true`|

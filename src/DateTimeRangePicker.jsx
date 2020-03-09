@@ -34,10 +34,6 @@ export default class DateTimeRangePicker extends PureComponent {
 
   state = {};
 
-  get eventProps() {
-    return makeEventProps(this.props);
-  }
-
   componentDidMount() {
     this.handleOutsideActionListeners();
   }
@@ -71,13 +67,8 @@ export default class DateTimeRangePicker extends PureComponent {
     this.handleOutsideActionListeners(false);
   }
 
-  handleOutsideActionListeners(shouldListen) {
-    const { isCalendarOpen, isClockOpen } = this.state;
-    const isWidgetOpen = isCalendarOpen || isClockOpen;
-
-    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isWidgetOpen;
-    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
-    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+  get eventProps() {
+    return makeEventProps(this.props);
   }
 
   onOutsideAction = (event) => {
@@ -215,9 +206,19 @@ export default class DateTimeRangePicker extends PureComponent {
 
   clear = () => this.onChange(null);
 
+  handleOutsideActionListeners(shouldListen) {
+    const { isCalendarOpen, isClockOpen } = this.state;
+    const isWidgetOpen = isCalendarOpen || isClockOpen;
+
+    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isWidgetOpen;
+    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
+    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+  }
+
   renderInputs() {
     const {
       amPmAriaLabel,
+      autoFocus,
       calendarAriaLabel,
       calendarIcon,
       clearAriaLabel,
@@ -239,6 +240,7 @@ export default class DateTimeRangePicker extends PureComponent {
       monthPlaceholder,
       name,
       nativeInputAriaLabel,
+      rangeDivider,
       required,
       secondAriaLabel,
       secondPlaceholder,
@@ -291,13 +293,14 @@ export default class DateTimeRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <DateTimeInput
           {...commonProps}
+          autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>
-          –
+          {rangeDivider}
         </span>
         <DateTimeInput
           {...commonProps}
@@ -473,6 +476,7 @@ DateTimeRangePicker.defaultProps = {
   isClockOpen: null,
   maxDetail: 'minute',
   name: 'datetimerange',
+  rangeDivider: '–',
 };
 
 const isValue = PropTypes.oneOfType([
@@ -482,6 +486,7 @@ const isValue = PropTypes.oneOfType([
 
 DateTimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
+  autoFocus: PropTypes.bool,
   calendarAriaLabel: PropTypes.string,
   calendarClassName: PropTypes.oneOfType([
     PropTypes.string,
@@ -524,6 +529,7 @@ DateTimeRangePicker.propTypes = {
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
+  rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
