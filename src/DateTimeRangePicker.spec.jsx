@@ -719,7 +719,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeFrom(nextValueFrom);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], true);
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
     });
 
     it('calls onChange properly given single initial value', () => {
@@ -737,7 +737,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeFrom(nextValueFrom);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], true);
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
     });
 
     it('calls onChange properly given initial value as an array', () => {
@@ -757,7 +757,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeFrom(nextValueFrom);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], true);
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
     });
   });
 
@@ -775,7 +775,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeTo(nextValueTo);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], true);
+      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
     });
 
     it('calls onChange properly given single initial value', () => {
@@ -793,7 +793,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeTo(nextValueTo);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], true);
+      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
     });
 
     it('calls onChange properly given initial value as an array', () => {
@@ -813,7 +813,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeTo(nextValueTo);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], true);
+      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
     });
   });
 });
