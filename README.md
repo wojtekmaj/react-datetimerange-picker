@@ -88,10 +88,11 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |calendarAriaLabel|`aria-label` for the calendar button.|n/a|`"Toggle calendar"`|
 |calendarClassName|Class name(s) that will be added along with `"react-calendar"` to the main React-Calendar `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |calendarIcon|Content of the calendar button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Calendar"`</li><li>React element: `<CalendarIcon />`</li></ul>|
+|className|Class name(s) that will be added along with `"react-datetimerange-picker"` to the main React-DateTimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |clearAriaLabel|`aria-label` for the clear button.|n/a|`"Clear value"`|
 |clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
 |clockClassName|Class name(s) that will be added along with `"react-clock"` to the main React-Calendar `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
-|className|Class name(s) that will be added along with `"react-datetimerange-picker"` to the main React-DateTimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
+|closeWidgets|Whether to close the widgets on value selection.|`true`|`false`|
 |dayAriaLabel|`aria-label` for the day input.|n/a|`"Day"`|
 |disabled|Whether the datetime range picker should be disabled.|`false`|`true`|
 |disableCalendar|When set to `true`, will remove the calendar and the button toggling its visibility.|`false`|`true`|
