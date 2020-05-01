@@ -9,7 +9,6 @@ import Clock from 'react-clock/dist/entry.nostyle';
 import DateTimeInput from 'react-datetime-picker/dist/DateTimeInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
-import { callIfDefined } from './shared/utils';
 
 const allViews = ['hour', 'minute', 'second'];
 const baseClassName = 'react-datetimerange-picker';
@@ -55,11 +54,13 @@ export default class DateTimeRangePicker extends PureComponent {
     }
 
     if (isCalendarOpen !== prevState.isCalendarOpen) {
-      callIfDefined(isCalendarOpen ? onCalendarOpen : onCalendarClose);
+      const callback = isCalendarOpen ? onCalendarOpen : onCalendarClose;
+      if (callback) callback();
     }
 
     if (isClockOpen !== prevState.isClockOpen) {
-      callIfDefined(isClockOpen ? onClockOpen : onClockClose);
+      const callback = isClockOpen ? onClockOpen : onClockClose;
+      if (callback) callback();
     }
   }
 
