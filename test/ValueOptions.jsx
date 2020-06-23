@@ -39,7 +39,6 @@ export default function ValueOptions({
     }
   }
 
-
   function onStartChange(event) {
     const { value: nextValue } = event.target;
     setStartValue(nextValue ? new Date(nextValue) : null);
