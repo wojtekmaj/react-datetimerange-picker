@@ -1781,7 +1781,7 @@ __metadata:
     prop-types: ^15.6.0
     react: ^17.0.0
     react-calendar: ^3.3.1
-    react-clock: ^2.3.0
+    react-clock: ^3.0.0
     react-datetime-picker: ^3.1.0
     react-dom: ^17.0.0
     react-fit: ^1.0.3
@@ -6728,19 +6728,6 @@ fsevents@^2.1.2:
     react: ^16.3.0 || ^17.0.0-0
     react-dom: ^16.3.0 || ^17.0.0-0
   checksum: f5e4687f1eb04a82ef87449ca47620c87d73ac09c63a2d128a7785ea611389a1140ec517f39703fae8fc0d5dea23628289dbe82b2cf63e5dc92c021712677f97
-  languageName: node
-  linkType: hard
-
-"react-clock@npm:^2.3.0":
-  version: 2.4.0
-  resolution: "react-clock@npm:2.4.0"
-  dependencies:
-    merge-class-names: ^1.1.1
-    prop-types: ^15.6.0
-  peerDependencies:
-    react: ">=15.5"
-    react-dom: ">=15.5"
-  checksum: ee6ba7922c68ffb6d1348014fa314998e51eab3303e9133161091dfc4c8ff17add8c0d3573cd4601d7d936b0ee32d8772b87a490bdfeddd8cad3f832213a0dec
   languageName: node
   linkType: hard
 

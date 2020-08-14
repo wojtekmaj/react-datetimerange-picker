@@ -5,7 +5,7 @@ import mergeClassNames from 'merge-class-names';
 import Calendar from 'react-calendar';
 import Fit from 'react-fit';
 
-import Clock from 'react-clock/dist/entry.nostyle';
+import Clock from 'react-clock';
 import DateTimeInput from 'react-datetime-picker/dist/DateTimeInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
