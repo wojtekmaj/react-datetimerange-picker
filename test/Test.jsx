@@ -32,7 +32,7 @@ export default class Test extends Component {
     value: now,
   }
 
-  onChange = value => this.setState({ value })
+  onChange = (value) => this.setState({ value })
 
   render() {
     const {
@@ -48,7 +48,7 @@ export default class Test extends Component {
       value,
     } = this.state;
 
-    const setState = state => this.setState(state);
+    const setState = (state) => this.setState(state);
 
     return (
       <div className="Test">
