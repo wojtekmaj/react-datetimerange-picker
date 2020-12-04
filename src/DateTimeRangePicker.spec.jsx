@@ -3,12 +3,10 @@ import { mount } from 'enzyme';
 
 import DateTimeRangePicker from './DateTimeRangePicker';
 
-/* eslint-disable comma-dangle */
-
 describe('DateTimeRangePicker', () => {
   it('passes default name to DateTimeInput components', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -21,7 +19,7 @@ describe('DateTimeRangePicker', () => {
     const name = 'testName';
 
     const component = mount(
-      <DateTimeRangePicker name={name} />
+      <DateTimeRangePicker name={name} />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -32,7 +30,7 @@ describe('DateTimeRangePicker', () => {
 
   it('passes autoFocus flag to first DateTimeInput component', () => {
     const component = mount(
-      <DateTimeRangePicker autoFocus />
+      <DateTimeRangePicker autoFocus />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -43,7 +41,7 @@ describe('DateTimeRangePicker', () => {
 
   it('passes disabled flag to DateTimeInput components', () => {
     const component = mount(
-      <DateTimeRangePicker disabled />
+      <DateTimeRangePicker disabled />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -56,7 +54,7 @@ describe('DateTimeRangePicker', () => {
     const format = 'y-MM-dd h:mm:ss a';
 
     const component = mount(
-      <DateTimeRangePicker format={format} />
+      <DateTimeRangePicker format={format} />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -76,11 +74,11 @@ describe('DateTimeRangePicker', () => {
       monthAriaLabel: 'Month',
       nativeInputAriaLabel: 'Date and time',
       secondAriaLabel: 'Second',
-      yearAriaLabel: 'Year'
+      yearAriaLabel: 'Year',
     };
 
     const component = mount(
-      <DateTimeRangePicker {...ariaLabelProps} />
+      <DateTimeRangePicker {...ariaLabelProps} />,
     );
 
     const calendarButton = component.find('button.react-datetimerange-picker__calendar-button');
@@ -112,11 +110,11 @@ describe('DateTimeRangePicker', () => {
       minutePlaceholder: 'mm',
       monthPlaceholder: 'mm',
       secondPlaceholder: 'ss',
-      yearPlaceholder: 'yyyy'
+      yearPlaceholder: 'yyyy',
     };
 
     const component = mount(
-      <DateTimeRangePicker {...placeholderProps} />
+      <DateTimeRangePicker {...placeholderProps} />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -140,7 +138,7 @@ describe('DateTimeRangePicker', () => {
       const value = new Date(2019, 0, 1);
 
       const component = mount(
-        <DateTimeRangePicker value={value} />
+        <DateTimeRangePicker value={value} />,
       );
 
       const dateTimeInput = component.find('DateTimeInput');
@@ -154,7 +152,7 @@ describe('DateTimeRangePicker', () => {
       const value2 = new Date(2019, 6, 1);
 
       const component = mount(
-        <DateTimeRangePicker value={[value1, value2]} />
+        <DateTimeRangePicker value={[value1, value2]} />,
       );
 
       const dateTimeInput = component.find('DateTimeInput');
@@ -168,7 +166,7 @@ describe('DateTimeRangePicker', () => {
     const className = 'testClassName';
 
     const component = mount(
-      <DateTimeRangePicker className={className} />
+      <DateTimeRangePicker className={className} />,
     );
 
     const wrapperClassName = component.prop('className');
@@ -183,7 +181,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         calendarClassName={calendarClassName}
         isCalendarOpen
-      />
+      />,
     );
 
     const calendar = component.find('Calendar');
@@ -199,7 +197,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         clockClassName={clockClassName}
         isClockOpen
-      />
+      />,
     );
 
     const clock = component.find('Clock');
@@ -210,7 +208,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders DateTimeInput components', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -220,7 +218,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders range divider with default divider', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
@@ -231,7 +229,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders range divider with custom divider', () => {
     const component = mount(
-      <DateTimeRangePicker rangeDivider="to" />
+      <DateTimeRangePicker rangeDivider="to" />,
     );
 
     const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
@@ -242,7 +240,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders clear button', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const clearButton = component.find('button.react-datetimerange-picker__clear-button');
@@ -252,7 +250,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders calendar button', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const calendarButton = component.find('button.react-datetimerange-picker__calendar-button');
@@ -262,7 +260,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders DateTimeInput and Calendar components when given isCalendarOpen flag', () => {
     const component = mount(
-      <DateTimeRangePicker isCalendarOpen />
+      <DateTimeRangePicker isCalendarOpen />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -274,7 +272,7 @@ describe('DateTimeRangePicker', () => {
 
   it('renders DateTimeInput and Clock components when given isClockOpen flag', () => {
     const component = mount(
-      <DateTimeRangePicker isClockOpen />
+      <DateTimeRangePicker isClockOpen />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -286,7 +284,7 @@ describe('DateTimeRangePicker', () => {
 
   it('does not render Calendar component when given disableCalendar & isCalendarOpen flags', () => {
     const component = mount(
-      <DateTimeRangePicker disableCalendar isCalendarOpen />
+      <DateTimeRangePicker disableCalendar isCalendarOpen />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -298,7 +296,7 @@ describe('DateTimeRangePicker', () => {
 
   it('does not render Clock component when given disableClock & isClockOpen flags', () => {
     const component = mount(
-      <DateTimeRangePicker disableClock isClockOpen />
+      <DateTimeRangePicker disableClock isClockOpen />,
     );
 
     const dateTimeInput = component.find('DateTimeInput');
@@ -310,7 +308,7 @@ describe('DateTimeRangePicker', () => {
 
   it('opens Calendar component when given isCalendarOpen flag by changing props', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const calendar = component.find('Calendar');
@@ -327,7 +325,7 @@ describe('DateTimeRangePicker', () => {
 
   it('opens Clock component when given isClockOpen flag by changing props', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const calendar = component.find('Clock');
@@ -344,7 +342,7 @@ describe('DateTimeRangePicker', () => {
 
   it('opens Calendar component when clicking on a button', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const calendar = component.find('Calendar');
@@ -362,7 +360,7 @@ describe('DateTimeRangePicker', () => {
 
   it('opens Calendar component when focusing on an input inside', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const calendar = component.find('Calendar');
@@ -380,7 +378,7 @@ describe('DateTimeRangePicker', () => {
 
   it('opens Clock component when focusing on a time input inside', () => {
     const component = mount(
-      <DateTimeRangePicker />
+      <DateTimeRangePicker />,
     );
 
     const clock = component.find('Clock');
@@ -402,7 +400,7 @@ describe('DateTimeRangePicker', () => {
 
     const component = mount(
       <DateTimeRangePicker isCalendarOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('MouseEvent');
@@ -419,7 +417,7 @@ describe('DateTimeRangePicker', () => {
 
     const component = mount(
       <DateTimeRangePicker isCalendarOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('FocusEvent');
@@ -436,7 +434,7 @@ describe('DateTimeRangePicker', () => {
 
     const component = mount(
       <DateTimeRangePicker isCalendarOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('TouchEvent');
@@ -453,7 +451,7 @@ describe('DateTimeRangePicker', () => {
 
     const component = mount(
       <DateTimeRangePicker isClockOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('MouseEvent');
@@ -470,7 +468,7 @@ describe('DateTimeRangePicker', () => {
 
     const component = mount(
       <DateTimeRangePicker isClockOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('FocusEvent');
@@ -487,7 +485,7 @@ describe('DateTimeRangePicker', () => {
 
     const component = mount(
       <DateTimeRangePicker isClockOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('TouchEvent');
@@ -500,7 +498,7 @@ describe('DateTimeRangePicker', () => {
 
   it('does not close Calendar component when focused within date inputs', () => {
     const component = mount(
-      <DateTimeRangePicker isCalendarOpen />
+      <DateTimeRangePicker isCalendarOpen />,
     );
 
     const customInputs = component.find('input[type="number"]');
@@ -517,7 +515,7 @@ describe('DateTimeRangePicker', () => {
 
   it('does not close Clock component when focused within time inputs', () => {
     const component = mount(
-      <DateTimeRangePicker isClockOpen />
+      <DateTimeRangePicker isClockOpen />,
     );
 
     const customInputs = component.find('input[type="number"]');
@@ -534,7 +532,7 @@ describe('DateTimeRangePicker', () => {
 
   it('closes Clock when Calendar is opened by a click on the calendar icon', () => {
     const component = mount(
-      <DateTimeRangePicker isClockOpen />
+      <DateTimeRangePicker isClockOpen />,
     );
 
     const clock = component.find('Clock');
@@ -552,7 +550,7 @@ describe('DateTimeRangePicker', () => {
 
   it('closes Calendar when calling internal onChange by default', () => {
     const component = mount(
-      <DateTimeRangePicker isCalendarOpen />
+      <DateTimeRangePicker isCalendarOpen />,
     );
 
     const { onChange } = component.instance();
@@ -567,7 +565,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         closeWidgets={false}
         isCalendarOpen
-      />
+      />,
     );
 
     const { onChange } = component.instance();
@@ -579,7 +577,7 @@ describe('DateTimeRangePicker', () => {
 
   it('does not close Calendar when calling internal onChange with closeWidgets = false', () => {
     const component = mount(
-      <DateTimeRangePicker isCalendarOpen />
+      <DateTimeRangePicker isCalendarOpen />,
     );
 
     const { onChange } = component.instance();
@@ -591,7 +589,7 @@ describe('DateTimeRangePicker', () => {
 
   it('closes Clock when calling internal onChange by default', () => {
     const component = mount(
-      <DateTimeRangePicker isClockOpen />
+      <DateTimeRangePicker isClockOpen />,
     );
 
     const { onChange } = component.instance();
@@ -606,7 +604,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         closeWidgets={false}
         isClockOpen
-      />
+      />,
     );
 
     const { onChange } = component.instance();
@@ -618,7 +616,7 @@ describe('DateTimeRangePicker', () => {
 
   it('does not close Clock when calling internal onChange with closeWidgets = false', () => {
     const component = mount(
-      <DateTimeRangePicker isClockOpen />
+      <DateTimeRangePicker isClockOpen />,
     );
 
     const { onChange } = component.instance();
@@ -633,7 +631,7 @@ describe('DateTimeRangePicker', () => {
     const onChange = jest.fn();
 
     const component = mount(
-      <DateTimeRangePicker onChange={onChange} />
+      <DateTimeRangePicker onChange={onChange} />,
     );
 
     const { onChange: onChangeInternal } = component.instance();
@@ -658,7 +656,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         onChange={onChange}
         value={[valueFrom, valueTo]}
-      />
+      />,
     );
 
     const { onDateChange } = component.instance();
@@ -667,7 +665,7 @@ describe('DateTimeRangePicker', () => {
 
     expect(onChange).toHaveBeenCalledWith([
       new Date(2019, 0, 1, hours, minutes, seconds, ms),
-      valueTo
+      valueTo,
     ]);
   });
 
@@ -686,7 +684,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         onChange={onChange}
         value={[valueFrom, valueTo]}
-      />
+      />,
     );
 
     const { onDateChange } = component.instance();
@@ -707,7 +705,7 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker
         onChange={onChange}
         value={new Date(2018, 6, 17)}
-      />
+      />,
     );
 
     const { onChange: onChangeInternal } = component.instance();
@@ -721,7 +719,7 @@ describe('DateTimeRangePicker', () => {
     const onChange = jest.fn();
 
     const component = mount(
-      <DateTimeRangePicker onChange={onChange} />
+      <DateTimeRangePicker onChange={onChange} />,
     );
 
     const calendar = component.find('Calendar');
@@ -738,7 +736,7 @@ describe('DateTimeRangePicker', () => {
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
       const component = mount(
-        <DateTimeRangePicker />
+        <DateTimeRangePicker />,
       );
 
       const componentInstance = component.instance();
@@ -756,7 +754,7 @@ describe('DateTimeRangePicker', () => {
       const value = new Date(2018, 0, 1);
 
       const component = mount(
-        <DateTimeRangePicker value={value} />
+        <DateTimeRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
@@ -776,7 +774,7 @@ describe('DateTimeRangePicker', () => {
       const value = [valueFrom, valueTo];
 
       const component = mount(
-        <DateTimeRangePicker value={value} />
+        <DateTimeRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
@@ -794,7 +792,7 @@ describe('DateTimeRangePicker', () => {
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
       const component = mount(
-        <DateTimeRangePicker />
+        <DateTimeRangePicker />,
       );
 
       const componentInstance = component.instance();
@@ -812,7 +810,7 @@ describe('DateTimeRangePicker', () => {
       const value = new Date(2018, 0, 1);
 
       const component = mount(
-        <DateTimeRangePicker value={value} />
+        <DateTimeRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
@@ -832,7 +830,7 @@ describe('DateTimeRangePicker', () => {
       const value = [valueFrom, valueTo];
 
       const component = mount(
-        <DateTimeRangePicker value={value} />
+        <DateTimeRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
