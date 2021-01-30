@@ -70,7 +70,7 @@ function MyApp() {
 
 ### Custom styling
 
-If you don't want to use default React-DateTimeRange-Picker, React-Calendar, and React-Clock styles, you can import React-DateTimeRange-Picker without them by using `import DateTimeRangePicker from 'react-datetime-picker/dist/entry.nostyle';` instead.
+If you don't want to use default React-DateTimeRange-Picker, React-Calendar, and React-Clock styles, you can import React-DateTimeRange-Picker without them by using `import DateTimeRangePicker from 'react-datetimerange-picker/dist/entry.nostyle';` instead.
 
 Styles loaded by the default entry file are `@wojtekmaj/react-datetimerange-picker/dist/DateTimeRangePicker.css`, `react-calendar/dist/Calendar.css`, and `react-clock/dist/Clock.css`. You can copy them to your project to build your own upon them.
 
