@@ -1782,7 +1782,7 @@ __metadata:
     react: ^17.0.0
     react-calendar: ^3.3.1
     react-clock: ^3.0.0
-    react-datetime-picker: ^3.1.0
+    react-datetime-picker: ^3.2.0
     react-dom: ^17.0.0
     react-fit: ^1.0.3
     rimraf: ^3.0.0
@@ -6745,9 +6745,9 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^8.0.7":
-  version: 8.0.7
-  resolution: "react-date-picker@npm:8.0.7"
+"react-date-picker@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "react-date-picker@npm:8.1.0"
   dependencies:
     "@types/react-calendar": ^3.0.0
     "@wojtekmaj/date-utils": ^1.0.3
@@ -6761,13 +6761,13 @@ fsevents@^2.1.2:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
     react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: 9b6aec0ba9016db5c42a8a537efd4e4761014674b4ff653e19a9c41f318d1eaa45d5caeb20d8d84ea076c994b84c6f10180c6686e96fb189224b5acb6fd360c0
+  checksum: b871f9ede4ebbdcf665824ed8fb9d85e14f72a40006913a2d17db9e06cbc1527363cfb7f837410764f225f5ffec89ed4b4e367446adee5ae6aba44276df25f1f
   languageName: node
   linkType: hard
 
-"react-datetime-picker@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "react-datetime-picker@npm:3.1.0"
+"react-datetime-picker@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-datetime-picker@npm:3.2.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.3
     get-user-locale: ^1.2.0
@@ -6776,13 +6776,13 @@ fsevents@^2.1.2:
     prop-types: ^15.6.0
     react-calendar: ^3.3.1
     react-clock: ^3.0.0
-    react-date-picker: ^8.0.7
+    react-date-picker: ^8.1.0
     react-fit: ^1.0.3
-    react-time-picker: ^4.1.0
+    react-time-picker: ^4.2.0
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
     react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: b1e9f5f69031c5dd7917fef766b3aaf96bf5ebd419c64b4bd14f234a243dfa3e9e7e678ddb358f0113793e0abdefc329392e21e5464398b3c6f606210988c25e
+  checksum: ad46843555efc7070009f3bc2fdb5aed277e46180bf64012a484316eaaefbbe727d546c84be6a515e33d82512c8eb618365a20b181097c1cf1c877921650336c
   languageName: node
   linkType: hard
 
@@ -6852,9 +6852,9 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^4.1.0":
-  version: 4.1.2
-  resolution: "react-time-picker@npm:4.1.2"
+"react-time-picker@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "react-time-picker@npm:4.2.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.0
     get-user-locale: ^1.2.0
@@ -6867,7 +6867,7 @@ fsevents@^2.1.2:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
     react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: 21477910650583b5678ff617ad18cafa8ba002959355cbfe25804fc4f7edf5a89609eb42c9e5bc49b20c4725d21c5774b39a1f90d3ec3018ccb3a01851f20e9a
+  checksum: cb6d41c1116708e4340bda06f512060276ceb26b65be808f8c7999e7635cc16e04aa4b02fd70c0ae09c2fbc589aebbcbfcd74cff98881354305b4f666646a3e1
   languageName: node
   linkType: hard
 
