@@ -78,8 +78,8 @@ export default class DateTimeRangePicker extends PureComponent {
     }
   }
 
-  onDateChange = ([valueFrom, valueTo], closeWidgets = true) => {
-    const { value } = this.props;
+  onDateChange = ([valueFrom, valueTo]) => {
+    const { value, closeWidgets } = this.props;
     const [prevValueFrom, prevValueTo] = [].concat(value);
 
     const nextValueFrom = (() => {
