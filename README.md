@@ -116,6 +116,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |onChange|Function called when the user clicks an item on the most detailed view available.|n/a|`(value) => alert('New date is: ', value)`|
 |onClockClose|Function called when the clock closes.|n/a|`() => alert('Clock closed')`|
 |onClockOpen|Function called when the clock opens.|n/a|`() => alert('Clock opened')`|
+|openWidgetsOnFocus|Whether to open the widgets on input focus.|`true`|`false`|
 |rangeDivider|Divider between datetime inputs.|`"–"`|`" to "`|
 |required|Whether datetime input should be required.|`false`|`true`|
 |secondAriaLabel|`aria-label` for the second input.|n/a|`"Second"`|

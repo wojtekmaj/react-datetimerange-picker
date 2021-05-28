@@ -143,7 +143,11 @@ export default class DateTimeRangePicker extends PureComponent {
   }
 
   onFocus = (event) => {
-    const { disabled, onFocus } = this.props;
+    const {
+      disabled,
+      onFocus,
+      openWidgetsOnFocus,
+    } = this.props;
 
     if (onFocus) {
       onFocus(event);
@@ -154,19 +158,21 @@ export default class DateTimeRangePicker extends PureComponent {
       return;
     }
 
-    switch (event.target.name) {
-      case 'day':
-      case 'month':
-      case 'year':
-        this.openCalendar();
-        break;
-      case 'hour12':
-      case 'hour24':
-      case 'minute':
-      case 'second':
-        this.openClock();
-        break;
-      default:
+    if (openWidgetsOnFocus) {
+      switch (event.target.name) {
+        case 'day':
+        case 'month':
+        case 'year':
+          this.openCalendar();
+          break;
+        case 'hour12':
+        case 'hour24':
+        case 'minute':
+        case 'second':
+          this.openClock();
+          break;
+        default:
+      }
     }
   }
 
@@ -479,6 +485,7 @@ DateTimeRangePicker.defaultProps = {
   isClockOpen: null,
   maxDetail: 'minute',
   name: 'datetimerange',
+  openWidgetsOnFocus: true,
   rangeDivider: '–',
 };
 
@@ -533,6 +540,7 @@ DateTimeRangePicker.propTypes = {
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
+  openWidgetsOnFocus: PropTypes.bool,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
