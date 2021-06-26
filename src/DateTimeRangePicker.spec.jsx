@@ -658,7 +658,7 @@ describe('DateTimeRangePicker', () => {
 
     const { onChange } = component.instance();
 
-    onChange(new Date(), false);
+    onChange(new Date());
 
     expect(component.state('isCalendarOpen')).toBe(true);
   });
@@ -697,7 +697,7 @@ describe('DateTimeRangePicker', () => {
 
     const { onChange } = component.instance();
 
-    onChange(new Date(), false);
+    onChange(new Date());
 
     expect(component.state('isClockOpen')).toBe(true);
   });
@@ -823,7 +823,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeFrom(nextValueFrom);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined]);
     });
 
     it('calls onChange properly given single initial value', () => {
@@ -841,7 +841,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeFrom(nextValueFrom);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
@@ -861,7 +861,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeFrom(nextValueFrom);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo]);
     });
   });
 
@@ -879,7 +879,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeTo(nextValueTo);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
+      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo]);
     });
 
     it('calls onChange properly given single initial value', () => {
@@ -897,7 +897,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeTo(nextValueTo);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
+      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
@@ -917,7 +917,7 @@ describe('DateTimeRangePicker', () => {
       componentInstance.onChangeTo(nextValueTo);
 
       expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
+      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo]);
     });
   });
 });

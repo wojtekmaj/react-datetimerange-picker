@@ -78,7 +78,7 @@ export default class DateTimeRangePicker extends PureComponent {
     }
   }
 
-  onDateChange = ([valueFrom, valueTo], closeWidgets = true) => {
+  onDateChange = ([valueFrom, valueTo]) => {
     const { value } = this.props;
     const [prevValueFrom, prevValueTo] = [].concat(value);
 
@@ -114,14 +114,14 @@ export default class DateTimeRangePicker extends PureComponent {
       return valueWithHour;
     })();
 
-    this.onChange([nextValueFrom, nextValueTo], closeWidgets);
+    this.onChange([nextValueFrom, nextValueTo]);
   }
 
-  // eslint-disable-next-line react/destructuring-assignment
-  onChange = (value, closeWidgets = this.props.closeWidgets) => {
+  onChange = (value) => {
     const { onChange } = this.props;
 
-    if (closeWidgets) {
+    // eslint-disable-next-line react/destructuring-assignment
+    if (this.props.closeWidgets) {
       this.closeWidgets();
     }
 
@@ -130,16 +130,16 @@ export default class DateTimeRangePicker extends PureComponent {
     }
   }
 
-  onChangeFrom = (valueFrom, closeWidgets) => {
+  onChangeFrom = (valueFrom) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
-    this.onChange([valueFrom, valueTo], closeWidgets);
+    this.onChange([valueFrom, valueTo]);
   }
 
-  onChangeTo = (valueTo, closeWidgets) => {
+  onChangeTo = (valueTo) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
-    this.onChange([valueFrom, valueTo], closeWidgets);
+    this.onChange([valueFrom, valueTo]);
   }
 
   onFocus = (event) => {
