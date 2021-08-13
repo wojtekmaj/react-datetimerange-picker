@@ -51,7 +51,7 @@
     "prop-types": "^15.6.0",
     "react-calendar": "^3.3.1",
     "react-clock": "^3.0.0",
-    "react-datetime-picker": "^3.2.0",
+    "react-datetime-picker": "^3.4.0",
     "react-fit": "^1.0.3"
   },
   "devDependencies": {
