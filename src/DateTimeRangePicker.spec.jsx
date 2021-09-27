@@ -412,6 +412,24 @@ describe('DateTimeRangePicker', () => {
 
       expect(calendar2).toHaveLength(0);
     });
+
+    it('does not open Calendar component when focusing on a select element', () => {
+      const component = mount(
+        <DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />,
+      );
+
+      const calendar = component.find('Calendar');
+      const select = component.find('select[name="month"]').first();
+
+      expect(calendar).toHaveLength(0);
+
+      select.simulate('focus');
+      component.update();
+
+      const calendar2 = component.find('Calendar');
+
+      expect(calendar2).toHaveLength(0);
+    });
   });
 
   describe('handles opening Clock component when focusing on an input inside properly', () => {
@@ -462,6 +480,24 @@ describe('DateTimeRangePicker', () => {
       expect(clock).toHaveLength(0);
 
       input.simulate('focus');
+      component.update();
+
+      const clock2 = component.find('Clock');
+
+      expect(clock2).toHaveLength(0);
+    });
+
+    it('does not open Clock component when focusing on a select element', () => {
+      const component = mount(
+        <DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />,
+      );
+
+      const clock = component.find('Clock');
+      const select = component.find('select[name="amPm"]').first();
+
+      expect(clock).toHaveLength(0);
+
+      select.simulate('focus');
       component.update();
 
       const clock2 = component.find('Clock');

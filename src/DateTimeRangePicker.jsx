@@ -161,6 +161,10 @@ export default class DateTimeRangePicker extends PureComponent {
     }
 
     if (openWidgetsOnFocus) {
+      if (event.target.getAttribute('data-select') === 'true') {
+        return;
+      }
+
       switch (event.target.name) {
         case 'day':
         case 'month':
