@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker/src/entry.nostyle';
 import '@wojtekmaj/react-datetimerange-picker/src/DateTimeRangePicker.less';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-calendar/src/Calendar.less';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-clock/src/Clock.less';
 
 import ValidityOptions from './ValidityOptions';
@@ -36,16 +34,11 @@ export default function Test() {
   return (
     <div className="Test">
       <header>
-        <h1>
-          react-datetimerange-picker test page
-        </h1>
+        <h1>react-datetimerange-picker test page</h1>
       </header>
       <div className="Test__container">
         <aside className="Test__container__options">
-          <MaxDetailOptions
-            maxDetail={maxDetail}
-            setMaxDetail={setMaxDetail}
-          />
+          <MaxDetailOptions maxDetail={maxDetail} setMaxDetail={setMaxDetail} />
           <ValidityOptions
             maxDate={maxDate}
             minDate={minDate}
@@ -54,14 +47,8 @@ export default function Test() {
             setMinDate={setMinDate}
             setRequired={setRequired}
           />
-          <LocaleOptions
-            locale={locale}
-            setLocale={setLocale}
-          />
-          <ValueOptions
-            setValue={setValue}
-            value={value}
-          />
+          <LocaleOptions locale={locale} setLocale={setLocale} />
+          <ValueOptions setValue={setValue} value={value} />
           <ViewOptions
             disabled={disabled}
             setDisabled={setDisabled}
@@ -104,10 +91,7 @@ export default function Test() {
             />
             <br />
             <br />
-            <button
-              id="submit"
-              type="submit"
-            >
+            <button id="submit" type="submit">
               Submit
             </button>
           </form>

@@ -39,12 +39,7 @@ export default class DateTimeRangePicker extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { isCalendarOpen, isClockOpen } = this.state;
-    const {
-      onCalendarClose,
-      onCalendarOpen,
-      onClockClose,
-      onClockOpen,
-    } = this.props;
+    const { onCalendarClose, onCalendarOpen, onClockClose, onClockOpen } = this.props;
 
     const isWidgetOpen = isCalendarOpen || isClockOpen;
     const prevIsWidgetOpen = prevState.isCalendarOpen || prevState.isClockOpen;
@@ -78,7 +73,7 @@ export default class DateTimeRangePicker extends PureComponent {
     if (this.wrapper && !this.wrapper.contains(target)) {
       this.closeWidgets();
     }
-  }
+  };
 
   onDateChange = ([valueFrom, valueTo], closeWidgets = true) => {
     const { value } = this.props;
@@ -117,9 +112,8 @@ export default class DateTimeRangePicker extends PureComponent {
     })();
 
     this.onChange([nextValueFrom, nextValueTo], closeWidgets);
-  }
+  };
 
-  // eslint-disable-next-line react/destructuring-assignment
   onChange = (value, closeWidgets = this.props.closeWidgets) => {
     const { onChange } = this.props;
 
@@ -130,26 +124,22 @@ export default class DateTimeRangePicker extends PureComponent {
     if (onChange) {
       onChange(value);
     }
-  }
+  };
 
   onChangeFrom = (valueFrom, closeWidgets) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeWidgets);
-  }
+  };
 
   onChangeTo = (valueTo, closeWidgets) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeWidgets);
-  }
+  };
 
   onFocus = (event) => {
-    const {
-      disabled,
-      onFocus,
-      openWidgetsOnFocus,
-    } = this.props;
+    const { disabled, onFocus, openWidgetsOnFocus } = this.props;
 
     if (onFocus) {
       onFocus(event);
@@ -180,34 +170,34 @@ export default class DateTimeRangePicker extends PureComponent {
         default:
       }
     }
-  }
+  };
 
   onKeyDown = (event) => {
     if (event.key === 'Escape') {
       this.closeWidgets();
     }
-  }
+  };
 
   openClock = () => {
     this.setState({
       isCalendarOpen: false,
       isClockOpen: true,
     });
-  }
+  };
 
   openCalendar = () => {
     this.setState({
       isCalendarOpen: true,
       isClockOpen: false,
     });
-  }
+  };
 
   toggleCalendar = () => {
     this.setState((prevState) => ({
       isCalendarOpen: !prevState.isCalendarOpen,
       isClockOpen: false,
     }));
-  }
+  };
 
   closeWidgets = () => {
     this.setState((prevState) => {
@@ -220,7 +210,7 @@ export default class DateTimeRangePicker extends PureComponent {
         isClockOpen: false,
       };
     });
-  }
+  };
 
   stopPropagation = (event) => event.stopPropagation();
 
@@ -230,7 +220,8 @@ export default class DateTimeRangePicker extends PureComponent {
     const { isCalendarOpen, isClockOpen } = this.state;
     const isWidgetOpen = isCalendarOpen || isClockOpen;
 
-    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isWidgetOpen;
+    const shouldListenWithFallback =
+      typeof shouldListen !== 'undefined' ? shouldListen : isWidgetOpen;
     const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
     outsideActionEvents.forEach((eventName) => document[fnName](eventName, this.onOutsideAction));
     document[fnName]('keydown', this.onKeyDown);
@@ -314,15 +305,14 @@ export default class DateTimeRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <DateTimeInput
           {...commonProps}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
-        <span className={`${baseClassName}__range-divider`}>
-          {rangeDivider}
-        </span>
+        <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
         <DateTimeInput
           {...commonProps}
           name={`${name}_to`}
@@ -386,7 +376,10 @@ export default class DateTimeRangePicker extends PureComponent {
               ref.removeAttribute('style');
             }
           }}
-          className={mergeClassNames(className, `${className}--${isCalendarOpen ? 'open' : 'closed'}`)}
+          className={mergeClassNames(
+            className,
+            `${className}--${isCalendarOpen ? 'open' : 'closed'}`,
+          )}
         >
           <Calendar
             className={calendarClassName}
@@ -519,30 +512,18 @@ DateTimeRangePicker.defaultProps = {
   rangeDivider: '–',
 };
 
-const isValue = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.instanceOf(Date),
-]);
+const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
 DateTimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
   autoFocus: PropTypes.bool,
   calendarAriaLabel: PropTypes.string,
-  calendarClassName: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  calendarClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   calendarIcon: PropTypes.node,
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
-  clockClassName: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   closeWidgets: PropTypes.bool,
   dayAriaLabel: PropTypes.string,
   dayPlaceholder: PropTypes.string,
@@ -576,10 +557,7 @@ DateTimeRangePicker.propTypes = {
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([
-    isValue,
-    PropTypes.arrayOf(isValue),
-  ]),
+  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
   yearAriaLabel: PropTypes.string,
   yearPlaceholder: PropTypes.string,
 };
