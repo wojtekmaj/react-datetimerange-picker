@@ -1864,9 +1864,9 @@ __metadata:
     make-event-props: ^1.1.0
     merge-class-names: ^1.1.1
     prop-types: ^15.6.0
-    react-calendar: ^3.3.1
-    react-clock: ^3.0.0
-    react-datetime-picker: ^3.4.1
+    react-calendar: ^3.7.0
+    react-clock: ^3.1.0
+    react-datetime-picker: ^3.5.0
     react-fit: ^1.4.0
   peerDependencies:
     react: ^16.3.0 || ^17.0.0 || ^18.0.0
@@ -3565,7 +3565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-user-locale@npm:^1.2.0":
+"get-user-locale@npm:^1.2.0, get-user-locale@npm:^1.4.0":
   version: 1.4.0
   resolution: "get-user-locale@npm:1.4.0"
   dependencies:
@@ -5404,38 +5404,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-calendar@npm:^3.3.1":
-  version: 3.6.0
-  resolution: "react-calendar@npm:3.6.0"
+"react-calendar@npm:^3.3.1, react-calendar@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "react-calendar@npm:3.7.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.2
     get-user-locale: ^1.2.0
     merge-class-names: ^1.1.1
     prop-types: ^15.6.0
   peerDependencies:
-    react: ^16.3.0 || ^17.0.0-0
-    react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: 4499e26a5d000e6a6d9decb6ccc0ec4895197943aa3ba8024f9dbf5c597a442471df3ab686a1d46a2543c34ac31bd83c26bcbc5a7c952a02b98a03846339decb
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: 368084515bdbc59dddf1a0e367c6bb49e9b9efdc1d01343afeeb412feb52d89b88ac6b09378433cdb3716557ff2cf56751f11183ecd99a5df2a5c48b1691e33d
   languageName: node
   linkType: hard
 
-"react-clock@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "react-clock@npm:3.0.0"
+"react-clock@npm:^3.0.0, react-clock@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "react-clock@npm:3.1.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.0
+    get-user-locale: ^1.4.0
     merge-class-names: ^1.1.1
     prop-types: ^15.6.0
   peerDependencies:
-    react: ">=15.5"
-    react-dom: ">=15.5"
-  checksum: 2f93f15f5fc1e4961db809044612ee430978242b8a7d886b62c9a2e1a368d4b399e807377d9fb388eb01a2d0f333f21415229f7ab949291124c16d5b9ed07ed3
+    react: ^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 5046a24caacbf8cf6a86c00172533f0914e849d246299a0a2e6335d06b89bc8393734d71413e75c42275d872f160953255f48c7b88cb0f791273f3d10dfb6691
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^8.3.3":
-  version: 8.3.6
-  resolution: "react-date-picker@npm:8.3.6"
+"react-date-picker@npm:^8.4.0":
+  version: 8.4.0
+  resolution: "react-date-picker@npm:8.4.0"
   dependencies:
     "@types/react-calendar": ^3.0.0
     "@wojtekmaj/date-utils": ^1.0.3
@@ -5445,18 +5446,18 @@ __metadata:
     merge-refs: ^1.0.0
     prop-types: ^15.6.0
     react-calendar: ^3.3.1
-    react-fit: ^1.0.3
+    react-fit: ^1.4.0
     update-input-width: ^1.2.2
   peerDependencies:
-    react: ^16.3.0 || ^17.0.0-0
-    react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: f2c8e8a0e91c0499783ec2ca1896dec4ef1cc649fcc43c3f70073888545f4ff3176cbf1d42131f5052f1f5532d8743028e701c3a6ca2e6f01d8dcc66b7bd79d6
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: 4973d5a971f69fe927ccb8e9558788fcdf2d5918ae3171040c4a2a36c54c540334cc3359b44d3f83a9f839847ed51a392450b273c3f1d586e47038c12e7bdd73
   languageName: node
   linkType: hard
 
-"react-datetime-picker@npm:^3.4.1":
-  version: 3.4.3
-  resolution: "react-datetime-picker@npm:3.4.3"
+"react-datetime-picker@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "react-datetime-picker@npm:3.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.3
     get-user-locale: ^1.2.0
@@ -5465,13 +5466,13 @@ __metadata:
     prop-types: ^15.6.0
     react-calendar: ^3.3.1
     react-clock: ^3.0.0
-    react-date-picker: ^8.3.3
-    react-fit: ^1.0.3
-    react-time-picker: ^4.4.2
+    react-date-picker: ^8.4.0
+    react-fit: ^1.4.0
+    react-time-picker: ^4.5.0
   peerDependencies:
-    react: ^16.3.0 || ^17.0.0-0
-    react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: 7857cbc858d0417a8b568c183e207d52b25fd24d8d6103d0ba3eccd626fe6f0b9f24c8fe916e57ddef1dffae16a35820fc4697f026ae7a61efa080cd177e780c
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: 256bd04fdb6627daf3d1a0d380db1289084e2f6dff3eda0555cc5a3bbf51db864c1568f9536cf9e849c334f52d697b503e0b9ec9f7e209aa6c617ea3a056b620
   languageName: node
   linkType: hard
 
@@ -5516,7 +5517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fit@npm:^1.0.3, react-fit@npm:^1.4.0":
+"react-fit@npm:^1.4.0":
   version: 1.4.0
   resolution: "react-fit@npm:1.4.0"
   dependencies:
@@ -5544,9 +5545,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^4.4.2":
-  version: 4.4.4
-  resolution: "react-time-picker@npm:4.4.4"
+"react-time-picker@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "react-time-picker@npm:4.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.0
     get-user-locale: ^1.2.0
@@ -5555,12 +5556,12 @@ __metadata:
     merge-refs: ^1.0.0
     prop-types: ^15.6.0
     react-clock: ^3.0.0
-    react-fit: ^1.0.3
+    react-fit: ^1.4.0
     update-input-width: ^1.2.2
   peerDependencies:
-    react: ^16.3.0 || ^17.0.0-0
-    react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: d20ac5c42cdfc97ae8ec22c806d73af10fbee97478bf55baa923c8f18e3d08724f1823e9ee78ae1e2079b359b155f15576dc3d50ca4b13d4e332b5a67881da7b
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: 9bcf598500153e05d018cff52a282ed678526853952e67e8dd1deca333335f97aa45110d9a288a0afb232006e91f7937387b1f4c82cb0882c32a0be4250d0ff6
   languageName: node
   linkType: hard
 
