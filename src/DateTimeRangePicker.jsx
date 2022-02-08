@@ -383,7 +383,7 @@ export default class DateTimeRangePicker extends PureComponent {
         >
           <Calendar
             className={calendarClassName}
-            onChange={this.onDateChange}
+            onChange={(value) => this.onDateChange(value)}
             selectRange
             value={value || null}
             {...calendarProps}
