@@ -1,58 +1,49 @@
-import React from 'react';
-import { mount } from 'enzyme';
+import React, { createRef } from 'react';
+import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 
 import DateTimeRangePicker from './DateTimeRangePicker';
 
 describe('DateTimeRangePicker', () => {
   it('passes default name to DateTimeInput components', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container } = render(<DateTimeRangePicker />);
 
-    const dateTimeInput = component.find('DateTimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
-    expect(dateTimeInput.at(0).prop('name')).toBe('datetimerange_from');
-    expect(dateTimeInput.at(1).prop('name')).toBe('datetimerange_to');
+    expect(nativeInputs[0]).toHaveAttribute('name', 'datetimerange_from');
+    expect(nativeInputs[1]).toHaveAttribute('name', 'datetimerange_to');
   });
 
   it('passes custom name to DateTimeInput components', () => {
     const name = 'testName';
 
-    const component = mount(<DateTimeRangePicker name={name} />);
+    const { container } = render(<DateTimeRangePicker name={name} />);
 
-    const dateTimeInput = component.find('DateTimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
-    expect(dateTimeInput.at(0).prop('name')).toBe(`${name}_from`);
-    expect(dateTimeInput.at(1).prop('name')).toBe(`${name}_to`);
+    expect(nativeInputs[0]).toHaveAttribute('name', `${name}_from`);
+    expect(nativeInputs[1]).toHaveAttribute('name', `${name}_to`);
   });
 
-  it('passes autoFocus flag to first DateTimeInput component', () => {
+  // See https://github.com/jsdom/jsdom/issues/3041
+  it.skip('passes autoFocus flag to first DateTimeInput component', () => {
     // eslint-disable-next-line jsx-a11y/no-autofocus
-    const component = mount(<DateTimeRangePicker autoFocus />);
+    const { container } = render(<DateTimeRangePicker autoFocus />);
 
-    const dateTimeInput = component.find('DateTimeInput');
+    const customInputs = container.querySelectorAll('input[data-input]');
 
-    expect(dateTimeInput.at(0).prop('autoFocus')).toBeTruthy();
-    expect(dateTimeInput.at(1).prop('autoFocus')).toBe(undefined);
+    expect(customInputs[0]).toHaveAttribute('autofocus');
   });
 
   it('passes disabled flag to DateTimeInput components', () => {
-    const component = mount(<DateTimeRangePicker disabled />);
+    const { container } = render(<DateTimeRangePicker disabled />);
 
-    const dateTimeInput = component.find('DateTimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
-    expect(dateTimeInput.at(0).prop('disabled')).toBeTruthy();
-    expect(dateTimeInput.at(1).prop('disabled')).toBeTruthy();
+    expect(nativeInputs[0]).toBeDisabled();
+    expect(nativeInputs[1]).toBeDisabled();
   });
 
-  it('passes format to DateTimeInput components', () => {
-    const format = 'y-MM-dd h:mm:ss a';
-
-    const component = mount(<DateTimeRangePicker format={format} />);
-
-    const dateTimeInput = component.find('DateTimeInput');
-
-    expect(dateTimeInput.at(0).prop('format')).toBe(format);
-    expect(dateTimeInput.at(1).prop('format')).toBe(format);
-  });
+  it.todo('passes format to DateTimeInput components');
 
   it('passes aria-label props to DateTimeInput components', () => {
     const ariaLabelProps = {
@@ -68,31 +59,53 @@ describe('DateTimeRangePicker', () => {
       yearAriaLabel: 'Year',
     };
 
-    const component = mount(<DateTimeRangePicker {...ariaLabelProps} />);
+    const { container } = render(<DateTimeRangePicker {...ariaLabelProps} maxDetail="second" />);
 
-    const calendarButton = component.find('button.react-datetimerange-picker__calendar-button');
-    const clearButton = component.find('button.react-datetimerange-picker__clear-button');
-    const dateTimeInput = component.find('DateTimeInput');
+    const calendarButton = container.querySelector(
+      'button.react-datetimerange-picker__calendar-button',
+    );
+    const clearButton = container.querySelector('button.react-datetimerange-picker__clear-button');
+    const dateTimeInputs = container.querySelectorAll('.react-datetimerange-picker__inputGroup');
 
-    expect(calendarButton.prop('aria-label')).toBe(ariaLabelProps.calendarAriaLabel);
-    expect(clearButton.prop('aria-label')).toBe(ariaLabelProps.clearAriaLabel);
-    expect(dateTimeInput.at(0).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
-    expect(dateTimeInput.at(0).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
-    expect(dateTimeInput.at(0).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
-    expect(dateTimeInput.at(0).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
-    expect(dateTimeInput.at(0).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
-    expect(dateTimeInput.at(0).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
-    expect(dateTimeInput.at(0).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
-    expect(dateTimeInput.at(1).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
-    expect(dateTimeInput.at(1).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
-    expect(dateTimeInput.at(1).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
-    expect(dateTimeInput.at(1).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
-    expect(dateTimeInput.at(1).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
-    expect(dateTimeInput.at(1).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
-    expect(dateTimeInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
+    const [dateTimeFromInput, dateTimeToInput] = dateTimeInputs;
+
+    const nativeFromInput = dateTimeFromInput.querySelector('input[type="datetime-local"]');
+    const dayFromInput = dateTimeFromInput.querySelector('input[name="day"]');
+    const monthFromInput = dateTimeFromInput.querySelector('input[name="month"]');
+    const yearFromInput = dateTimeFromInput.querySelector('input[name="year"]');
+    const hourFromInput = dateTimeFromInput.querySelector('input[name="hour12"]');
+    const minuteFromInput = dateTimeFromInput.querySelector('input[name="minute"]');
+    const secondFromInput = dateTimeFromInput.querySelector('input[name="second"]');
+
+    const nativeToInput = dateTimeToInput.querySelector('input[type="datetime-local"]');
+    const dayToInput = dateTimeToInput.querySelector('input[name="day"]');
+    const monthToInput = dateTimeToInput.querySelector('input[name="month"]');
+    const yearToInput = dateTimeToInput.querySelector('input[name="year"]');
+    const hourToInput = dateTimeToInput.querySelector('input[name="hour12"]');
+    const minuteToInput = dateTimeToInput.querySelector('input[name="minute"]');
+    const secondToInput = dateTimeToInput.querySelector('input[name="second"]');
+
+    expect(calendarButton).toHaveAttribute('aria-label', ariaLabelProps.calendarAriaLabel);
+    expect(clearButton).toHaveAttribute('aria-label', ariaLabelProps.clearAriaLabel);
+
+    expect(nativeFromInput).toHaveAttribute('aria-label', ariaLabelProps.nativeInputAriaLabel);
+    expect(dayFromInput).toHaveAttribute('aria-label', ariaLabelProps.dayAriaLabel);
+    expect(monthFromInput).toHaveAttribute('aria-label', ariaLabelProps.monthAriaLabel);
+    expect(yearFromInput).toHaveAttribute('aria-label', ariaLabelProps.yearAriaLabel);
+    expect(hourFromInput).toHaveAttribute('aria-label', ariaLabelProps.hourAriaLabel);
+    expect(minuteFromInput).toHaveAttribute('aria-label', ariaLabelProps.minuteAriaLabel);
+    expect(secondFromInput).toHaveAttribute('aria-label', ariaLabelProps.secondAriaLabel);
+
+    expect(nativeToInput).toHaveAttribute('aria-label', ariaLabelProps.nativeInputAriaLabel);
+    expect(dayToInput).toHaveAttribute('aria-label', ariaLabelProps.dayAriaLabel);
+    expect(monthToInput).toHaveAttribute('aria-label', ariaLabelProps.monthAriaLabel);
+    expect(yearToInput).toHaveAttribute('aria-label', ariaLabelProps.yearAriaLabel);
+    expect(hourToInput).toHaveAttribute('aria-label', ariaLabelProps.hourAriaLabel);
+    expect(minuteToInput).toHaveAttribute('aria-label', ariaLabelProps.minuteAriaLabel);
+    expect(secondToInput).toHaveAttribute('aria-label', ariaLabelProps.secondAriaLabel);
   });
 
-  it('passes aria-label props to DateTimeInput components', () => {
+  it('passes placeholder props to DateTimeInput components', () => {
     const placeholderProps = {
       dayPlaceholder: 'dd',
       hourPlaceholder: 'hh',
@@ -102,340 +115,340 @@ describe('DateTimeRangePicker', () => {
       yearPlaceholder: 'yyyy',
     };
 
-    const component = mount(<DateTimeRangePicker {...placeholderProps} />);
+    const { container } = render(<DateTimeRangePicker {...placeholderProps} maxDetail="second" />);
 
-    const dateTimeInput = component.find('DateTimeInput');
+    const dateTimeInputs = container.querySelectorAll('.react-datetimerange-picker__inputGroup');
 
-    expect(dateTimeInput.at(0).prop('dayPlaceholder')).toBe(placeholderProps.dayPlaceholder);
-    expect(dateTimeInput.at(0).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
-    expect(dateTimeInput.at(0).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
-    expect(dateTimeInput.at(0).prop('monthPlaceholder')).toBe(placeholderProps.monthPlaceholder);
-    expect(dateTimeInput.at(0).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
-    expect(dateTimeInput.at(0).prop('yearPlaceholder')).toBe(placeholderProps.yearPlaceholder);
-    expect(dateTimeInput.at(1).prop('dayPlaceholder')).toBe(placeholderProps.dayPlaceholder);
-    expect(dateTimeInput.at(1).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
-    expect(dateTimeInput.at(1).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
-    expect(dateTimeInput.at(1).prop('monthPlaceholder')).toBe(placeholderProps.monthPlaceholder);
-    expect(dateTimeInput.at(1).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
-    expect(dateTimeInput.at(1).prop('yearPlaceholder')).toBe(placeholderProps.yearPlaceholder);
+    const [dateTimeFromInput, dateTimeToInput] = dateTimeInputs;
+
+    const dayFromInput = dateTimeFromInput.querySelector('input[name="day"]');
+    const monthFromInput = dateTimeFromInput.querySelector('input[name="month"]');
+    const yearFromInput = dateTimeFromInput.querySelector('input[name="year"]');
+    const hourFromInput = dateTimeFromInput.querySelector('input[name="hour12"]');
+    const minuteFromInput = dateTimeFromInput.querySelector('input[name="minute"]');
+    const secondFromInput = dateTimeFromInput.querySelector('input[name="second"]');
+
+    const dayToInput = dateTimeToInput.querySelector('input[name="day"]');
+    const monthToInput = dateTimeToInput.querySelector('input[name="month"]');
+    const yearToInput = dateTimeToInput.querySelector('input[name="year"]');
+    const hourToInput = dateTimeToInput.querySelector('input[name="hour12"]');
+    const minuteToInput = dateTimeToInput.querySelector('input[name="minute"]');
+    const secondToInput = dateTimeToInput.querySelector('input[name="second"]');
+
+    expect(dayFromInput).toHaveAttribute('placeholder', placeholderProps.dayPlaceholder);
+    expect(monthFromInput).toHaveAttribute('placeholder', placeholderProps.monthPlaceholder);
+    expect(yearFromInput).toHaveAttribute('placeholder', placeholderProps.yearPlaceholder);
+    expect(hourFromInput).toHaveAttribute('placeholder', placeholderProps.hourPlaceholder);
+    expect(minuteFromInput).toHaveAttribute('placeholder', placeholderProps.minutePlaceholder);
+    expect(secondFromInput).toHaveAttribute('placeholder', placeholderProps.secondPlaceholder);
+
+    expect(dayToInput).toHaveAttribute('placeholder', placeholderProps.dayPlaceholder);
+    expect(monthToInput).toHaveAttribute('placeholder', placeholderProps.monthPlaceholder);
+    expect(yearToInput).toHaveAttribute('placeholder', placeholderProps.yearPlaceholder);
+    expect(hourToInput).toHaveAttribute('placeholder', placeholderProps.hourPlaceholder);
+    expect(minuteToInput).toHaveAttribute('placeholder', placeholderProps.minutePlaceholder);
+    expect(secondToInput).toHaveAttribute('placeholder', placeholderProps.secondPlaceholder);
   });
 
   describe('passes value to DateTimeInput components', () => {
     it('passes single value to DateTimeInput components', () => {
       const value = new Date(2019, 0, 1);
 
-      const component = mount(<DateTimeRangePicker value={value} />);
+      const { container } = render(<DateTimeRangePicker value={value} />);
 
-      const dateTimeInput = component.find('DateTimeInput');
+      const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
-      expect(dateTimeInput.at(0).prop('value')).toBe(value);
-      expect(dateTimeInput.at(1).prop('value')).toBe(undefined);
+      expect(nativeInputs[0]).toHaveValue('2019-01-01T00:00');
+      expect(nativeInputs[1]).toHaveValue('');
     });
 
     it('passes the first item of an array of values to DateTimeInput components', () => {
       const value1 = new Date(2019, 0, 1);
-      const value2 = new Date(2019, 6, 1);
+      const value2 = new Date(2019, 6, 1, 12, 30);
 
-      const component = mount(<DateTimeRangePicker value={[value1, value2]} />);
+      const { container } = render(<DateTimeRangePicker value={[value1, value2]} />);
 
-      const dateTimeInput = component.find('DateTimeInput');
+      const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
-      expect(dateTimeInput.at(0).prop('value')).toBe(value1);
-      expect(dateTimeInput.at(1).prop('value')).toBe(value2);
+      expect(nativeInputs[0]).toHaveValue('2019-01-01T00:00');
+      expect(nativeInputs[1]).toHaveValue('2019-07-01T12:30');
     });
   });
 
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
-    const component = mount(<DateTimeRangePicker className={className} />);
+    const { container } = render(<DateTimeRangePicker className={className} />);
 
-    const wrapperClassName = component.prop('className');
+    const wrapper = container.firstChild;
 
-    expect(wrapperClassName.includes(className)).toBe(true);
+    expect(wrapper).toHaveClass(className);
   });
 
   it('applies calendarClassName to the calendar when given a string', () => {
     const calendarClassName = 'testClassName';
 
-    const component = mount(
+    const { container } = render(
       <DateTimeRangePicker calendarClassName={calendarClassName} isCalendarOpen />,
     );
 
-    const calendar = component.find('Calendar');
-    const calendarWrapperClassName = calendar.prop('className');
+    const calendar = container.querySelector('.react-calendar');
 
-    expect(calendarWrapperClassName.includes(calendarClassName)).toBe(true);
+    expect(calendar).toHaveClass(calendarClassName);
   });
 
   it('applies clockClassName to the clock when given a string', () => {
     const clockClassName = 'testClassName';
 
-    const component = mount(<DateTimeRangePicker clockClassName={clockClassName} isClockOpen />);
+    const { container } = render(
+      <DateTimeRangePicker clockClassName={clockClassName} isClockOpen />,
+    );
 
-    const clock = component.find('Clock');
-    const calendarWrapperClassName = clock.prop('className');
+    const clock = container.querySelector('.react-clock');
 
-    expect(calendarWrapperClassName.includes(clockClassName)).toBe(true);
+    expect(clock).toHaveClass(clockClassName);
   });
 
   it('renders DateTimeInput components', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container } = render(<DateTimeRangePicker />);
 
-    const dateTimeInput = component.find('DateTimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
-    expect(dateTimeInput).toHaveLength(2);
+    expect(nativeInputs.length).toBe(2);
   });
 
   it('renders range divider with default divider', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container } = render(<DateTimeRangePicker />);
 
-    const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
+    const rangeDivider = container.querySelector('.react-datetimerange-picker__range-divider');
 
-    expect(rangeDivider).toHaveLength(1);
-    expect(rangeDivider.text()).toBe('–');
+    expect(rangeDivider).toBeInTheDocument();
+    expect(rangeDivider).toHaveTextContent('–');
   });
 
   it('renders range divider with custom divider', () => {
-    const component = mount(<DateTimeRangePicker rangeDivider="to" />);
+    const { container } = render(<DateTimeRangePicker rangeDivider="to" />);
 
-    const rangeDivider = component.find('.react-datetimerange-picker__range-divider');
+    const rangeDivider = container.querySelector('.react-datetimerange-picker__range-divider');
 
-    expect(rangeDivider).toHaveLength(1);
-    expect(rangeDivider.text()).toBe('to');
+    expect(rangeDivider).toBeInTheDocument();
+    expect(rangeDivider).toHaveTextContent('to');
   });
 
   it('renders clear button', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container } = render(<DateTimeRangePicker />);
 
-    const clearButton = component.find('button.react-datetimerange-picker__clear-button');
+    const clearButton = container.querySelector('button.react-datetimerange-picker__clear-button');
 
-    expect(clearButton).toHaveLength(1);
+    expect(clearButton).toBeInTheDocument();
   });
 
   it('renders calendar button', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container } = render(<DateTimeRangePicker />);
 
-    const calendarButton = component.find('button.react-datetimerange-picker__calendar-button');
+    const calendarButton = container.querySelector(
+      'button.react-datetimerange-picker__calendar-button',
+    );
 
-    expect(calendarButton).toHaveLength(1);
+    expect(calendarButton).toBeInTheDocument();
   });
 
   it('renders DateTimeInput and Calendar components when given isCalendarOpen flag', () => {
-    const component = mount(<DateTimeRangePicker isCalendarOpen />);
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 
-    const dateTimeInput = component.find('DateTimeInput');
-    const calendar = component.find('Calendar');
+    const calendar = container.querySelector('.react-calendar');
 
-    expect(dateTimeInput).toHaveLength(2);
-    expect(calendar).toHaveLength(1);
+    expect(calendar).toBeInTheDocument();
   });
 
-  it('renders DateTimeInput and Clock components when given isClockOpen flag', () => {
-    const component = mount(<DateTimeRangePicker isClockOpen />);
+  it('renders Clock component when given isClockOpen flag', () => {
+    const { container } = render(<DateTimeRangePicker isClockOpen />);
 
-    const dateTimeInput = component.find('DateTimeInput');
-    const calendar = component.find('Clock');
+    const clock = container.querySelector('.react-clock');
 
-    expect(dateTimeInput).toHaveLength(2);
-    expect(calendar).toHaveLength(1);
+    expect(clock).toBeInTheDocument();
   });
 
   it('does not render Calendar component when given disableCalendar & isCalendarOpen flags', () => {
-    const component = mount(<DateTimeRangePicker disableCalendar isCalendarOpen />);
+    const { container } = render(<DateTimeRangePicker disableCalendar isCalendarOpen />);
 
-    const dateTimeInput = component.find('DateTimeInput');
-    const calendar = component.find('Calendar');
+    const calendar = container.querySelector('.react-calendar');
 
-    expect(dateTimeInput).toHaveLength(2);
-    expect(calendar).toHaveLength(0);
+    expect(calendar).toBeFalsy();
   });
 
   it('does not render Clock component when given disableClock & isClockOpen flags', () => {
-    const component = mount(<DateTimeRangePicker disableClock isClockOpen />);
+    const { container } = render(<DateTimeRangePicker disableClock isClockOpen />);
 
-    const dateTimeInput = component.find('DateTimeInput');
-    const clock = component.find('Clock');
+    const clock = container.querySelector('.react-clock');
 
-    expect(dateTimeInput).toHaveLength(2);
-    expect(clock).toHaveLength(0);
+    expect(clock).toBeFalsy();
   });
 
   it('opens Calendar component when given isCalendarOpen flag by changing props', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container, rerender } = render(<DateTimeRangePicker />);
 
-    const calendar = component.find('Calendar');
+    const calendar = container.querySelector('.react-calendar');
 
-    expect(calendar).toHaveLength(0);
+    expect(calendar).toBeFalsy();
 
-    component.setProps({ isCalendarOpen: true });
-    component.update();
+    rerender(<DateTimeRangePicker isCalendarOpen />);
 
-    const calendar2 = component.find('Calendar');
+    const calendar2 = container.querySelector('.react-calendar');
 
-    expect(calendar2).toHaveLength(1);
+    expect(calendar2).toBeInTheDocument();
   });
 
   it('opens Clock component when given isClockOpen flag by changing props', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container, rerender } = render(<DateTimeRangePicker />);
 
-    const calendar = component.find('Clock');
+    const clock = container.querySelector('.react-clock');
 
-    expect(calendar).toHaveLength(0);
+    expect(clock).toBeFalsy();
 
-    component.setProps({ isClockOpen: true });
-    component.update();
+    rerender(<DateTimeRangePicker isClockOpen />);
 
-    const calendar2 = component.find('Clock');
+    const clock2 = container.querySelector('.react-clock');
 
-    expect(calendar2).toHaveLength(1);
+    expect(clock2).toBeInTheDocument();
   });
 
   it('opens Calendar component when clicking on a button', () => {
-    const component = mount(<DateTimeRangePicker />);
+    const { container } = render(<DateTimeRangePicker />);
 
-    const calendar = component.find('Calendar');
-    const button = component.find('button.react-datetimerange-picker__calendar-button');
+    const calendar = container.querySelector('.react-calendar');
+    const button = container.querySelector('button.react-datetimerange-picker__calendar-button');
 
-    expect(calendar).toHaveLength(0);
+    expect(calendar).toBeFalsy();
 
-    button.simulate('click');
-    component.update();
+    fireEvent.click(button);
 
-    const calendar2 = component.find('Calendar');
+    const calendar2 = container.querySelector('.react-calendar');
 
-    expect(calendar2).toHaveLength(1);
+    expect(calendar2).toBeInTheDocument();
   });
 
   describe('handles opening Calendar component when focusing on an input inside properly', () => {
     it('opens Calendar component when focusing on an input inside by default', () => {
-      const component = mount(<DateTimeRangePicker />);
+      const { container } = render(<DateTimeRangePicker />);
 
-      const calendar = component.find('Calendar');
-      const input = component.find('input[name="day"]').first();
+      const calendar = container.querySelector('.react-calendar');
+      const input = container.querySelector('input[name="day"]');
 
-      expect(calendar).toHaveLength(0);
+      expect(calendar).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const calendar2 = component.find('Calendar');
+      const calendar2 = container.querySelector('.react-calendar');
 
-      expect(calendar2).toHaveLength(1);
+      expect(calendar2).toBeInTheDocument();
     });
 
     it('opens Calendar component when focusing on an input inside given openWidgetsOnFocus = true', () => {
-      const component = mount(<DateTimeRangePicker openWidgetsOnFocus />);
+      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus />);
 
-      const calendar = component.find('Calendar');
-      const input = component.find('input[name="day"]').first();
+      const calendar = container.querySelector('.react-calendar');
+      const input = container.querySelector('input[name="day"]');
 
-      expect(calendar).toHaveLength(0);
+      expect(calendar).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const calendar2 = component.find('Calendar');
+      const calendar2 = container.querySelector('.react-calendar');
 
-      expect(calendar2).toHaveLength(1);
+      expect(calendar2).toBeInTheDocument();
     });
 
     it('does not open Calendar component when focusing on an input inside given openWidgetsOnFocus = false', () => {
-      const component = mount(<DateTimeRangePicker openWidgetsOnFocus={false} />);
+      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus={false} />);
 
-      const calendar = component.find('Calendar');
-      const input = component.find('input[name="day"]').first();
+      const calendar = container.querySelector('.react-calendar');
+      const input = container.querySelector('input[name="day"]');
 
-      expect(calendar).toHaveLength(0);
+      expect(calendar).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const calendar2 = component.find('Calendar');
+      const calendar2 = container.querySelector('.react-calendar');
 
-      expect(calendar2).toHaveLength(0);
+      expect(calendar2).toBeFalsy();
     });
 
     it('does not open Calendar component when focusing on a select element', () => {
-      const component = mount(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
+      const { container } = render(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
 
-      const calendar = component.find('Calendar');
-      const select = component.find('select[name="month"]').first();
+      const calendar = container.querySelector('.react-calendar');
+      const select = container.querySelector('select[name="month"]');
 
-      expect(calendar).toHaveLength(0);
+      expect(calendar).toBeFalsy();
 
-      select.simulate('focus');
-      component.update();
+      fireEvent.focus(select);
 
-      const calendar2 = component.find('Calendar');
+      const calendar2 = container.querySelector('.react-calendar');
 
-      expect(calendar2).toHaveLength(0);
+      expect(calendar2).toBeFalsy();
     });
   });
 
   describe('handles opening Clock component when focusing on an input inside properly', () => {
     it('opens Clock component when focusing on an input inside by default', () => {
-      const component = mount(<DateTimeRangePicker />);
+      const { container } = render(<DateTimeRangePicker />);
 
-      const clock = component.find('Clock');
-      const input = component.find('input[name^="hour"]').first();
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(1);
+      expect(clock2).toBeInTheDocument();
     });
 
     it('opens Clock component when focusing on an input inside given openWidgetsOnFocus = true', () => {
-      const component = mount(<DateTimeRangePicker openWidgetsOnFocus />);
+      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus />);
 
-      const clock = component.find('Clock');
-      const input = component.find('input[name^="hour"]').first();
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(1);
+      expect(clock2).toBeInTheDocument();
     });
 
     it('does not open Clock component when focusing on an input inside given openWidgetsOnFocus = false', () => {
-      const component = mount(<DateTimeRangePicker openWidgetsOnFocus={false} />);
+      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus={false} />);
 
-      const clock = component.find('Clock');
-      const input = component.find('input[name^="hour"]').first();
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(0);
+      expect(clock2).toBeFalsy();
     });
 
     it('does not open Clock component when focusing on a select element', () => {
-      const component = mount(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
+      const { container } = render(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
 
-      const clock = component.find('Clock');
-      const select = component.find('select[name="amPm"]').first();
+      const clock = container.querySelector('.react-clock');
+      const select = container.querySelector('select[name="amPm"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      select.simulate('focus');
-      component.update();
+      fireEvent.focus(select);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(0);
+      expect(clock2).toBeFalsy();
     });
   });
 
@@ -443,199 +456,205 @@ describe('DateTimeRangePicker', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
 
-    const event = document.createEvent('MouseEvent');
-    event.initEvent('mousedown', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.mouseDown(document.body);
 
-    expect(component.state('isCalendarOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
   });
 
   it('closes Calendar component when focused outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
 
-    const event = document.createEvent('FocusEvent');
-    event.initEvent('focusin', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.focusIn(document.body);
 
-    expect(component.state('isCalendarOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
   });
 
   it('closes Calendar component when tapped outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
 
-    const event = document.createEvent('TouchEvent');
-    event.initEvent('touchstart', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.touchStart(document.body);
 
-    expect(component.state('isCalendarOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
   });
 
   it('closes Clock component when clicked outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<DateTimeRangePicker isClockOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isClockOpen />, { attachTo: root });
 
-    const event = document.createEvent('MouseEvent');
-    event.initEvent('mousedown', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.mouseDown(document.body);
 
-    expect(component.state('isClockOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('closes Clock component when focused outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<DateTimeRangePicker isClockOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isClockOpen />, { attachTo: root });
 
-    const event = document.createEvent('FocusEvent');
-    event.initEvent('focusin', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.focusIn(document.body);
 
-    expect(component.state('isClockOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('closes Clock component when tapped outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<DateTimeRangePicker isClockOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isClockOpen />, { attachTo: root });
 
-    const event = document.createEvent('TouchEvent');
-    event.initEvent('touchstart', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.touchStart(document.body);
 
-    expect(component.state('isClockOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('does not close Calendar component when focused within date inputs', () => {
-    const component = mount(<DateTimeRangePicker isCalendarOpen />);
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 
-    const customInputs = component.find('input[type="number"]');
-    const dayInput = customInputs.at(0);
-    const monthInput = customInputs.at(1);
+    const customInputs = container.querySelectorAll('input[data-input]');
+    const dayInput = customInputs[0];
+    const monthInput = customInputs[1];
 
-    dayInput.simulate('blur');
-    monthInput.simulate('focus');
-    component.update();
+    fireEvent.blur(dayInput);
+    fireEvent.focus(monthInput);
 
-    expect(component.state('isCalendarOpen')).toBe(true);
-    expect(component.state('isClockOpen')).toBe(false);
+    const calendar = container.querySelector('.react-calendar');
+
+    expect(calendar).toBeInTheDocument();
   });
 
   it('does not close Clock component when focused within time inputs', () => {
-    const component = mount(<DateTimeRangePicker isClockOpen />);
+    const { container } = render(<DateTimeRangePicker isClockOpen />);
 
-    const customInputs = component.find('input[type="number"]');
-    const hourInput = customInputs.at(3);
-    const minuteInput = customInputs.at(4);
+    const customInputs = container.querySelectorAll('input[data-input]');
+    const hourInput = customInputs[3];
+    const minuteInput = customInputs[4];
 
-    hourInput.simulate('blur');
-    minuteInput.simulate('focus');
-    component.update();
+    fireEvent.blur(hourInput);
+    fireEvent.focus(minuteInput);
 
-    expect(component.state('isCalendarOpen')).toBe(false);
-    expect(component.state('isClockOpen')).toBe(true);
+    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
+
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
   });
 
   it('closes Clock when Calendar is opened by a click on the calendar icon', () => {
-    const component = mount(<DateTimeRangePicker isClockOpen />);
+    const { container } = render(<DateTimeRangePicker isClockOpen />);
 
-    const clock = component.find('Clock');
-    const button = component.find('button.react-datetimerange-picker__calendar-button');
+    const clock = container.querySelector('.react-clock');
+    const button = container.querySelector('button.react-datetimerange-picker__calendar-button');
 
-    expect(clock).toHaveLength(1);
+    expect(clock).toBeInTheDocument();
 
-    button.simulate('click');
-    component.update();
+    fireEvent.click(button);
 
-    const clock2 = component.find('Clock');
-
-    expect(clock2).toHaveLength(1);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('closes Calendar when calling internal onChange by default', () => {
-    const component = mount(<DateTimeRangePicker isCalendarOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<DateTimeRangePicker isCalendarOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date());
 
-    expect(component.state('isCalendarOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
   });
 
   it('does not close Calendar when calling internal onChange with prop closeWidgets = false', () => {
-    const component = mount(<DateTimeRangePicker closeWidgets={false} isCalendarOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(
+      <DateTimeRangePicker closeWidgets={false} isCalendarOpen ref={instance} />,
+    );
+
+    const { onChange } = instance.current;
 
     onChange(new Date());
 
-    expect(component.state('isCalendarOpen')).toBe(true);
+    const calendar = container.querySelector('.react-calendar');
+
+    expect(calendar).toBeInTheDocument();
   });
 
   it('does not close Calendar when calling internal onChange with closeWidgets = false', () => {
-    const component = mount(<DateTimeRangePicker isCalendarOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<DateTimeRangePicker isCalendarOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date(), false);
 
-    expect(component.state('isCalendarOpen')).toBe(true);
+    const calendar = container.querySelector('.react-calendar');
+
+    expect(calendar).toBeInTheDocument();
   });
 
   it('closes Clock when calling internal onChange by default', () => {
-    const component = mount(<DateTimeRangePicker isClockOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<DateTimeRangePicker isClockOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date());
 
-    expect(component.state('isClockOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('does not close Clock when calling internal onChange with prop closeWidgets = false', () => {
-    const component = mount(<DateTimeRangePicker closeWidgets={false} isClockOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(
+      <DateTimeRangePicker closeWidgets={false} isClockOpen ref={instance} />,
+    );
+
+    const { onChange } = instance.current;
 
     onChange(new Date());
 
-    expect(component.state('isClockOpen')).toBe(true);
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
   });
 
   it('does not close Clock when calling internal onChange with closeWidgets = false', () => {
-    const component = mount(<DateTimeRangePicker isClockOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<DateTimeRangePicker isClockOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date(), false);
 
-    expect(component.state('isClockOpen')).toBe(true);
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
   });
 
   it('calls onChange callback when calling internal onChange', () => {
+    const instance = createRef();
     const nextValue = new Date(2019, 0, 1);
     const onChange = jest.fn();
 
-    const component = mount(<DateTimeRangePicker onChange={onChange} />);
+    render(<DateTimeRangePicker onChange={onChange} ref={instance} />);
 
-    const { onChange: onChangeInternal } = component.instance();
+    const { onChange: onChangeInternal } = instance.current;
 
     onChangeInternal(nextValue);
 
@@ -643,6 +662,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('calls onChange callback with merged new date & old time when calling internal onDateChange', () => {
+    const instance = createRef();
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -653,11 +673,9 @@ describe('DateTimeRangePicker', () => {
     const valueTo = new Date(2019, 6, 17);
     const onChange = jest.fn();
 
-    const component = mount(
-      <DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} />,
-    );
+    render(<DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} ref={instance} />);
 
-    const { onDateChange } = component.instance();
+    const { onDateChange } = instance.current;
 
     onDateChange([nextValueFrom, valueTo]);
 
@@ -668,6 +686,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('calls onChange callback with merged new date & old time when calling internal onDateChange', () => {
+    const instance = createRef();
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -678,11 +697,9 @@ describe('DateTimeRangePicker', () => {
     const nextValueTo = new Date(2019, 0, 1);
     const onChange = jest.fn();
 
-    const component = mount(
-      <DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} />,
-    );
+    render(<DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} ref={instance} />);
 
-    const { onDateChange } = component.instance();
+    const { onDateChange } = instance.current;
 
     onDateChange([valueFrom, nextValueTo]);
 
@@ -693,14 +710,15 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('calls onChange callback when calling internal onChange', () => {
+    const instance = createRef();
     const nextValue = new Date(2019, 0, 1, 21, 40, 11, 458);
     const onChange = jest.fn();
 
-    const component = mount(
-      <DateTimeRangePicker onChange={onChange} value={new Date(2018, 6, 17)} />,
+    render(
+      <DateTimeRangePicker onChange={onChange} value={new Date(2018, 6, 17)} ref={instance} />,
     );
 
-    const { onChange: onChangeInternal } = component.instance();
+    const { onChange: onChangeInternal } = instance.current;
 
     onChangeInternal(nextValue);
 
@@ -710,24 +728,25 @@ describe('DateTimeRangePicker', () => {
   it('clears the value when clicking on a button', () => {
     const onChange = jest.fn();
 
-    const component = mount(<DateTimeRangePicker onChange={onChange} />);
+    const { container } = render(<DateTimeRangePicker onChange={onChange} />);
 
-    const calendar = component.find('Calendar');
-    const button = component.find('button.react-datetimerange-picker__clear-button');
+    const calendar = container.querySelector('.react-calendar');
+    const button = container.querySelector('button.react-datetimerange-picker__clear-button');
 
-    expect(calendar).toHaveLength(0);
+    expect(calendar).toBeFalsy();
 
-    button.simulate('click');
-    component.update();
+    fireEvent.click(button);
 
     expect(onChange).toHaveBeenCalledWith(null);
   });
 
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
-      const component = mount(<DateTimeRangePicker />);
+      const instance = createRef();
 
-      const componentInstance = component.instance();
+      render(<DateTimeRangePicker ref={instance} />);
+
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -739,11 +758,12 @@ describe('DateTimeRangePicker', () => {
     });
 
     it('calls onChange properly given single initial value', () => {
+      const instance = createRef();
       const value = new Date(2018, 0, 1);
 
-      const component = mount(<DateTimeRangePicker value={value} />);
+      render(<DateTimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -755,13 +775,14 @@ describe('DateTimeRangePicker', () => {
     });
 
     it('calls onChange properly given initial value as an array', () => {
+      const instance = createRef();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo];
 
-      const component = mount(<DateTimeRangePicker value={value} />);
+      render(<DateTimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -775,9 +796,11 @@ describe('DateTimeRangePicker', () => {
 
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
-      const component = mount(<DateTimeRangePicker />);
+      const instance = createRef();
 
-      const componentInstance = component.instance();
+      render(<DateTimeRangePicker ref={instance} />);
+
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -789,11 +812,12 @@ describe('DateTimeRangePicker', () => {
     });
 
     it('calls onChange properly given single initial value', () => {
+      const instance = createRef();
       const value = new Date(2018, 0, 1);
 
-      const component = mount(<DateTimeRangePicker value={value} />);
+      render(<DateTimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -805,13 +829,14 @@ describe('DateTimeRangePicker', () => {
     });
 
     it('calls onChange properly given initial value as an array', () => {
+      const instance = createRef();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo];
 
-      const component = mount(<DateTimeRangePicker value={value} />);
+      render(<DateTimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
