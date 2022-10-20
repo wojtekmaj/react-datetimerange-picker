@@ -22,7 +22,7 @@
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
     "@wojtekmaj/date-utils": "^1.0.0",
     "babel-loader": "^8.0.0",
     "css-loader": "^6.0.0",
