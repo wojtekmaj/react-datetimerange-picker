@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 
 import DateTimeRangePicker from './DateTimeRangePicker';
 
@@ -592,9 +592,11 @@ describe('DateTimeRangePicker', () => {
 
     const { container } = render(<DateTimeRangePicker isCalendarOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
   });
@@ -606,9 +608,11 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker closeWidgets={false} isCalendarOpen ref={instance} />,
     );
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -620,9 +624,11 @@ describe('DateTimeRangePicker', () => {
 
     const { container } = render(<DateTimeRangePicker isCalendarOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date(), false);
+    act(() => {
+      onChangeInternal(new Date(), false);
+    });
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -634,9 +640,11 @@ describe('DateTimeRangePicker', () => {
 
     const { container } = render(<DateTimeRangePicker isClockOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
@@ -648,9 +656,11 @@ describe('DateTimeRangePicker', () => {
       <DateTimeRangePicker closeWidgets={false} isClockOpen ref={instance} />,
     );
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     const clock = container.querySelector('.react-clock');
 
@@ -662,9 +672,11 @@ describe('DateTimeRangePicker', () => {
 
     const { container } = render(<DateTimeRangePicker isClockOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date(), false);
+    act(() => {
+      onChangeInternal(new Date(), false);
+    });
 
     const clock = container.querySelector('.react-clock');
 
@@ -680,7 +692,9 @@ describe('DateTimeRangePicker', () => {
 
     const { onChange: onChangeInternal } = instance.current;
 
-    onChangeInternal(nextValue);
+    act(() => {
+      onChangeInternal(nextValue);
+    });
 
     expect(onChange).toHaveBeenCalledWith(nextValue);
   });
@@ -699,9 +713,11 @@ describe('DateTimeRangePicker', () => {
 
     render(<DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} ref={instance} />);
 
-    const { onDateChange } = instance.current;
+    const { onDateChange: onDateChangeInternal } = instance.current;
 
-    onDateChange([nextValueFrom, valueTo]);
+    act(() => {
+      onDateChangeInternal([nextValueFrom, valueTo]);
+    });
 
     expect(onChange).toHaveBeenCalledWith([
       new Date(2019, 0, 1, hours, minutes, seconds, ms),
@@ -723,9 +739,11 @@ describe('DateTimeRangePicker', () => {
 
     render(<DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} ref={instance} />);
 
-    const { onDateChange } = instance.current;
+    const { onDateChange: onDateChangeInternal } = instance.current;
 
-    onDateChange([valueFrom, nextValueTo]);
+    act(() => {
+      onDateChangeInternal([valueFrom, nextValueTo]);
+    });
 
     expect(onChange).toHaveBeenCalledWith([
       valueFrom,
@@ -744,7 +762,9 @@ describe('DateTimeRangePicker', () => {
 
     const { onChange: onChangeInternal } = instance.current;
 
-    onChangeInternal(nextValue);
+    act(() => {
+      onChangeInternal(nextValue);
+    });
 
     expect(onChange).toHaveBeenCalledWith(nextValue);
   });
@@ -771,11 +791,15 @@ describe('DateTimeRangePicker', () => {
       render(<DateTimeRangePicker ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
@@ -788,11 +812,15 @@ describe('DateTimeRangePicker', () => {
       render(<DateTimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
@@ -807,11 +835,15 @@ describe('DateTimeRangePicker', () => {
       render(<DateTimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
@@ -825,11 +857,15 @@ describe('DateTimeRangePicker', () => {
       render(<DateTimeRangePicker ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
@@ -842,11 +878,15 @@ describe('DateTimeRangePicker', () => {
       render(<DateTimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
@@ -861,11 +901,15 @@ describe('DateTimeRangePicker', () => {
       render(<DateTimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
