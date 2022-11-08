@@ -1964,10 +1964,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wojtekmaj/react-datetimerange-picker@portal:../::locator=react-datetimerange-picker-test-page%40workspace%3A."
   dependencies:
+    clsx: ^1.2.1
     make-event-props: ^1.1.0
-    merge-class-names: ^1.1.1
     prop-types: ^15.6.0
-    react-calendar: ^3.7.0
+    react-calendar: ^4.0.0
     react-clock: ^3.1.0
     react-datetime-picker: ^4.0.0
     react-fit: ^1.4.0
@@ -2522,6 +2522,13 @@ __metadata:
     kind-of: ^6.0.2
     shallow-clone: ^3.0.0
   checksum: 770f912fe4e6f21873c8e8fbb1e99134db3b93da32df271d00589ea4a29dbe83a9808a322c93f3bcaf8584b8b4fa6fc269fc8032efbaa6728e0c9886c74467d2
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
   languageName: node
   linkType: hard
 
@@ -5288,6 +5295,21 @@ __metadata:
     react: ^16.3.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
   checksum: f178e8afef9e427689472c3792a2e4d60ca959657f12e06ab07a7cc27f64cc5e9531e495d087bfd5c9bc5826f7cec5088fb0e7f15fa4f28482180cc344c8c60f
+  languageName: node
+  linkType: hard
+
+"react-calendar@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "react-calendar@npm:4.0.0"
+  dependencies:
+    "@wojtekmaj/date-utils": ^1.0.2
+    clsx: ^1.2.1
+    get-user-locale: ^1.2.0
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: a470ea1eab914cda9f76245060e15129a220c30f2942a28c20b3cb999fd994d0c0fadae849184ba123b3b78541fbb3301c5ac0c44e0bd2ab156bfba8cc587593
   languageName: node
   linkType: hard
 
