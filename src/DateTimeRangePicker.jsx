@@ -2,7 +2,7 @@ import React, { createRef, PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
-import mergeClassNames from 'merge-class-names';
+import clsx from 'clsx';
 import Calendar from 'react-calendar';
 import Fit from 'react-fit';
 
@@ -380,10 +380,7 @@ export default class DateTimeRangePicker extends PureComponent {
     } = this.props;
 
     const className = `${baseClassName}__calendar`;
-    const classNames = mergeClassNames(
-      className,
-      `${className}--${isCalendarOpen ? 'open' : 'closed'}`,
-    );
+    const classNames = clsx(className, `${className}--${isCalendarOpen ? 'open' : 'closed'}`);
 
     const calendar = (
       <Calendar
@@ -437,10 +434,7 @@ export default class DateTimeRangePicker extends PureComponent {
     } = this.props;
 
     const className = `${baseClassName}__clock`;
-    const classNames = mergeClassNames(
-      className,
-      `${className}--${isClockOpen ? 'open' : 'closed'}`,
-    );
+    const classNames = clsx(className, `${className}--${isClockOpen ? 'open' : 'closed'}`);
 
     const [valueFrom] = [].concat(value);
 
@@ -488,7 +482,7 @@ export default class DateTimeRangePicker extends PureComponent {
 
     return (
       <div
-        className={mergeClassNames(
+        className={clsx(
           baseClassName,
           `${baseClassName}--${isCalendarOpen || isClockOpen ? 'open' : 'closed'}`,
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
