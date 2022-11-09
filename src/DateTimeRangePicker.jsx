@@ -154,15 +154,10 @@ export default class DateTimeRangePicker extends PureComponent {
   };
 
   onFocus = (event) => {
-    const { disabled, onFocus, openWidgetsOnFocus } = this.props;
+    const { onFocus, openWidgetsOnFocus } = this.props;
 
     if (onFocus) {
       onFocus(event);
-    }
-
-    // Internet Explorer still fires onFocus on disabled elements
-    if (disabled) {
-      return;
     }
 
     if (openWidgetsOnFocus) {
