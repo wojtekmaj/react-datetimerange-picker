@@ -1853,8 +1853,8 @@ __metadata:
   linkType: hard
 
 "@wojtekmaj/react-datetimerange-picker@npm:latest":
-  version: 4.1.0
-  resolution: "@wojtekmaj/react-datetimerange-picker@npm:4.1.0"
+  version: 4.1.1
+  resolution: "@wojtekmaj/react-datetimerange-picker@npm:4.1.1"
   dependencies:
     clsx: ^1.2.1
     make-event-props: ^1.1.0
@@ -1866,7 +1866,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: f48e8baf3a60ea173ac47a98ac135ed4b6e07df652e1a8f9f3ede9924d825582f6053e46bffce90188050fdb4270ade2aa69c4744d4fb1d60b3adac61a82ac70
+  checksum: 83ae9ddac9d6f4d4e2fe4830f403c25409d412d25f8641868d255620fd3a66619aa44e5a1cf29b6e92c0b30cf1fff039650b9b0a49c099b2c1bcb011687cbdd6
   languageName: node
   linkType: hard
 
