@@ -1,0 +1,131 @@
+.react-datetimerange-picker {
+  display: inline-flex;
+  position: relative;
+}
+
+.react-datetimerange-picker,
+.react-datetimerange-picker *,
+.react-datetimerange-picker *:before,
+.react-datetimerange-picker *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.react-datetimerange-picker--disabled {
+  background-color: #f0f0f0;
+  color: #6d6d6d;
+}
+
+.react-datetimerange-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: center;
+  border: thin solid gray;
+}
+
+.react-datetimerange-picker__inputGroup {
+  min-width: calc(4px + (4px * 3) + 0.54em * 6 + 0.217em * 2);
+  height: 100%;
+  flex-grow: 1;
+  padding: 0 2px;
+}
+
+.react-datetimerange-picker__inputGroup__divider {
+  padding: 1px 0;
+}
+
+.react-datetimerange-picker__inputGroup__divider,
+.react-datetimerange-picker__inputGroup__leadingZero {
+  display: inline-block;
+}
+
+.react-datetimerange-picker__inputGroup__input {
+  min-width: 0.54em;
+  height: calc(100% - 2px);
+  position: relative;
+  padding: 1px;
+  border: 0;
+  background: none;
+  font: inherit;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.react-datetimerange-picker__inputGroup__input::-webkit-outer-spin-button,
+.react-datetimerange-picker__inputGroup__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.react-datetimerange-picker__inputGroup__input:invalid {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.react-datetimerange-picker__inputGroup__input--hasLeadingZero {
+  margin-left: -0.54em;
+  padding-left: calc(1px + 0.54em);
+}
+
+.react-datetimerange-picker__inputGroup__amPm {
+  font: inherit;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+}
+
+.react-datetimerange-picker__button {
+  border: 0;
+  background: transparent;
+  padding: 4px 6px;
+}
+
+.react-datetimerange-picker__button:enabled {
+  cursor: pointer;
+}
+
+.react-datetimerange-picker__button:enabled:hover .react-datetimerange-picker__button__icon,
+.react-datetimerange-picker__button:enabled:focus .react-datetimerange-picker__button__icon {
+  stroke: #0078d7;
+}
+
+.react-datetimerange-picker__button:disabled .react-datetimerange-picker__button__icon {
+  stroke: #6d6d6d;
+}
+
+.react-datetimerange-picker__button svg {
+  display: inherit;
+}
+
+.react-datetimerange-picker__calendar,
+.react-datetimerange-picker__clock {
+  z-index: 1;
+}
+
+.react-datetimerange-picker__calendar--closed,
+.react-datetimerange-picker__clock--closed {
+  display: none;
+}
+
+.react-datetimerange-picker__calendar {
+  width: 350px;
+  max-width: 100vw;
+}
+
+.react-datetimerange-picker__calendar .react-calendar {
+  border-width: thin;
+}
+
+.react-datetimerange-picker__clock {
+  width: 200px;
+  height: 200px;
+  max-width: 100vw;
+  padding: 25px;
+  background-color: white;
+  border: thin solid #a0a096;
+}
