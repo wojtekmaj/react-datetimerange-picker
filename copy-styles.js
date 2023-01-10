@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-fs.copyFile('src/DateTimeRangePicker.less', 'dist/DateTimeRangePicker.less', (error) => {
+fs.copyFile('src/DateTimeRangePicker.css', 'dist/DateTimeRangePicker.css', (error) => {
   if (error) {
     throw error;
   }
   // eslint-disable-next-line no-console
-  console.log('DateTimeRangePicker.less copied successfully.');
+  console.log('DateTimeRangePicker.css copied successfully.');
 });

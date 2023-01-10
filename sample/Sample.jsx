@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 
-import './Sample.less';
+import './Sample.css';
 
 const now = new Date();
 const yesterdayBegin = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
