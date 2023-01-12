@@ -496,7 +496,7 @@ export default class DateTimeRangePicker extends PureComponent {
 
   render() {
     const { eventProps } = this;
-    const { className, disabled } = this.props;
+    const { className, 'data-testid': dataTestid, disabled } = this.props;
     const { isCalendarOpen, isClockOpen } = this.state;
 
     const { onChange, ...eventPropsWithoutOnChange } = eventProps;
@@ -509,6 +509,7 @@ export default class DateTimeRangePicker extends PureComponent {
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
           className,
         )}
+        data-testid={dataTestid}
         {...eventPropsWithoutOnChange}
         onFocus={this.onFocus}
         ref={this.wrapper}
@@ -576,6 +577,7 @@ DateTimeRangePicker.propTypes = {
   clearIcon: PropTypes.node,
   clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   closeWidgets: PropTypes.bool,
+  'data-testid': PropTypes.string,
   dayAriaLabel: PropTypes.string,
   dayPlaceholder: PropTypes.string,
   disableCalendar: PropTypes.bool,

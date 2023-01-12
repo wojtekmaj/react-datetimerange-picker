@@ -76,6 +76,7 @@ export default function Test() {
             <DateTimeRangePicker
               calendarClassName="myCustomCalendarClassName"
               className="myCustomDateTimeRangePickerClassName"
+              data-testid="myCustomDateTimeRangePicker"
               disabled={disabled}
               locale={locale}
               maxDate={maxDate}
