@@ -7,4 +7,6 @@ import DateTimeRangePicker from './DateTimeRangePicker';
 // eslint-disable-next-line import/no-unresolved
 import './DateTimeRangePicker.css';
 
+export { DateTimeRangePicker };
+
 export default DateTimeRangePicker;
