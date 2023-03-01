@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker/src/entry.nostyle';
 import '@wojtekmaj/react-datetimerange-picker/src/DateTimeRangePicker.css';
-import 'react-calendar/src/Calendar.css';
-import 'react-clock/src/Clock.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
 
 import ValidityOptions from './ValidityOptions';
 import MaxDetailOptions from './MaxDetailOptions';
