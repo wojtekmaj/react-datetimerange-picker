@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker/src/entry.nostyle';
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker/src';
 import '@wojtekmaj/react-datetimerange-picker/src/DateTimeRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
