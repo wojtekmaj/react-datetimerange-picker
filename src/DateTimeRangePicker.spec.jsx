@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import React, { createRef } from 'react';
 import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -807,7 +808,7 @@ describe('DateTimeRangePicker', () => {
   it('calls onChange callback when calling internal onChange', () => {
     const instance = createRef();
     const nextValue = new Date(2019, 0, 1);
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(<DateTimeRangePicker onChange={onChange} ref={instance} />);
 
@@ -830,7 +831,7 @@ describe('DateTimeRangePicker', () => {
     const valueFrom = new Date(2018, 6, 17, hours, minutes, seconds, ms);
     const nextValueFrom = new Date(2019, 0, 1);
     const valueTo = new Date(2019, 6, 17);
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(<DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} ref={instance} />);
 
@@ -856,7 +857,7 @@ describe('DateTimeRangePicker', () => {
     const valueFrom = new Date(2018, 6, 17);
     const valueTo = new Date(2019, 6, 17, hours, minutes, seconds, ms);
     const nextValueTo = new Date(2019, 0, 1);
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(<DateTimeRangePicker onChange={onChange} value={[valueFrom, valueTo]} ref={instance} />);
 
@@ -875,7 +876,7 @@ describe('DateTimeRangePicker', () => {
   it('calls onChange callback when calling internal onChange', () => {
     const instance = createRef();
     const nextValue = new Date(2019, 0, 1, 21, 40, 11, 458);
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <DateTimeRangePicker onChange={onChange} value={new Date(2018, 6, 17)} ref={instance} />,
@@ -891,7 +892,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('clears the value when clicking on a button', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     const { container } = render(<DateTimeRangePicker onChange={onChange} />);
 
@@ -914,7 +915,7 @@ describe('DateTimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
 
@@ -935,7 +936,7 @@ describe('DateTimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
 
@@ -958,7 +959,7 @@ describe('DateTimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
 
@@ -980,7 +981,7 @@ describe('DateTimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeTo: onChangeToInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
 
@@ -1001,7 +1002,7 @@ describe('DateTimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeTo: onChangeToInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
 
@@ -1024,7 +1025,7 @@ describe('DateTimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeTo: onChangeToInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
 
