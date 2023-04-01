@@ -2149,7 +2149,7 @@ __metadata:
     pretty-quick: ^3.1.0
     prop-types: ^15.6.0
     react: ^18.2.0
-    react-calendar: ^4.0.0
+    react-calendar: ~4.0.0
     react-clock: ^4.0.0
     react-datetime-picker: ^4.2.0
     react-dom: ^18.2.0
@@ -6075,7 +6075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-calendar@npm:^4.0.0":
+"react-calendar@npm:^4.0.0, react-calendar@npm:~4.0.0":
   version: 4.0.0
   resolution: "react-calendar@npm:4.0.0"
   dependencies:
