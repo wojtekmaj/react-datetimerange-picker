@@ -50,11 +50,11 @@ export default function DateTimeRangePicker(props) {
     amPmAriaLabel,
     autoFocus,
     calendarAriaLabel,
-    calendarIcon,
+    calendarIcon = CalendarIcon,
     className,
     clearAriaLabel,
-    clearIcon,
-    closeWidgets: shouldCloseWidgetsProps,
+    clearIcon = ClearIcon,
+    closeWidgets: shouldCloseWidgetsProps = true,
     'data-testid': dataTestid,
     dayAriaLabel,
     dayPlaceholder,
@@ -65,17 +65,17 @@ export default function DateTimeRangePicker(props) {
     hourAriaLabel,
     hourPlaceholder,
     id,
-    isCalendarOpen: isCalendarOpenProps,
-    isClockOpen: isClockOpenProps,
+    isCalendarOpen: isCalendarOpenProps = null,
+    isClockOpen: isClockOpenProps = null,
     locale,
     maxDate,
-    maxDetail,
+    maxDetail = 'minute',
     minDate,
     minuteAriaLabel,
     minutePlaceholder,
     monthAriaLabel,
     monthPlaceholder,
-    name,
+    name = 'datetimerange',
     nativeInputAriaLabel,
     onCalendarClose,
     onCalendarOpen,
@@ -83,8 +83,8 @@ export default function DateTimeRangePicker(props) {
     onClockClose,
     onClockOpen,
     onFocus: onFocusProps,
-    openWidgetsOnFocus,
-    rangeDivider,
+    openWidgetsOnFocus = true,
+    rangeDivider = '–',
     required,
     secondAriaLabel,
     secondPlaceholder,
@@ -451,7 +451,7 @@ export default function DateTimeRangePicker(props) {
     const {
       clockClassName,
       className: dateTimePickerClassName, // Unused, here to exclude it from clockProps
-      maxDetail,
+      maxDetail = 'minute',
       onChange,
       portalContainer,
       value,
@@ -525,18 +525,6 @@ export default function DateTimeRangePicker(props) {
     </div>
   );
 }
-
-DateTimeRangePicker.defaultProps = {
-  calendarIcon: CalendarIcon,
-  clearIcon: ClearIcon,
-  closeWidgets: true,
-  isCalendarOpen: null,
-  isClockOpen: null,
-  maxDetail: 'minute',
-  name: 'datetimerange',
-  openWidgetsOnFocus: true,
-  rangeDivider: '–',
-};
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
