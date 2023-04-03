@@ -804,7 +804,7 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([new Date(2023, 0, 1, 21, 40, 11), undefined]);
   });
 
-  it('calls onChange callback with merged new date & old time when calling internal onDateChange', () => {
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given Date', () => {
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -850,7 +850,92 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
   });
 
-  it('calls onChange callback with merged new date & old time when calling internal onDateChange', () => {
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given ISO string', () => {
+    const hours = 21;
+    const minutes = 40;
+    const seconds = 11;
+    const ms = 458;
+
+    const onChange = vi.fn();
+    const valueFrom = new Date(2018, 6, 17, hours, minutes, seconds, ms);
+    const nextValueFrom = new Date(2019, 0, 1, hours, minutes, seconds, ms);
+    const valueTo = new Date(2019, 6, 17);
+
+    const { container, getByRole } = render(
+      <DateTimeRangePicker isCalendarOpen onChange={onChange} value={[valueFrom, valueTo]} />,
+    );
+
+    // Navigate up the calendar
+    const drillUpButton = container.querySelector('.react-calendar__navigation__label');
+    fireEvent.click(drillUpButton); // To year 2018
+    fireEvent.click(drillUpButton); // To 2011 – 2020 decade
+
+    // Click year 2019
+    const twentyNineteenButton = getByRole('button', { name: '2019' });
+    fireEvent.click(twentyNineteenButton);
+
+    // Click January
+    const januaryButton = getByRole('button', { name: 'January 2019' });
+    fireEvent.click(januaryButton);
+
+    // Click 1st
+    const firstButton = getByRole('button', { name: 'January 1, 2019' });
+    fireEvent.click(firstButton);
+
+    // Navigate up the calendar
+    fireEvent.click(drillUpButton); // To year 2019
+
+    // Click July
+    const julyButton = getByRole('button', { name: 'July 2019' });
+    fireEvent.click(julyButton);
+
+    // Click 17th
+    const seventeenthButton = getByRole('button', { name: 'July 17, 2019' });
+    fireEvent.click(seventeenthButton);
+
+    expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
+  });
+
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given Date', () => {
+    const hours = 21;
+    const minutes = 40;
+    const seconds = 11;
+    const ms = 458;
+
+    const onChange = vi.fn();
+    const valueFrom = new Date(2018, 6, 17);
+    const valueTo = new Date(2019, 6, 17, hours, minutes, seconds, ms);
+    const nextValueTo = new Date(2019, 0, 1, hours, minutes, seconds, ms);
+
+    const { container, getByRole } = render(
+      <DateTimeRangePicker isCalendarOpen onChange={onChange} value={[valueFrom, valueTo]} />,
+    );
+
+    // Click 17th
+    const seventeenthButton = getByRole('button', { name: 'July 17, 2018' });
+    fireEvent.click(seventeenthButton);
+
+    // Navigate up the calendar
+    const drillUpButton = container.querySelector('.react-calendar__navigation__label');
+    fireEvent.click(drillUpButton); // To year 2018
+    fireEvent.click(drillUpButton); // To 2011 – 2020 decade
+
+    // Click year 2019
+    const twentyNineteenButton = getByRole('button', { name: '2019' });
+    fireEvent.click(twentyNineteenButton);
+
+    // Click January
+    const januaryButton = getByRole('button', { name: 'January 2019' });
+    fireEvent.click(januaryButton);
+
+    // Click 1st
+    const firstButton = getByRole('button', { name: 'January 1, 2019' });
+    fireEvent.click(firstButton);
+
+    expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
+  });
+
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given ISO string', () => {
     const hours = 21;
     const minutes = 40;
     const seconds = 11;

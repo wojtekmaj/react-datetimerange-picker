@@ -186,12 +186,13 @@ export default function DateTimeRangePicker(props) {
         return rawNextValueFrom;
       }
 
+      const valueFromDate = new Date(valueFrom);
       const nextValueWithHour = new Date(rawNextValueFrom);
       nextValueWithHour.setHours(
-        valueFrom.getHours(),
-        valueFrom.getMinutes(),
-        valueFrom.getSeconds(),
-        valueFrom.getMilliseconds(),
+        valueFromDate.getHours(),
+        valueFromDate.getMinutes(),
+        valueFromDate.getSeconds(),
+        valueFromDate.getMilliseconds(),
       );
 
       return nextValueWithHour;
@@ -202,12 +203,13 @@ export default function DateTimeRangePicker(props) {
         return rawNextValueTo;
       }
 
+      const valueToDate = new Date(valueTo);
       const nextValueWithHour = new Date(rawNextValueTo);
       nextValueWithHour.setHours(
-        valueTo.getHours(),
-        valueTo.getMinutes(),
-        valueTo.getSeconds(),
-        valueTo.getMilliseconds(),
+        valueToDate.getHours(),
+        valueToDate.getMinutes(),
+        valueToDate.getSeconds(),
+        valueToDate.getMilliseconds(),
       );
 
       return nextValueWithHour;
