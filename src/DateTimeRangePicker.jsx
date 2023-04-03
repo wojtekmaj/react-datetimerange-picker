@@ -178,41 +178,42 @@ export default function DateTimeRangePicker(props) {
     onChange([valueFrom, valueTo], closeCalendar);
   }
 
-  function onDateChange([rawNextValueFrom, rawNextValueTo], shouldCloseWidgets = true) {
+  function onDateChange(nextValue, shouldCloseWidgets = true) {
+    const [rawNextValueFrom, rawNextValueTo] = [].concat(nextValue);
     const [valueFrom, valueTo] = [].concat(value);
 
     const nextValueFrom = (() => {
-      if (!valueFrom) {
+      if (!valueFrom || !rawNextValueFrom) {
         return rawNextValueFrom;
       }
 
       const valueFromDate = new Date(valueFrom);
-      const nextValueWithHour = new Date(rawNextValueFrom);
-      nextValueWithHour.setHours(
+      const nextValueFromWithHour = new Date(rawNextValueFrom);
+      nextValueFromWithHour.setHours(
         valueFromDate.getHours(),
         valueFromDate.getMinutes(),
         valueFromDate.getSeconds(),
         valueFromDate.getMilliseconds(),
       );
 
-      return nextValueWithHour;
+      return nextValueFromWithHour;
     })();
 
     const nextValueTo = (() => {
-      if (!valueTo) {
+      if (!valueTo || !rawNextValueTo) {
         return rawNextValueTo;
       }
 
       const valueToDate = new Date(valueTo);
-      const nextValueWithHour = new Date(rawNextValueTo);
-      nextValueWithHour.setHours(
+      const nextValueToWithHour = new Date(rawNextValueTo);
+      nextValueToWithHour.setHours(
         valueToDate.getHours(),
         valueToDate.getMinutes(),
         valueToDate.getSeconds(),
         valueToDate.getMilliseconds(),
       );
 
-      return nextValueWithHour;
+      return nextValueToWithHour;
     })();
 
     onChange([nextValueFrom, nextValueTo], shouldCloseWidgets);
