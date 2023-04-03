@@ -46,7 +46,7 @@
     "clsx": "^1.2.1",
     "make-event-props": "^1.4.2",
     "prop-types": "^15.6.0",
-    "react-calendar": "^4.1.0",
+    "react-calendar": "^4.1.1",
     "react-clock": "^4.2.0",
     "react-datetime-picker": "^4.2.0",
     "react-fit": "^1.5.1"
