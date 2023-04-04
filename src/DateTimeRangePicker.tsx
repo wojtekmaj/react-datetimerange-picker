@@ -11,7 +11,7 @@ import DateTimeInput from 'react-datetime-picker/dist/cjs/DateTimeInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
 
-import type { ClassName, Detail, LooseValue } from './shared/types';
+import type { ClassName, Detail, LooseValue, Value } from './shared/types';
 
 const baseClassName = 'react-datetimerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
@@ -86,7 +86,7 @@ type DateTimeRangePickerProps = {
   nativeInputAriaLabel?: string;
   onCalendarClose?: () => void;
   onCalendarOpen?: () => void;
-  onChange?: (value: Date | null | (Date | null)[]) => void;
+  onChange?: (value: Value) => void;
   onClockClose?: () => void;
   onClockOpen?: () => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
@@ -213,10 +213,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     closeClock();
   }, [closeCalendar, closeClock]);
 
-  function onChange(
-    value: Date | null | (Date | null)[],
-    shouldCloseWidgets = shouldCloseWidgetsProps,
-  ) {
+  function onChange(value: Value, shouldCloseWidgets = shouldCloseWidgetsProps) {
     if (shouldCloseWidgets) {
       closeWidgets();
     }
@@ -242,7 +239,13 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     onChange([valueFromDate, valueTo], closeCalendar);
   }
 
-  function onDateChange(nextValue: Date | null | (Date | null)[], shouldCloseWidgets?: boolean) {
+  type DatePiece = Date | null;
+
+  function onDateChange(
+    nextValue: DatePiece | [DatePiece, DatePiece],
+    shouldCloseWidgets?: boolean,
+  ) {
+    // React-Calendar passes an array of values when selectRange is enabled
     const [rawNextValueFrom, rawNextValueTo] = Array.isArray(nextValue) ? nextValue : [nextValue];
     const [valueFrom, valueTo] = Array.isArray(value) ? value : [value];
 

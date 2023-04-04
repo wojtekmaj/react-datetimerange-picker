@@ -1116,7 +1116,7 @@ describe('DateTimeRangePicker', () => {
       const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
-      const value = [valueFrom, valueTo];
+      const value = [valueFrom, valueTo] as [Date, Date];
 
       const { container } = render(
         <DateTimeRangePicker
@@ -1266,7 +1266,7 @@ describe('DateTimeRangePicker', () => {
       const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
-      const value = [valueFrom, valueTo];
+      const value = [valueFrom, valueTo] as [Date, Date];
 
       const { container } = render(
         <DateTimeRangePicker
