@@ -773,7 +773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wojtekmaj/date-utils@npm:^1.0.0, @wojtekmaj/date-utils@npm:^1.0.3, @wojtekmaj/date-utils@npm:^1.1.2, @wojtekmaj/date-utils@npm:^1.1.3":
+"@wojtekmaj/date-utils@npm:^1.0.0, @wojtekmaj/date-utils@npm:^1.0.2, @wojtekmaj/date-utils@npm:^1.0.3, @wojtekmaj/date-utils@npm:^1.1.2, @wojtekmaj/date-utils@npm:^1.1.3":
   version: 1.1.3
   resolution: "@wojtekmaj/date-utils@npm:1.1.3"
   checksum: 4ae0eba0876b8c156720c249ddd665efd8da0c42a02bbf037475b8a30554e02fa642e6f1d81d1fffdc02c6d816fb73590ee03c003ac976d91380745533dbf327
@@ -4029,6 +4029,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-calendar@npm:~4.0.0":
+  version: 4.0.0
+  resolution: "react-calendar@npm:4.0.0"
+  dependencies:
+    "@wojtekmaj/date-utils": ^1.0.2
+    clsx: ^1.2.1
+    get-user-locale: ^1.2.0
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: a470ea1eab914cda9f76245060e15129a220c30f2942a28c20b3cb999fd994d0c0fadae849184ba123b3b78541fbb3301c5ac0c44e0bd2ab156bfba8cc587593
+  languageName: node
+  linkType: hard
+
 "react-clock@npm:^4.0.0, react-clock@npm:^4.2.0":
   version: 4.2.0
   resolution: "react-clock@npm:4.2.0"
@@ -4066,15 +4081,15 @@ __metadata:
   linkType: hard
 
 "react-datetime-picker@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "react-datetime-picker@npm:4.2.0"
+  version: 4.2.1
+  resolution: "react-datetime-picker@npm:4.2.1"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.3
     clsx: ^1.2.1
     get-user-locale: ^1.2.0
     make-event-props: ^1.1.0
     prop-types: ^15.6.0
-    react-calendar: ^4.0.0
+    react-calendar: ~4.0.0
     react-clock: ^4.0.0
     react-date-picker: ^9.2.0
     react-fit: ^1.4.0
@@ -4082,7 +4097,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 06bcadaccebabd385054f5966285a8cab77984701fc9d45be0950a8ae391718e40fdf11694ecacef0f88b24baa98b34031d3c4f8a09ace5ef0a4d83b6cc09c5b
+  checksum: d2af9cb298c10a18ce037714e45d88659f322e9a51c29a9a15eae7cae9442daceaf6f73e99f34e1dcded67349da317682472b53c18502d80efd0b0bc90bca040
   languageName: node
   linkType: hard
 
