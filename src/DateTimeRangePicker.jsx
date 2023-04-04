@@ -527,6 +527,8 @@ export default function DateTimeRangePicker(props) {
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
+const isValueOrValueArray = PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]);
+
 DateTimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
   autoFocus: PropTypes.bool,
@@ -573,7 +575,7 @@ DateTimeRangePicker.propTypes = {
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
+  value: isValueOrValueArray,
   yearAriaLabel: PropTypes.string,
   yearPlaceholder: PropTypes.string,
 };
