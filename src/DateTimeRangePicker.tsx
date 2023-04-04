@@ -11,6 +11,8 @@ import DateTimeInput from 'react-datetime-picker/dist/cjs/DateTimeInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
 
+import type { ClassName, Detail, LooseValue } from './shared/types';
+
 const baseClassName = 'react-datetimerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 const allViews = ['hour', 'minute', 'second'];
@@ -45,7 +47,62 @@ const ClearIcon = (
   </svg>
 );
 
-export default function DateTimeRangePicker(props) {
+type Icon = React.ReactElement | string;
+
+type IconOrRenderFunction = Icon | React.ComponentType | React.ReactElement;
+
+type DateTimeRangePickerProps = {
+  amPmAriaLabel?: string;
+  autoFocus?: boolean;
+  calendarAriaLabel?: string;
+  calendarClassName?: ClassName;
+  calendarIcon?: IconOrRenderFunction;
+  className?: ClassName;
+  clearAriaLabel?: string;
+  clearIcon?: IconOrRenderFunction;
+  clockClassName?: ClassName;
+  closeWidgets?: boolean;
+  'data-testid'?: string;
+  dayAriaLabel?: string;
+  dayPlaceholder?: string;
+  disableCalendar?: boolean;
+  disableClock?: boolean;
+  disabled?: boolean;
+  format?: string;
+  hourAriaLabel?: string;
+  hourPlaceholder?: string;
+  id?: string;
+  isCalendarOpen?: boolean;
+  isClockOpen?: boolean;
+  locale?: string;
+  maxDate?: Date;
+  maxDetail?: Detail;
+  minDate?: Date;
+  minuteAriaLabel?: string;
+  minutePlaceholder?: string;
+  monthAriaLabel?: string;
+  monthPlaceholder?: string;
+  name?: string;
+  nativeInputAriaLabel?: string;
+  onCalendarClose?: () => void;
+  onCalendarOpen?: () => void;
+  onChange?: (value: Date | null | (Date | null)[]) => void;
+  onClockClose?: () => void;
+  onClockOpen?: () => void;
+  onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+  openWidgetsOnFocus?: boolean;
+  portalContainer?: HTMLElement;
+  rangeDivider?: React.ReactNode;
+  required?: boolean;
+  secondAriaLabel?: string;
+  secondPlaceholder?: string;
+  showLeadingZeros?: boolean;
+  value?: LooseValue;
+  yearAriaLabel?: string;
+  yearPlaceholder?: string;
+};
+
+export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
   const {
     amPmAriaLabel,
     autoFocus,
@@ -95,11 +152,11 @@ export default function DateTimeRangePicker(props) {
     ...otherProps
   } = props;
 
-  const [isCalendarOpen, setIsCalendarOpen] = useState(isCalendarOpenProps);
-  const [isClockOpen, setIsClockOpen] = useState(isClockOpenProps);
-  const wrapper = useRef();
-  const calendarWrapper = useRef();
-  const clockWrapper = useRef();
+  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean | null>(isCalendarOpenProps);
+  const [isClockOpen, setIsClockOpen] = useState<boolean | null>(isClockOpenProps);
+  const wrapper = useRef<HTMLDivElement>(null);
+  const calendarWrapper = useRef<HTMLDivElement>(null);
+  const clockWrapper = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsCalendarOpen(isCalendarOpenProps);
@@ -156,7 +213,10 @@ export default function DateTimeRangePicker(props) {
     closeClock();
   }, [closeCalendar, closeClock]);
 
-  function onChange(value, shouldCloseWidgets = shouldCloseWidgetsProps) {
+  function onChange(
+    value: Date | null | (Date | null)[],
+    shouldCloseWidgets = shouldCloseWidgetsProps,
+  ) {
     if (shouldCloseWidgets) {
       closeWidgets();
     }
@@ -166,21 +226,25 @@ export default function DateTimeRangePicker(props) {
     }
   }
 
-  function onChangeFrom(valueFrom, closeCalendar) {
-    const [, valueTo] = [].concat(value);
+  function onChangeFrom(valueFrom: Date | null, closeCalendar: boolean) {
+    const [, valueTo] = Array.isArray(value) ? value : [value];
 
-    onChange([valueFrom, valueTo], closeCalendar);
+    const valueToDate = valueTo ? new Date(valueTo) : null;
+
+    onChange([valueFrom, valueToDate], closeCalendar);
   }
 
-  function onChangeTo(valueTo, closeCalendar) {
-    const [valueFrom] = [].concat(value);
+  function onChangeTo(valueTo: Date | null, closeCalendar: boolean) {
+    const [valueFrom] = Array.isArray(value) ? value : [value];
 
-    onChange([valueFrom, valueTo], closeCalendar);
+    const valueFromDate = valueFrom ? new Date(valueFrom) : null;
+
+    onChange([valueFromDate, valueTo], closeCalendar);
   }
 
-  function onDateChange(nextValue, shouldCloseWidgets = true) {
-    const [rawNextValueFrom, rawNextValueTo] = [].concat(nextValue);
-    const [valueFrom, valueTo] = [].concat(value);
+  function onDateChange(nextValue: Date | null | (Date | null)[], shouldCloseWidgets?: boolean) {
+    const [rawNextValueFrom, rawNextValueTo] = Array.isArray(nextValue) ? nextValue : [nextValue];
+    const [valueFrom, valueTo] = Array.isArray(value) ? value : [value];
 
     const nextValueFrom = (() => {
       if (!valueFrom || !rawNextValueFrom) {
@@ -216,10 +280,10 @@ export default function DateTimeRangePicker(props) {
       return nextValueToWithHour;
     })();
 
-    onChange([nextValueFrom, nextValueTo], shouldCloseWidgets);
+    onChange([nextValueFrom || null, nextValueTo || null], shouldCloseWidgets);
   }
 
-  function onFocus(event) {
+  function onFocus(event: React.FocusEvent<HTMLInputElement>) {
     if (onFocusProps) {
       onFocusProps(event);
     }
@@ -252,7 +316,7 @@ export default function DateTimeRangePicker(props) {
   }
 
   const onKeyDown = useCallback(
-    (event) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeWidgets();
       }
@@ -264,18 +328,20 @@ export default function DateTimeRangePicker(props) {
     onChange(null);
   }
 
-  function stopPropagation(event) {
+  function stopPropagation(event: React.FocusEvent) {
     event.stopPropagation();
   }
 
   const onOutsideAction = useCallback(
-    (event) => {
+    (event: Event) => {
       const { current: wrapperEl } = wrapper;
       const { current: calendarWrapperEl } = calendarWrapper;
       const { current: clockWrapperEl } = clockWrapper;
 
       // Try event.composedPath first to handle clicks inside a Shadow DOM.
-      const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+      const target = (
+        'composedPath' in event ? event.composedPath()[0] : (event as Event).target
+      ) as HTMLElement;
 
       if (
         target &&
@@ -292,13 +358,19 @@ export default function DateTimeRangePicker(props) {
 
   const handleOutsideActionListeners = useCallback(
     (shouldListen = isCalendarOpen || isClockOpen) => {
-      const action = shouldListen ? 'addEventListener' : 'removeEventListener';
-
       outsideActionEvents.forEach((event) => {
-        document[action](event, onOutsideAction);
+        if (shouldListen) {
+          document.addEventListener(event, onOutsideAction);
+        } else {
+          document.removeEventListener(event, onOutsideAction);
+        }
       });
 
-      document[action]('keydown', onKeyDown);
+      if (shouldListen) {
+        document.addEventListener('keydown', onKeyDown);
+      } else {
+        document.removeEventListener('keydown', onKeyDown);
+      }
     },
     [isCalendarOpen, isClockOpen, onOutsideAction, onKeyDown],
   );
@@ -312,7 +384,7 @@ export default function DateTimeRangePicker(props) {
   }, [handleOutsideActionListeners]);
 
   function renderInputs() {
-    const [valueFrom, valueTo] = [].concat(value);
+    const [valueFrom, valueTo] = Array.isArray(value) ? value : [value];
 
     const ariaLabelProps = {
       amPmAriaLabel,
@@ -357,17 +429,10 @@ export default function DateTimeRangePicker(props) {
           autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={onChangeFrom}
-          returnValue="start"
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
-        <DateTimeInput
-          {...commonProps}
-          name={`${name}_to`}
-          onChange={onChangeTo}
-          returnValue="end"
-          value={valueTo}
-        />
+        <DateTimeInput {...commonProps} name={`${name}_to`} onChange={onChangeTo} value={valueTo} />
         {clearIcon !== null && (
           <button
             aria-label={clearAriaLabel}
@@ -419,7 +484,7 @@ export default function DateTimeRangePicker(props) {
         className={calendarClassName}
         onChange={(value) => onDateChange(value)}
         selectRange
-        value={value || null}
+        value={value}
         {...calendarProps}
       />
     );
@@ -465,7 +530,7 @@ export default function DateTimeRangePicker(props) {
     const className = `${baseClassName}__clock`;
     const classNames = clsx(className, `${className}--${isClockOpen ? 'open' : 'closed'}`);
 
-    const [valueFrom] = [].concat(value);
+    const [valueFrom] = Array.isArray(value) ? value : [value];
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
 
