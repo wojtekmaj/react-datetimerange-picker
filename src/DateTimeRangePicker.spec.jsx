@@ -579,10 +579,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar component when clicked outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 
     userEvent.click(document.body);
 
@@ -592,10 +589,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar component when focused outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 
     fireEvent.focusIn(document.body);
 
@@ -605,10 +599,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar component when tapped outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 
     fireEvent.touchStart(document.body);
 
@@ -618,10 +609,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock component when clicked outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateTimeRangePicker isClockOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isClockOpen />);
 
     userEvent.click(document.body);
 
@@ -631,10 +619,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock component when focused outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateTimeRangePicker isClockOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isClockOpen />);
 
     fireEvent.focusIn(document.body);
 
@@ -644,10 +629,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock component when tapped outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateTimeRangePicker isClockOpen />, { attachTo: root });
+    const { container } = render(<DateTimeRangePicker isClockOpen />);
 
     fireEvent.touchStart(document.body);
 
