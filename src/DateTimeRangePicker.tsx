@@ -100,7 +100,8 @@ type DateTimeRangePickerProps = {
   value?: LooseValue;
   yearAriaLabel?: string;
   yearPlaceholder?: string;
-};
+} & Omit<React.ComponentPropsWithoutRef<typeof Calendar>, 'className' | 'maxDetail' | 'onChange'> &
+  Omit<React.ComponentPropsWithoutRef<typeof Clock>, 'value'>;
 
 export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
   const {
