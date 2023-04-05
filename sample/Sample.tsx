@@ -3,12 +3,16 @@ import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 
 import './Sample.css';
 
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 const now = new Date();
 const yesterdayBegin = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
 const todayNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
 
 export default function Sample() {
-  const [value, onChange] = useState([yesterdayBegin, todayNoon]);
+  const [value, onChange] = useState<Value>([yesterdayBegin, todayNoon]);
 
   return (
     <div className="Sample">
