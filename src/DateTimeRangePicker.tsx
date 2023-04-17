@@ -51,6 +51,15 @@ type Icon = React.ReactElement | string;
 
 type IconOrRenderFunction = Icon | React.ComponentType | React.ReactElement;
 
+type CalendarProps = Omit<
+  React.ComponentPropsWithoutRef<typeof Calendar>,
+  'className' | 'maxDetail' | 'onChange'
+>;
+
+type ClockProps = Omit<React.ComponentPropsWithoutRef<typeof Clock>, 'value'>;
+
+type EventProps = ReturnType<typeof makeEventProps>;
+
 type DateTimeRangePickerProps = {
   amPmAriaLabel?: string;
   autoFocus?: boolean;
@@ -100,8 +109,9 @@ type DateTimeRangePickerProps = {
   value?: LooseValue;
   yearAriaLabel?: string;
   yearPlaceholder?: string;
-} & Omit<React.ComponentPropsWithoutRef<typeof Calendar>, 'className' | 'maxDetail' | 'onChange'> &
-  Omit<React.ComponentPropsWithoutRef<typeof Clock>, 'value'>;
+} & CalendarProps &
+  ClockProps &
+  EventProps;
 
 export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
   const {
