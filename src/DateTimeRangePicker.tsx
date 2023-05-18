@@ -11,7 +11,7 @@ import DateTimeInput from 'react-datetime-picker/dist/cjs/DateTimeInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
 
-import type { ClassName, Detail, LooseValue, Value } from './shared/types';
+import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
 
 const baseClassName = 'react-datetimerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
@@ -105,6 +105,8 @@ type DateTimeRangePickerProps = {
   required?: boolean;
   secondAriaLabel?: string;
   secondPlaceholder?: string;
+  shouldCloseWidgets?: (props: { reason: CloseReason; widget: 'calendar' | 'clock' }) => boolean;
+  shouldOpenWidgets?: (props: { reason: OpenReason; widget: 'calendar' | 'clock' }) => boolean;
   showLeadingZeros?: boolean;
   value?: LooseValue;
   yearAriaLabel?: string;
@@ -122,7 +124,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     className,
     clearAriaLabel,
     clearIcon = ClearIcon,
-    closeWidgets: shouldCloseWidgetsProps = true,
+    closeWidgets: shouldCloseWidgetsOnSelect = true,
     'data-testid': dataTestid,
     dayAriaLabel,
     dayPlaceholder,
@@ -156,6 +158,8 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     required,
     secondAriaLabel,
     secondPlaceholder,
+    shouldCloseWidgets,
+    shouldOpenWidgets,
     showLeadingZeros,
     value,
     yearAriaLabel,
@@ -177,7 +181,13 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     setIsClockOpen(isClockOpenProps);
   }, [isClockOpenProps]);
 
-  function openCalendar() {
+  function openCalendar({ reason }: { reason: OpenReason }) {
+    if (shouldOpenWidgets) {
+      if (!shouldOpenWidgets({ reason, widget: 'calendar' })) {
+        return;
+      }
+    }
+
     setIsClockOpen(false);
     setIsCalendarOpen(true);
 
@@ -186,23 +196,38 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     }
   }
 
-  const closeCalendar = useCallback(() => {
-    setIsCalendarOpen(false);
+  const closeCalendar = useCallback(
+    ({ reason }: { reason: CloseReason }) => {
+      if (shouldCloseWidgets) {
+        if (!shouldCloseWidgets({ reason, widget: 'calendar' })) {
+          return;
+        }
+      }
 
-    if (onCalendarClose) {
-      onCalendarClose();
-    }
-  }, [onCalendarClose]);
+      setIsCalendarOpen(false);
+
+      if (onCalendarClose) {
+        onCalendarClose();
+      }
+    },
+    [onCalendarClose, shouldCloseWidgets],
+  );
 
   function toggleCalendar() {
     if (isCalendarOpen) {
-      closeCalendar();
+      closeCalendar({ reason: 'buttonClick' });
     } else {
-      openCalendar();
+      openCalendar({ reason: 'buttonClick' });
     }
   }
 
-  function openClock() {
+  function openClock({ reason }: { reason: OpenReason }) {
+    if (shouldOpenWidgets) {
+      if (!shouldOpenWidgets({ reason, widget: 'clock' })) {
+        return;
+      }
+    }
+
     setIsCalendarOpen(false);
     setIsClockOpen(true);
 
@@ -211,22 +236,34 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     }
   }
 
-  const closeClock = useCallback(() => {
-    setIsClockOpen(false);
+  const closeClock = useCallback(
+    ({ reason }: { reason: CloseReason }) => {
+      if (shouldCloseWidgets) {
+        if (!shouldCloseWidgets({ reason, widget: 'clock' })) {
+          return;
+        }
+      }
 
-    if (onClockClose) {
-      onClockClose();
-    }
-  }, [onClockClose]);
+      setIsClockOpen(false);
 
-  const closeWidgets = useCallback(() => {
-    closeCalendar();
-    closeClock();
-  }, [closeCalendar, closeClock]);
+      if (onClockClose) {
+        onClockClose();
+      }
+    },
+    [onClockClose, shouldCloseWidgets],
+  );
 
-  function onChange(value: Value, shouldCloseWidgets = shouldCloseWidgetsProps) {
+  const closeWidgets = useCallback(
+    ({ reason }: { reason: CloseReason }) => {
+      closeCalendar({ reason });
+      closeClock({ reason });
+    },
+    [closeCalendar, closeClock],
+  );
+
+  function onChange(value: Value, shouldCloseWidgets = shouldCloseWidgetsOnSelect) {
     if (shouldCloseWidgets) {
-      closeWidgets();
+      closeWidgets({ reason: 'select' });
     }
 
     if (onChangeProps) {
@@ -317,13 +354,13 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
       case 'day':
       case 'month':
       case 'year':
-        openCalendar();
+        openCalendar({ reason: 'focus' });
         break;
       case 'hour12':
       case 'hour24':
       case 'minute':
       case 'second':
-        openClock();
+        openClock({ reason: 'focus' });
         break;
       default:
     }
@@ -332,7 +369,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        closeWidgets();
+        closeWidgets({ reason: 'escape' });
       }
     },
     [closeWidgets],
@@ -364,7 +401,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
         (!calendarWrapperEl || !calendarWrapperEl.contains(target)) &&
         (!clockWrapperEl || !clockWrapperEl.contains(target))
       ) {
-        closeWidgets();
+        closeWidgets({ reason: 'outsideAction' });
       }
     },
     [calendarWrapper, clockWrapper, closeWidgets, wrapper],
