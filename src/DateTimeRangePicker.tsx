@@ -113,7 +113,7 @@ export type DateTimeRangePickerProps = {
   yearPlaceholder?: string;
 } & CalendarProps &
   ClockProps &
-  EventProps;
+  Omit<EventProps, 'onChange' | 'onFocus'>;
 
 export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
   const {
