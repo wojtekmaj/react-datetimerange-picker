@@ -99,6 +99,7 @@ export type DateTimeRangePickerProps = {
   onClockClose?: () => void;
   onClockOpen?: () => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+  onInvalidChange?: () => void;
   openWidgetsOnFocus?: boolean;
   portalContainer?: HTMLElement | null;
   rangeDivider?: React.ReactNode;
@@ -153,6 +154,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     onClockClose,
     onClockOpen,
     onFocus: onFocusProps,
+    onInvalidChange,
     openWidgetsOnFocus = true,
     rangeDivider = '–',
     required,
@@ -468,6 +470,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
       maxDate,
       maxDetail,
       minDate,
+      onInvalidChange,
       required,
       showLeadingZeros,
     };
