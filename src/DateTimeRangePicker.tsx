@@ -9,7 +9,7 @@ import Fit from 'react-fit';
 
 import DateTimeInput from 'react-datetime-picker/dist/cjs/DateTimeInput';
 
-import { isMaxDate, isMinDate } from './shared/propTypes';
+import { isMaxDate, isMinDate, rangeOf } from './shared/propTypes';
 
 import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
 
@@ -646,7 +646,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
-const isValueOrValueArray = PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]);
+const isValueOrValueArray = PropTypes.oneOfType([isValue, rangeOf(isValue)]);
 
 DateTimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
