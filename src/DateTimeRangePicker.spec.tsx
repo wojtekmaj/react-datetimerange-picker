@@ -749,6 +749,26 @@ describe('DateTimeRangePicker', () => {
     );
   });
 
+  it('opens Calendar component, followed by Clock component, when focusing on inputs inside', () => {
+    const { container } = render(<DateTimeRangePicker />);
+
+    const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
+
+    fireEvent.focus(dayInput);
+
+    const calendar = container.querySelector('.react-calendar');
+
+    expect(calendar).toBeInTheDocument();
+
+    const minuteInput = container.querySelector('input[name="minute"]') as HTMLInputElement;
+
+    fireEvent.focus(minuteInput);
+
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
+  });
+
   it('closes Calendar when changing value by default', async () => {
     const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 

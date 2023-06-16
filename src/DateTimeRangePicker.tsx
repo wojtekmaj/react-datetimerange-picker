@@ -344,8 +344,6 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     if (
       // Internet Explorer still fires onFocus on disabled elements
       disabled ||
-      isCalendarOpen ||
-      isClockOpen ||
       !openWidgetsOnFocus ||
       event.target.dataset.select === 'true'
     ) {
@@ -355,15 +353,25 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
     switch (event.target.name) {
       case 'day':
       case 'month':
-      case 'year':
+      case 'year': {
+        if (isCalendarOpen) {
+          return;
+        }
+
         openCalendar({ reason: 'focus' });
         break;
+      }
       case 'hour12':
       case 'hour24':
       case 'minute':
-      case 'second':
+      case 'second': {
+        if (isClockOpen) {
+          return;
+        }
+
         openClock({ reason: 'focus' });
         break;
+      }
       default:
     }
   }
