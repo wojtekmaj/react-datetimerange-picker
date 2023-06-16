@@ -190,7 +190,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
       }
     }
 
-    setIsClockOpen(false);
+    setIsClockOpen(isClockOpen ? false : isCalendarOpen);
     setIsCalendarOpen(true);
 
     if (onCalendarOpen) {
@@ -230,7 +230,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps) {
       }
     }
 
-    setIsCalendarOpen(false);
+    setIsCalendarOpen(isCalendarOpen ? false : isCalendarOpen);
     setIsClockOpen(true);
 
     if (onClockOpen) {
