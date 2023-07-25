@@ -18,7 +18,7 @@ import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } fr
 
 const baseClassName = 'react-datetimerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
-const allViews = ['hour', 'minute', 'second'];
+const allViews = ['hour', 'minute', 'second'] as const;
 
 const iconProps = {
   xmlns: 'http://www.w3.org/2000/svg',
@@ -699,7 +699,7 @@ DateTimeRangePicker.propTypes = {
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
   openWidgetsOnFocus: PropTypes.bool,
-  portalContainer: PropTypes.object,
+  portalContainer: PropTypes.instanceOf(HTMLElement),
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
