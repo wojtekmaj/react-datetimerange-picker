@@ -1,6 +1,6 @@
-import DateTimeRangePicker from './DateTimeRangePicker';
+import DateTimeRangePicker from './DateTimeRangePicker.js';
 
-export type { DateTimeRangePickerProps } from './DateTimeRangePicker';
+export type { DateTimeRangePickerProps } from './DateTimeRangePicker.js';
 
 export { DateTimeRangePicker };
 

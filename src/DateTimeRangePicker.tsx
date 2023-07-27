@@ -11,10 +11,17 @@ import Fit from 'react-fit';
 
 import DateTimeInput from 'react-datetime-picker/dist/cjs/DateTimeInput';
 
-import { isMaxDate, isMinDate, rangeOf } from './shared/propTypes';
+import { isMaxDate, isMinDate, rangeOf } from './shared/propTypes.js';
 
 import type { ReactNodeArray } from 'prop-types';
-import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
+import type {
+  ClassName,
+  CloseReason,
+  Detail,
+  LooseValue,
+  OpenReason,
+  Value,
+} from './shared/types.js';
 
 const baseClassName = 'react-datetimerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'] as const;

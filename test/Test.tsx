@@ -1,18 +1,18 @@
 import React, { useRef, useState } from 'react';
-import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker/src';
-import '@wojtekmaj/react-datetimerange-picker/src/DateTimeRangePicker.css';
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
+import '@wojtekmaj/react-datetimerange-picker/dist/DateTimeRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import ValidityOptions from './ValidityOptions';
-import MaxDetailOptions from './MaxDetailOptions';
-import LocaleOptions from './LocaleOptions';
-import ValueOptions from './ValueOptions';
-import ViewOptions from './ViewOptions';
+import ValidityOptions from './ValidityOptions.js';
+import MaxDetailOptions from './MaxDetailOptions.js';
+import LocaleOptions from './LocaleOptions.js';
+import ValueOptions from './ValueOptions.js';
+import ViewOptions from './ViewOptions.js';
 
 import './Test.css';
 
-import type { Detail, LooseValue } from './shared/types';
+import type { Detail, LooseValue } from './shared/types.js';
 
 const now = new Date();
 
