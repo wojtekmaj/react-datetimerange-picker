@@ -599,7 +599,7 @@ __metadata:
     prop-types: ^15.6.0
     react-calendar: ^4.6.0
     react-clock: ^4.5.0
-    react-datetime-picker: ^5.2.2
+    react-datetime-picker: ^5.4.0
     react-fit: ^1.7.0
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1305,7 +1305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-event-props@npm:^1.4.2, make-event-props@npm:^1.6.0":
+"make-event-props@npm:^1.6.0":
   version: 1.6.1
   resolution: "make-event-props@npm:1.6.1"
   checksum: 0457abdaf0c5edea1a284ec58ca5afed0e3de96efd3754dca02fbe767b6d17607eb28862802bc769656e06bb6374cd0b568e960d23996798dc872d09de537f71
@@ -1598,7 +1598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-calendar@npm:^4.4.0, react-calendar@npm:^4.6.0":
+"react-calendar@npm:^4.6.0":
   version: 4.6.0
   resolution: "react-calendar@npm:4.6.0"
   dependencies:
@@ -1618,7 +1618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-clock@npm:^4.3.0, react-clock@npm:^4.5.0":
+"react-clock@npm:^4.5.0":
   version: 4.5.0
   resolution: "react-clock@npm:4.5.0"
   dependencies:
@@ -1637,43 +1637,51 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^10.2.1":
-  version: 10.2.1
-  resolution: "react-date-picker@npm:10.2.1"
+"react-date-picker@npm:^10.4.1":
+  version: 10.5.0
+  resolution: "react-date-picker@npm:10.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
     get-user-locale: ^2.2.1
-    make-event-props: ^1.4.2
+    make-event-props: ^1.6.0
     prop-types: ^15.6.0
-    react-calendar: ^4.4.0
-    react-fit: ^1.5.1
-    update-input-width: ^1.3.1
+    react-calendar: ^4.6.0
+    react-fit: ^1.7.0
+    update-input-width: ^1.4.0
   peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 5235a5471c70d777826ded191674a759e0d3968cb6ea24ea3e155ff897e53234fd3e9d6432d6a222b045aa08072bc3014a64d1dd3382fd4c4b42e76866f0a402
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 79215dfb690998252b21f2a66ee35604b4f4b5a60335628f029545e4c5b146c1c32c54c487acbcdba3bbb6868267f891b5d6b4b9de6513cf43c65b66a0a44d06
   languageName: node
   linkType: hard
 
-"react-datetime-picker@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "react-datetime-picker@npm:5.2.2"
+"react-datetime-picker@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "react-datetime-picker@npm:5.4.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
     get-user-locale: ^2.2.1
-    make-event-props: ^1.4.2
+    make-event-props: ^1.6.0
     prop-types: ^15.6.0
-    react-calendar: ^4.4.0
-    react-clock: ^4.3.0
-    react-date-picker: ^10.2.1
-    react-fit: ^1.5.1
-    react-time-picker: ^6.2.1
+    react-calendar: ^4.6.0
+    react-clock: ^4.5.0
+    react-date-picker: ^10.4.1
+    react-fit: ^1.7.0
+    react-time-picker: ^6.4.1
   peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: f496559bc7562b4b3156c9b260ca87d982200600be335a27382981c71ee36712a02fcd5978650db4de8c511d09ffd4d25dfc803c5c113185545f859125eff6d4
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 635c1294365369bc9be4d1a062041ad7132ff30fcd0eea1c6f320329bfb39f0f008f69a86db37786dcb63c035b6abded806bf9b5ad105e6e5aca27c662e609b3
   languageName: node
   linkType: hard
 
@@ -1704,7 +1712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fit@npm:^1.5.1, react-fit@npm:^1.7.0":
+"react-fit@npm:^1.7.0":
   version: 1.7.0
   resolution: "react-fit@npm:1.7.0"
   dependencies:
@@ -1739,22 +1747,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "react-time-picker@npm:6.2.1"
+"react-time-picker@npm:^6.4.1":
+  version: 6.5.0
+  resolution: "react-time-picker@npm:6.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
     get-user-locale: ^2.2.1
-    make-event-props: ^1.4.2
+    make-event-props: ^1.6.0
     prop-types: ^15.6.0
-    react-clock: ^4.3.0
-    react-fit: ^1.5.1
-    update-input-width: ^1.3.1
+    react-clock: ^4.5.0
+    react-fit: ^1.7.0
+    update-input-width: ^1.4.0
   peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 014eb223d63b8e48fc86eb19fbd3e0d23b9e1e34be0e557112afdc7dd419e25db4db64db8826c266c360e362fe06379fc3bae7e80c911277aac10beff896bb93
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 340004bda58e16cc5baa1117225d2e3f9b457cf5f86beb57df942f1a443c9d508dcffc8c67bce700e357053d4e1559ea44b82fe5805018cfe269f8d8debdec0c
   languageName: node
   linkType: hard
 
@@ -2029,10 +2041,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"update-input-width@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "update-input-width@npm:1.3.1"
-  checksum: 1e648fcb99b5da1f8e165dc0ceea7a82ddbdc20b75cdfa0b735a3c261eb62d0476662834dea38ac39985e1693c921e45489149afbb105eddd5e2b4b564846bc5
+"update-input-width@npm:^1.4.0":
+  version: 1.4.1
+  resolution: "update-input-width@npm:1.4.1"
+  checksum: 3a85212866b8002638d9dec237690b4157a8416617ea5331c0af8d33dac757828a8f0b85d1c2f2960a3420198a1d0cf7dde3872f5484d89534132e828a660466
   languageName: node
   linkType: hard
 
