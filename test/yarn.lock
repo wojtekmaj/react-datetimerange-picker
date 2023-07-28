@@ -599,7 +599,7 @@ __metadata:
     prop-types: ^15.6.0
     react-calendar: ^4.6.0
     react-clock: ^4.5.0
-    react-datetime-picker: ^5.4.0
+    react-datetime-picker: ^5.5.0
     react-fit: ^1.7.0
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1637,7 +1637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^10.4.1":
+"react-date-picker@npm:^10.5.0":
   version: 10.5.0
   resolution: "react-date-picker@npm:10.5.0"
   dependencies:
@@ -1660,9 +1660,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-datetime-picker@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "react-datetime-picker@npm:5.4.0"
+"react-datetime-picker@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "react-datetime-picker@npm:5.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
@@ -1671,9 +1671,9 @@ __metadata:
     prop-types: ^15.6.0
     react-calendar: ^4.6.0
     react-clock: ^4.5.0
-    react-date-picker: ^10.4.1
+    react-date-picker: ^10.5.0
     react-fit: ^1.7.0
-    react-time-picker: ^6.4.1
+    react-time-picker: ^6.5.0
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1681,7 +1681,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 635c1294365369bc9be4d1a062041ad7132ff30fcd0eea1c6f320329bfb39f0f008f69a86db37786dcb63c035b6abded806bf9b5ad105e6e5aca27c662e609b3
+  checksum: 739bb2eb5ea618a45cc6da8d343385760021f6b453c378d34cc89181a1c4f2249e1a557f10c90a12bfe850428d036fc6696f41da2830421e69a7da10550adf56
   languageName: node
   linkType: hard
 
@@ -1747,7 +1747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^6.4.1":
+"react-time-picker@npm:^6.5.0":
   version: 6.5.0
   resolution: "react-time-picker@npm:6.5.0"
   dependencies:

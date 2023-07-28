@@ -852,7 +852,7 @@ __metadata:
     react: ^18.2.0
     react-calendar: ^4.6.0
     react-clock: ^4.5.0
-    react-datetime-picker: ^5.4.0
+    react-datetime-picker: ^5.5.0
     react-dom: ^18.2.0
     react-fit: ^1.7.0
     rimraf: ^3.0.0
@@ -4804,9 +4804,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^10.4.1":
-  version: 10.4.1
-  resolution: "react-date-picker@npm:10.4.1"
+"react-date-picker@npm:^10.5.0":
+  version: 10.5.0
+  resolution: "react-date-picker@npm:10.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
@@ -4823,13 +4823,13 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: bc24cb669d543b41233393300f21e85d8986ab92f240a20044379cd857072bcbce6da0a64f19ed0c213609c40d1e96da2948f9eaa7f4d970064c6367c698d273
+  checksum: 79215dfb690998252b21f2a66ee35604b4f4b5a60335628f029545e4c5b146c1c32c54c487acbcdba3bbb6868267f891b5d6b4b9de6513cf43c65b66a0a44d06
   languageName: node
   linkType: hard
 
-"react-datetime-picker@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "react-datetime-picker@npm:5.4.0"
+"react-datetime-picker@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "react-datetime-picker@npm:5.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
@@ -4838,9 +4838,9 @@ __metadata:
     prop-types: ^15.6.0
     react-calendar: ^4.6.0
     react-clock: ^4.5.0
-    react-date-picker: ^10.4.1
+    react-date-picker: ^10.5.0
     react-fit: ^1.7.0
-    react-time-picker: ^6.4.1
+    react-time-picker: ^6.5.0
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4848,7 +4848,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 635c1294365369bc9be4d1a062041ad7132ff30fcd0eea1c6f320329bfb39f0f008f69a86db37786dcb63c035b6abded806bf9b5ad105e6e5aca27c662e609b3
+  checksum: 739bb2eb5ea618a45cc6da8d343385760021f6b453c378d34cc89181a1c4f2249e1a557f10c90a12bfe850428d036fc6696f41da2830421e69a7da10550adf56
   languageName: node
   linkType: hard
 
@@ -4906,9 +4906,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^6.4.1":
-  version: 6.4.1
-  resolution: "react-time-picker@npm:6.4.1"
+"react-time-picker@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "react-time-picker@npm:6.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^2.0.0
@@ -4925,7 +4925,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 1bfd53edfa63fbcec6ca13f1beb5bc8c89c88fb69c8f216aea1636e0272ce79d228f36fe855d8e0ea6ecf65e00447e58fc1c9187a0162eb79dac4a5835cabd4f
+  checksum: 340004bda58e16cc5baa1117225d2e3f9b457cf5f86beb57df942f1a443c9d508dcffc8c67bce700e357053d4e1559ea44b82fe5805018cfe269f8d8debdec0c
   languageName: node
   linkType: hard
 
