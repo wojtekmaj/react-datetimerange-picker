@@ -9,7 +9,7 @@ import Calendar from 'react-calendar';
 import Clock from 'react-clock';
 import Fit from 'react-fit';
 
-import DateTimeInput from 'react-datetime-picker/dist/cjs/DateTimeInput';
+import DateTimeInput from 'react-datetime-picker/dist/esm/DateTimeInput';
 
 import { isMaxDate, isMinDate, rangeOf } from './shared/propTypes.js';
 
