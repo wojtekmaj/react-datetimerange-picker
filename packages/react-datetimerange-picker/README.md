@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/@wojtekmaj/react-datetimerange-picker.svg)](https://www.npmjs.com/package/@wojtekmaj/react-datetimerange-picker) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-datetimerange-picker.svg) [![CI](https://github.com/wojtekmaj/react-datetimerange-picker/workflows/CI/badge.svg)](https://github.com/wojtekmaj/react-datetimerange-picker/actions)
+[![npm](https://img.shields.io/npm/v/@wojtekmaj/react-datetimerange-picker.svg)](https://www.npmjs.com/package/@wojtekmaj/react-datetimerange-picker) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-datetimerange-picker.svg) [![CI](https://github.com/wojtekmaj/react-datetimerange-picker/actions/workflows/ci.yml/badge.svg)](https://github.com/wojtekmaj/react-datetimerange-picker/actions)
 
 # React-DateTimeRange-Picker
 
