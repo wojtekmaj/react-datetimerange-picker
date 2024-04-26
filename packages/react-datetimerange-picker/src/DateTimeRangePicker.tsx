@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
@@ -807,7 +807,7 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = function DateTim
             onFocus={stopPropagation}
             type="button"
           >
-            {typeof clearIcon === 'function' ? React.createElement(clearIcon) : clearIcon}
+            {typeof clearIcon === 'function' ? createElement(clearIcon) : clearIcon}
           </button>
         )}
         {calendarIcon !== null && !disableCalendar && (
@@ -820,7 +820,7 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = function DateTim
             onFocus={stopPropagation}
             type="button"
           >
-            {typeof calendarIcon === 'function' ? React.createElement(calendarIcon) : calendarIcon}
+            {typeof calendarIcon === 'function' ? createElement(calendarIcon) : calendarIcon}
           </button>
         )}
       </div>
