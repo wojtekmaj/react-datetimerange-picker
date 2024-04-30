@@ -76,7 +76,11 @@ export default function Test() {
             }}
           >
             <DateTimeRangePicker
-              calendarClassName="myCustomCalendarClassName"
+              calendarProps={{
+                className: 'myCustomCalendarClassName',
+                showNeighboringMonth,
+                showWeekNumbers,
+              }}
               className="myCustomDateTimeRangePickerClassName"
               data-testid="myCustomDateTimeRangePicker"
               disabled={disabled}
@@ -93,8 +97,6 @@ export default function Test() {
               portalContainer={renderInPortal ? portalContainer.current : undefined}
               required={required}
               showLeadingZeros={showLeadingZeros}
-              showNeighboringMonth={showNeighboringMonth}
-              showWeekNumbers={showWeekNumbers}
               value={value}
             />
             <div ref={portalContainer} />

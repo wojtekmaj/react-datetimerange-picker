@@ -227,11 +227,11 @@ describe('DateTimeRangePicker', () => {
     expect(wrapper).toHaveClass('react-datetimerange-picker--open');
   });
 
-  it('applies calendarClassName to the calendar when given a string', () => {
+  it('applies calendar className to the calendar when given a string', () => {
     const calendarClassName = 'testClassName';
 
     const { container } = render(
-      <DateTimeRangePicker calendarClassName={calendarClassName} isCalendarOpen />,
+      <DateTimeRangePicker calendarProps={{ className: calendarClassName }} isCalendarOpen />,
     );
 
     const calendar = container.querySelector('.react-calendar');
@@ -239,11 +239,11 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toHaveClass(calendarClassName);
   });
 
-  it('applies clockClassName to the clock when given a string', () => {
+  it('applies clock className to the clock when given a string', () => {
     const clockClassName = 'testClassName';
 
     const { container } = render(
-      <DateTimeRangePicker clockClassName={clockClassName} isClockOpen />,
+      <DateTimeRangePicker clockProps={{ className: clockClassName }} isClockOpen />,
     );
 
     const clock = container.querySelector('.react-clock');
