@@ -56,10 +56,10 @@
   "dependencies": {
     "clsx": "^2.0.0",
     "make-event-props": "^1.6.0",
-    "react-calendar": "^4.6.0",
-    "react-clock": "^4.5.0",
-    "react-datetime-picker": "^5.5.1",
-    "react-fit": "^1.7.0"
+    "react-calendar": "^5.0.0",
+    "react-clock": "^5.0.0",
+    "react-datetime-picker": "^6.0.1",
+    "react-fit": "^2.0.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.0.0",
