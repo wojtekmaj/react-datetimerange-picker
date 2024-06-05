@@ -16,8 +16,6 @@ import type { Detail, LooseValue } from './shared/types.js';
 
 const now = new Date();
 
-/* eslint-disable no-console */
-
 const nineteenNinetyFive = new Date(1995, now.getUTCMonth() + 1, 15, 12);
 const fifteenthOfNextMonth = new Date(now.getUTCFullYear(), now.getUTCMonth() + 1, 15, 12);
 
