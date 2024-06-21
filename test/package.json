@@ -28,7 +28,7 @@
     "@types/react": "*",
     "@vitejs/plugin-react": "^4.2.0",
     "@wojtekmaj/date-utils": "^1.0.0",
-    "typescript": "^5.4.2",
+    "typescript": "^5.5.2",
     "vite": "^5.0.0"
   }
 }
