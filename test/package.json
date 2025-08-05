@@ -27,7 +27,7 @@
     "@biomejs/biome": "2.0.0",
     "@types/react": "*",
     "@vitejs/plugin-react": "^4.6.0",
-    "@wojtekmaj/date-utils": "^1.0.0",
+    "@wojtekmaj/date-utils": "^2.0.2",
     "typescript": "^5.5.2",
     "vite": "^7.0.0"
   }
