@@ -1,6 +1,6 @@
+import { userEvent } from '@vitest/browser/context';
 import { describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
 
 import DateTimeRangePicker from './DateTimeRangePicker.js';
 
@@ -638,7 +638,7 @@ describe('DateTimeRangePicker', () => {
   it('closes Calendar component when clicked outside', async () => {
     const { container } = render(<DateTimeRangePicker isCalendarOpen />);
 
-    userEvent.click(document.body);
+    await userEvent.click(document.body);
 
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-datetimerange-picker__calendar'),
@@ -668,7 +668,7 @@ describe('DateTimeRangePicker', () => {
   it('closes Clock component when clicked outside', async () => {
     const { container } = render(<DateTimeRangePicker isClockOpen />);
 
-    userEvent.click(document.body);
+    await userEvent.click(document.body);
 
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-datetimerange-picker__clock'),
