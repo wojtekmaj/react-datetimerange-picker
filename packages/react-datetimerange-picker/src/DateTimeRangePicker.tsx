@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import makeEventProps from 'make-event-props';
 import Calendar from 'react-calendar';
 import Clock from 'react-clock';
-import DateTimeInput from 'react-datetime-picker/dist/esm/DateTimeInput';
+import DateTimeInput from 'react-datetime-picker/dist/DateTimeInput';
 import Fit from 'react-fit';
 
 import type {

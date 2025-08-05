@@ -58,7 +58,7 @@
     "make-event-props": "^2.0.0",
     "react-calendar": "^6.0.0",
     "react-clock": "^6.0.0",
-    "react-datetime-picker": "^6.0.1",
+    "react-datetime-picker": "^7.0.1",
     "react-fit": "^3.0.0"
   },
   "devDependencies": {
