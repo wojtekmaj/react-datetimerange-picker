@@ -59,7 +59,7 @@
     "react-calendar": "^6.0.0",
     "react-clock": "^6.0.0",
     "react-datetime-picker": "^6.0.1",
-    "react-fit": "^2.0.0"
+    "react-fit": "^3.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0",
