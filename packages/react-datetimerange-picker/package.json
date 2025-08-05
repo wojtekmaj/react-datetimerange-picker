@@ -1,6 +1,6 @@
 {
   "name": "@wojtekmaj/react-datetimerange-picker",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "A datetime range picker for your React app.",
   "type": "module",
   "sideEffects": [
