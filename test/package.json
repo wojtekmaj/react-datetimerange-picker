@@ -24,7 +24,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.4",
+    "@biomejs/biome": "2.2.2",
     "@types/react": "*",
     "@vitejs/plugin-react": "^4.6.0",
     "@wojtekmaj/date-utils": "^2.0.2",
