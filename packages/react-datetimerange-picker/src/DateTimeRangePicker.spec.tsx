@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
-import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render } from 'vitest-browser-react';
+import { act, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 
 import DateTimeRangePicker from './DateTimeRangePicker.js';
 
@@ -927,26 +928,26 @@ describe('DateTimeRangePicker', () => {
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
-    fireEvent.click(twentyNineteenButton);
+    await userEvent.click(twentyNineteenButton);
 
     // Click January
     const januaryButton = getByRole('button', { name: 'January 2019' });
-    fireEvent.click(januaryButton);
+    await userEvent.click(januaryButton);
 
     // Click 1st
     const firstButton = getByRole('button', { name: 'January 1, 2019' });
-    fireEvent.click(firstButton);
+    await userEvent.click(firstButton);
 
     // Navigate up the calendar
-    fireEvent.click(drillUpButton); // To year 2019
+    await userEvent.click(drillUpButton); // To year 2019
 
     // Click July
     const julyButton = getByRole('button', { name: 'July 2019' });
-    fireEvent.click(julyButton);
+    await userEvent.click(julyButton);
 
     // Click 17th
     const seventeenthButton = getByRole('button', { name: 'July 17, 2019' });
-    fireEvent.click(seventeenthButton);
+    await userEvent.click(seventeenthButton);
 
     expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
   });
@@ -975,26 +976,26 @@ describe('DateTimeRangePicker', () => {
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
-    fireEvent.click(twentyNineteenButton);
+    await userEvent.click(twentyNineteenButton);
 
     // Click January
     const januaryButton = getByRole('button', { name: 'January 2019' });
-    fireEvent.click(januaryButton);
+    await userEvent.click(januaryButton);
 
     // Click 1st
     const firstButton = getByRole('button', { name: 'January 1, 2019' });
-    fireEvent.click(firstButton);
+    await userEvent.click(firstButton);
 
     // Navigate up the calendar
-    fireEvent.click(drillUpButton); // To year 2019
+    await userEvent.click(drillUpButton); // To year 2019
 
     // Click July
     const julyButton = getByRole('button', { name: 'July 2019' });
-    fireEvent.click(julyButton);
+    await userEvent.click(julyButton);
 
     // Click 17th
     const seventeenthButton = getByRole('button', { name: 'July 17, 2019' });
-    fireEvent.click(seventeenthButton);
+    await userEvent.click(seventeenthButton);
 
     expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
   });
@@ -1016,7 +1017,7 @@ describe('DateTimeRangePicker', () => {
 
     // Click 17th
     const seventeenthButton = getByRole('button', { name: 'July 17, 2018' });
-    fireEvent.click(seventeenthButton);
+    await userEvent.click(seventeenthButton);
 
     // Navigate up the calendar
     const drillUpButton = container.querySelector(
@@ -1027,15 +1028,15 @@ describe('DateTimeRangePicker', () => {
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
-    fireEvent.click(twentyNineteenButton);
+    await userEvent.click(twentyNineteenButton);
 
     // Click January
     const januaryButton = getByRole('button', { name: 'January 2019' });
-    fireEvent.click(januaryButton);
+    await userEvent.click(januaryButton);
 
     // Click 1st
     const firstButton = getByRole('button', { name: 'January 1, 2019' });
-    fireEvent.click(firstButton);
+    await userEvent.click(firstButton);
 
     expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
   });
@@ -1057,7 +1058,7 @@ describe('DateTimeRangePicker', () => {
 
     // Click 17th
     const seventeenthButton = getByRole('button', { name: 'July 17, 2018' });
-    fireEvent.click(seventeenthButton);
+    await userEvent.click(seventeenthButton);
 
     // Navigate up the calendar
     const drillUpButton = container.querySelector(
@@ -1068,15 +1069,15 @@ describe('DateTimeRangePicker', () => {
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
-    fireEvent.click(twentyNineteenButton);
+    await userEvent.click(twentyNineteenButton);
 
     // Click January
     const januaryButton = getByRole('button', { name: 'January 2019' });
-    fireEvent.click(januaryButton);
+    await userEvent.click(januaryButton);
 
     // Click 1st
     const firstButton = getByRole('button', { name: 'January 1, 2019' });
-    fireEvent.click(firstButton);
+    await userEvent.click(firstButton);
 
     expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
   });
