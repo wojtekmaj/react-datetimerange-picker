@@ -864,8 +864,8 @@ describe('DateTimeRangePicker', () => {
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '1' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '1');
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -878,8 +878,8 @@ describe('DateTimeRangePicker', () => {
 
     const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(hourInput, { target: { value: '9' } });
+    await act(async () => {
+      await userEvent.fill(hourInput, '9');
     });
 
     const clock = container.querySelector('.react-clock');
@@ -897,8 +897,8 @@ describe('DateTimeRangePicker', () => {
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '1' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '1');
     });
 
     expect(onChange).toHaveBeenCalledWith([new Date(2023, 0, 1, 21, 40, 11), null]);
@@ -1092,8 +1092,8 @@ describe('DateTimeRangePicker', () => {
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '32' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '32');
     });
 
     expect(onInvalidChange).toHaveBeenCalled();
@@ -1134,28 +1134,18 @@ describe('DateTimeRangePicker', () => {
       const minuteInput = customInputs[4] as HTMLInputElement;
       const secondInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
-      });
+        await userEvent.fill(yearInput, '2018');
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '12' } });
-      });
+        await userEvent.fill(hourInput, '12');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '30' } });
-      });
+        await userEvent.fill(minuteInput, '30');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '45' } });
+        await userEvent.fill(secondInput, '45');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -1185,28 +1175,18 @@ describe('DateTimeRangePicker', () => {
       const minuteInput = customInputs[4] as HTMLInputElement;
       const secondInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
-      });
+        await userEvent.fill(yearInput, '2018');
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '12' } });
-      });
+        await userEvent.fill(hourInput, '12');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '30' } });
-      });
+        await userEvent.fill(minuteInput, '30');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '45' } });
+        await userEvent.fill(secondInput, '45');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -1238,28 +1218,18 @@ describe('DateTimeRangePicker', () => {
       const minuteInput = customInputs[4] as HTMLInputElement;
       const secondInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
-      });
+        await userEvent.fill(yearInput, '2018');
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '12' } });
-      });
+        await userEvent.fill(hourInput, '12');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '30' } });
-      });
+        await userEvent.fill(minuteInput, '30');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '45' } });
+        await userEvent.fill(secondInput, '45');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -1284,28 +1254,19 @@ describe('DateTimeRangePicker', () => {
       const hourInput = customInputs[9] as HTMLInputElement;
       const minuteInput = customInputs[10] as HTMLInputElement;
       const secondInput = customInputs[11] as HTMLInputElement;
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '12' } });
-      });
+        await userEvent.fill(yearInput, '2018');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '30' } });
-      });
+        await userEvent.fill(hourInput, '12');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '45' } });
+        await userEvent.fill(minuteInput, '30');
+
+        await userEvent.fill(secondInput, '45');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -1335,28 +1296,18 @@ describe('DateTimeRangePicker', () => {
       const minuteInput = customInputs[10] as HTMLInputElement;
       const secondInput = customInputs[11] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
-      });
+        await userEvent.fill(yearInput, '2018');
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '12' } });
-      });
+        await userEvent.fill(hourInput, '12');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '30' } });
-      });
+        await userEvent.fill(minuteInput, '30');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '45' } });
+        await userEvent.fill(secondInput, '45');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -1388,28 +1339,18 @@ describe('DateTimeRangePicker', () => {
       const minuteInput = customInputs[10] as HTMLInputElement;
       const secondInput = customInputs[11] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
-      });
+        await userEvent.fill(yearInput, '2018');
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '12' } });
-      });
+        await userEvent.fill(hourInput, '12');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '30' } });
-      });
+        await userEvent.fill(minuteInput, '30');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '45' } });
+        await userEvent.fill(secondInput, '45');
       });
 
       expect(onChange).toHaveBeenCalled();
