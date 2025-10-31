@@ -475,7 +475,7 @@ describe('DateTimeRangePicker', () => {
 
     expect(calendar).toBeFalsy();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     const calendar2 = container.querySelector('.react-calendar');
 
@@ -748,7 +748,7 @@ describe('DateTimeRangePicker', () => {
 
     expect(clock).toBeInTheDocument();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-datetimerange-picker__clock'),
@@ -782,12 +782,12 @@ describe('DateTimeRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -802,12 +802,12 @@ describe('DateTimeRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -822,12 +822,12 @@ describe('DateTimeRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -846,12 +846,12 @@ describe('DateTimeRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -923,8 +923,8 @@ describe('DateTimeRangePicker', () => {
     const drillUpButton = container.querySelector(
       '.react-calendar__navigation__label',
     ) as HTMLButtonElement;
-    fireEvent.click(drillUpButton); // To year 2018
-    fireEvent.click(drillUpButton); // To 2011 – 2020 decade
+    await userEvent.click(drillUpButton); // To year 2018
+    await userEvent.click(drillUpButton); // To 2011 – 2020 decade
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
@@ -971,8 +971,8 @@ describe('DateTimeRangePicker', () => {
     const drillUpButton = container.querySelector(
       '.react-calendar__navigation__label',
     ) as HTMLButtonElement;
-    fireEvent.click(drillUpButton); // To year 2018
-    fireEvent.click(drillUpButton); // To 2011 – 2020 decade
+    await userEvent.click(drillUpButton); // To year 2018
+    await userEvent.click(drillUpButton); // To 2011 – 2020 decade
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
@@ -1023,8 +1023,8 @@ describe('DateTimeRangePicker', () => {
     const drillUpButton = container.querySelector(
       '.react-calendar__navigation__label',
     ) as HTMLButtonElement;
-    fireEvent.click(drillUpButton); // To year 2018
-    fireEvent.click(drillUpButton); // To 2011 – 2020 decade
+    await userEvent.click(drillUpButton); // To year 2018
+    await userEvent.click(drillUpButton); // To 2011 – 2020 decade
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
@@ -1064,8 +1064,8 @@ describe('DateTimeRangePicker', () => {
     const drillUpButton = container.querySelector(
       '.react-calendar__navigation__label',
     ) as HTMLButtonElement;
-    fireEvent.click(drillUpButton); // To year 2018
-    fireEvent.click(drillUpButton); // To 2011 – 2020 decade
+    await userEvent.click(drillUpButton); // To year 2018
+    await userEvent.click(drillUpButton); // To 2011 – 2020 decade
 
     // Click year 2019
     const twentyNineteenButton = getByRole('button', { name: '2019' });
@@ -1111,7 +1111,7 @@ describe('DateTimeRangePicker', () => {
 
     expect(calendar).toBeFalsy();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(onChange).toHaveBeenCalledWith(null);
   });
@@ -1422,7 +1422,7 @@ describe('DateTimeRangePicker', () => {
     const { container } = await render(<DateTimeRangePicker onClick={onClick} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
-    fireEvent.click(wrapper);
+    await userEvent.click(wrapper);
 
     expect(onClick).toHaveBeenCalled();
   });
