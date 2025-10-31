@@ -19,8 +19,8 @@ async function waitForElementToBeRemovedOrHidden(callback: () => HTMLElement | n
 }
 
 describe('DateTimeRangePicker', () => {
-  it('passes default name to DateTimeInput components', () => {
-    const { container } = render(<DateTimeRangePicker />);
+  it('passes default name to DateTimeInput components', async () => {
+    const { container } = await render(<DateTimeRangePicker />);
 
     const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
@@ -28,10 +28,10 @@ describe('DateTimeRangePicker', () => {
     expect(nativeInputs[1]).toHaveAttribute('name', 'datetimerange_to');
   });
 
-  it('passes custom name to DateTimeInput components', () => {
+  it('passes custom name to DateTimeInput components', async () => {
     const name = 'testName';
 
-    const { container } = render(<DateTimeRangePicker name={name} />);
+    const { container } = await render(<DateTimeRangePicker name={name} />);
 
     const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
@@ -39,16 +39,16 @@ describe('DateTimeRangePicker', () => {
     expect(nativeInputs[1]).toHaveAttribute('name', `${name}_to`);
   });
 
-  it('passes autoFocus flag to first DateTimeInput component', () => {
-    const { container } = render(<DateTimeRangePicker autoFocus />);
+  it('passes autoFocus flag to first DateTimeInput component', async () => {
+    const { container } = await render(<DateTimeRangePicker autoFocus />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
 
     expect(customInputs[0]).toHaveFocus();
   });
 
-  it('passes disabled flag to DateTimeInput components', () => {
-    const { container } = render(<DateTimeRangePicker disabled />);
+  it('passes disabled flag to DateTimeInput components', async () => {
+    const { container } = await render(<DateTimeRangePicker disabled />);
 
     const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
@@ -56,8 +56,8 @@ describe('DateTimeRangePicker', () => {
     expect(nativeInputs[1]).toBeDisabled();
   });
 
-  it('passes format to DateTimeInput components', () => {
-    const { container } = render(<DateTimeRangePicker format="ss" />);
+  it('passes format to DateTimeInput components', async () => {
+    const { container } = await render(<DateTimeRangePicker format="ss" />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
 
@@ -66,7 +66,7 @@ describe('DateTimeRangePicker', () => {
     expect(customInputs[1]).toHaveAttribute('name', 'second');
   });
 
-  it('passes aria-label props to DateTimeInput components', () => {
+  it('passes aria-label props to DateTimeInput components', async () => {
     const ariaLabelProps = {
       amPmAriaLabel: 'Select AM/PM',
       calendarAriaLabel: 'Toggle calendar',
@@ -80,7 +80,9 @@ describe('DateTimeRangePicker', () => {
       yearAriaLabel: 'Year',
     };
 
-    const { container } = render(<DateTimeRangePicker {...ariaLabelProps} maxDetail="second" />);
+    const { container } = await render(
+      <DateTimeRangePicker {...ariaLabelProps} maxDetail="second" />,
+    );
 
     const calendarButton = container.querySelector(
       'button.react-datetimerange-picker__calendar-button',
@@ -128,7 +130,7 @@ describe('DateTimeRangePicker', () => {
     expect(secondToInput).toHaveAttribute('aria-label', ariaLabelProps.secondAriaLabel);
   });
 
-  it('passes placeholder props to DateTimeInput components', () => {
+  it('passes placeholder props to DateTimeInput components', async () => {
     const placeholderProps = {
       dayPlaceholder: 'dd',
       hourPlaceholder: 'hh',
@@ -138,7 +140,9 @@ describe('DateTimeRangePicker', () => {
       yearPlaceholder: 'yyyy',
     };
 
-    const { container } = render(<DateTimeRangePicker {...placeholderProps} maxDetail="second" />);
+    const { container } = await render(
+      <DateTimeRangePicker {...placeholderProps} maxDetail="second" />,
+    );
 
     const dateTimeInputs = container.querySelectorAll(
       '.react-datetimerange-picker__inputGroup',
@@ -176,10 +180,10 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('passes value to DateTimeInput components', () => {
-    it('passes single value to DateTimeInput components', () => {
+    it('passes single value to DateTimeInput components', async () => {
       const value = new Date(2019, 0, 1);
 
-      const { container } = render(<DateTimeRangePicker value={value} />);
+      const { container } = await render(<DateTimeRangePicker value={value} />);
 
       const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
@@ -187,11 +191,11 @@ describe('DateTimeRangePicker', () => {
       expect(nativeInputs[1]).toHaveValue('');
     });
 
-    it('passes the first item of an array of values to DateTimeInput components', () => {
+    it('passes the first item of an array of values to DateTimeInput components', async () => {
       const value1 = new Date(2019, 0, 1);
       const value2 = new Date(2019, 6, 1, 12, 30);
 
-      const { container } = render(<DateTimeRangePicker value={[value1, value2]} />);
+      const { container } = await render(<DateTimeRangePicker value={[value1, value2]} />);
 
       const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
@@ -200,36 +204,36 @@ describe('DateTimeRangePicker', () => {
     });
   });
 
-  it('applies className to its wrapper when given a string', () => {
+  it('applies className to its wrapper when given a string', async () => {
     const className = 'testClassName';
 
-    const { container } = render(<DateTimeRangePicker className={className} />);
+    const { container } = await render(<DateTimeRangePicker className={className} />);
 
     const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass(className);
   });
 
-  it('applies "--open" className to its wrapper when given isCalendarOpen flag', () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+  it('applies "--open" className to its wrapper when given isCalendarOpen flag', async () => {
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass('react-datetimerange-picker--open');
   });
 
-  it('applies "--open" className to its wrapper when given isClockOpen flag', () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+  it('applies "--open" className to its wrapper when given isClockOpen flag', async () => {
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass('react-datetimerange-picker--open');
   });
 
-  it('applies calendar className to the calendar when given a string', () => {
+  it('applies calendar className to the calendar when given a string', async () => {
     const calendarClassName = 'testClassName';
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeRangePicker calendarProps={{ className: calendarClassName }} isCalendarOpen />,
     );
 
@@ -238,10 +242,10 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toHaveClass(calendarClassName);
   });
 
-  it('applies clock className to the clock when given a string', () => {
+  it('applies clock className to the clock when given a string', async () => {
     const clockClassName = 'testClassName';
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeRangePicker clockProps={{ className: clockClassName }} isClockOpen />,
     );
 
@@ -250,16 +254,16 @@ describe('DateTimeRangePicker', () => {
     expect(clock).toHaveClass(clockClassName);
   });
 
-  it('renders DateTimeInput components', () => {
-    const { container } = render(<DateTimeRangePicker />);
+  it('renders DateTimeInput components', async () => {
+    const { container } = await render(<DateTimeRangePicker />);
 
     const nativeInputs = container.querySelectorAll('input[type="datetime-local"]');
 
     expect(nativeInputs.length).toBe(2);
   });
 
-  it('renders range divider with default divider', () => {
-    const { container } = render(<DateTimeRangePicker />);
+  it('renders range divider with default divider', async () => {
+    const { container } = await render(<DateTimeRangePicker />);
 
     const rangeDivider = container.querySelector('.react-datetimerange-picker__range-divider');
 
@@ -267,8 +271,8 @@ describe('DateTimeRangePicker', () => {
     expect(rangeDivider).toHaveTextContent('–');
   });
 
-  it('renders range divider with custom divider', () => {
-    const { container } = render(<DateTimeRangePicker rangeDivider="to" />);
+  it('renders range divider with custom divider', async () => {
+    const { container } = await render(<DateTimeRangePicker rangeDivider="to" />);
 
     const rangeDivider = container.querySelector('.react-datetimerange-picker__range-divider');
 
@@ -277,8 +281,8 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('renders clear button properly', () => {
-    it('renders clear button', () => {
-      const { container } = render(<DateTimeRangePicker />);
+    it('renders clear button', async () => {
+      const { container } = await render(<DateTimeRangePicker />);
 
       const clearButton = container.querySelector(
         'button.react-datetimerange-picker__clear-button',
@@ -287,8 +291,8 @@ describe('DateTimeRangePicker', () => {
       expect(clearButton).toBeInTheDocument();
     });
 
-    it('renders clear icon by default when clearIcon is not given', () => {
-      const { container } = render(<DateTimeRangePicker />);
+    it('renders clear icon by default when clearIcon is not given', async () => {
+      const { container } = await render(<DateTimeRangePicker />);
 
       const clearButton = container.querySelector(
         'button.react-datetimerange-picker__clear-button',
@@ -299,8 +303,8 @@ describe('DateTimeRangePicker', () => {
       expect(clearIcon).toBeInTheDocument();
     });
 
-    it('renders clear icon when given clearIcon as a string', () => {
-      const { container } = render(<DateTimeRangePicker clearIcon="❌" />);
+    it('renders clear icon when given clearIcon as a string', async () => {
+      const { container } = await render(<DateTimeRangePicker clearIcon="❌" />);
 
       const clearButton = container.querySelector(
         'button.react-datetimerange-picker__clear-button',
@@ -309,12 +313,12 @@ describe('DateTimeRangePicker', () => {
       expect(clearButton).toHaveTextContent('❌');
     });
 
-    it('renders clear icon when given clearIcon as a React element', () => {
+    it('renders clear icon when given clearIcon as a React element', async () => {
       function ClearIcon() {
         return <>❌</>;
       }
 
-      const { container } = render(<DateTimeRangePicker clearIcon={<ClearIcon />} />);
+      const { container } = await render(<DateTimeRangePicker clearIcon={<ClearIcon />} />);
 
       const clearButton = container.querySelector(
         'button.react-datetimerange-picker__clear-button',
@@ -323,12 +327,12 @@ describe('DateTimeRangePicker', () => {
       expect(clearButton).toHaveTextContent('❌');
     });
 
-    it('renders clear icon when given clearIcon as a function', () => {
+    it('renders clear icon when given clearIcon as a function', async () => {
       function ClearIcon() {
         return <>❌</>;
       }
 
-      const { container } = render(<DateTimeRangePicker clearIcon={ClearIcon} />);
+      const { container } = await render(<DateTimeRangePicker clearIcon={ClearIcon} />);
 
       const clearButton = container.querySelector(
         'button.react-datetimerange-picker__clear-button',
@@ -339,8 +343,8 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('renders calendar button properly', () => {
-    it('renders calendar button', () => {
-      const { container } = render(<DateTimeRangePicker />);
+    it('renders calendar button', async () => {
+      const { container } = await render(<DateTimeRangePicker />);
 
       const calendarButton = container.querySelector(
         'button.react-datetimerange-picker__calendar-button',
@@ -349,8 +353,8 @@ describe('DateTimeRangePicker', () => {
       expect(calendarButton).toBeInTheDocument();
     });
 
-    it('renders calendar icon by default when calendarIcon is not given', () => {
-      const { container } = render(<DateTimeRangePicker />);
+    it('renders calendar icon by default when calendarIcon is not given', async () => {
+      const { container } = await render(<DateTimeRangePicker />);
 
       const calendarButton = container.querySelector(
         'button.react-datetimerange-picker__calendar-button',
@@ -361,8 +365,8 @@ describe('DateTimeRangePicker', () => {
       expect(calendarIcon).toBeInTheDocument();
     });
 
-    it('renders calendar icon when given calendarIcon as a string', () => {
-      const { container } = render(<DateTimeRangePicker calendarIcon="📅" />);
+    it('renders calendar icon when given calendarIcon as a string', async () => {
+      const { container } = await render(<DateTimeRangePicker calendarIcon="📅" />);
 
       const calendarButton = container.querySelector(
         'button.react-datetimerange-picker__calendar-button',
@@ -371,12 +375,12 @@ describe('DateTimeRangePicker', () => {
       expect(calendarButton).toHaveTextContent('📅');
     });
 
-    it('renders calendar icon when given calendarIcon as a React element', () => {
+    it('renders calendar icon when given calendarIcon as a React element', async () => {
       function CalendarIcon() {
         return <>📅</>;
       }
 
-      const { container } = render(<DateTimeRangePicker calendarIcon={<CalendarIcon />} />);
+      const { container } = await render(<DateTimeRangePicker calendarIcon={<CalendarIcon />} />);
 
       const calendarButton = container.querySelector(
         'button.react-datetimerange-picker__calendar-button',
@@ -385,12 +389,12 @@ describe('DateTimeRangePicker', () => {
       expect(calendarButton).toHaveTextContent('📅');
     });
 
-    it('renders calendar icon when given calendarIcon as a function', () => {
+    it('renders calendar icon when given calendarIcon as a function', async () => {
       function CalendarIcon() {
         return <>📅</>;
       }
 
-      const { container } = render(<DateTimeRangePicker calendarIcon={CalendarIcon} />);
+      const { container } = await render(<DateTimeRangePicker calendarIcon={CalendarIcon} />);
 
       const calendarButton = container.querySelector(
         'button.react-datetimerange-picker__calendar-button',
@@ -400,40 +404,40 @@ describe('DateTimeRangePicker', () => {
     });
   });
 
-  it('renders DateTimeInput and Calendar components when given isCalendarOpen flag', () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+  it('renders DateTimeInput and Calendar components when given isCalendarOpen flag', async () => {
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     const calendar = container.querySelector('.react-calendar');
 
     expect(calendar).toBeInTheDocument();
   });
 
-  it('renders Clock component when given isClockOpen flag', () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+  it('renders Clock component when given isClockOpen flag', async () => {
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     const clock = container.querySelector('.react-clock');
 
     expect(clock).toBeInTheDocument();
   });
 
-  it('does not render Calendar component when given disableCalendar & isCalendarOpen flags', () => {
-    const { container } = render(<DateTimeRangePicker disableCalendar isCalendarOpen />);
+  it('does not render Calendar component when given disableCalendar & isCalendarOpen flags', async () => {
+    const { container } = await render(<DateTimeRangePicker disableCalendar isCalendarOpen />);
 
     const calendar = container.querySelector('.react-calendar');
 
     expect(calendar).toBeFalsy();
   });
 
-  it('does not render Clock component when given disableClock & isClockOpen flags', () => {
-    const { container } = render(<DateTimeRangePicker disableClock isClockOpen />);
+  it('does not render Clock component when given disableClock & isClockOpen flags', async () => {
+    const { container } = await render(<DateTimeRangePicker disableClock isClockOpen />);
 
     const clock = container.querySelector('.react-clock');
 
     expect(clock).toBeFalsy();
   });
 
-  it('opens Calendar component when given isCalendarOpen flag by changing props', () => {
-    const { container, rerender } = render(<DateTimeRangePicker />);
+  it('opens Calendar component when given isCalendarOpen flag by changing props', async () => {
+    const { container, rerender } = await render(<DateTimeRangePicker />);
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -446,8 +450,8 @@ describe('DateTimeRangePicker', () => {
     expect(calendar2).toBeInTheDocument();
   });
 
-  it('opens Clock component when given isClockOpen flag by changing props', () => {
-    const { container, rerender } = render(<DateTimeRangePicker />);
+  it('opens Clock component when given isClockOpen flag by changing props', async () => {
+    const { container, rerender } = await render(<DateTimeRangePicker />);
 
     const clock = container.querySelector('.react-clock');
 
@@ -460,8 +464,8 @@ describe('DateTimeRangePicker', () => {
     expect(clock2).toBeInTheDocument();
   });
 
-  it('opens Calendar component when clicking on a button', () => {
-    const { container } = render(<DateTimeRangePicker />);
+  it('opens Calendar component when clicking on a button', async () => {
+    const { container } = await render(<DateTimeRangePicker />);
 
     const calendar = container.querySelector('.react-calendar');
     const button = container.querySelector(
@@ -478,8 +482,8 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('handles opening Calendar component when focusing on an input inside properly', () => {
-    it('opens Calendar component when focusing on an input inside by default', () => {
-      const { container } = render(<DateTimeRangePicker />);
+    it('opens Calendar component when focusing on an input inside by default', async () => {
+      const { container } = await render(<DateTimeRangePicker />);
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
@@ -493,8 +497,8 @@ describe('DateTimeRangePicker', () => {
       expect(calendar2).toBeInTheDocument();
     });
 
-    it('opens Calendar component when focusing on an input inside given openWidgetsOnFocus = true', () => {
-      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus />);
+    it('opens Calendar component when focusing on an input inside given openWidgetsOnFocus = true', async () => {
+      const { container } = await render(<DateTimeRangePicker openWidgetsOnFocus />);
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
@@ -508,8 +512,8 @@ describe('DateTimeRangePicker', () => {
       expect(calendar2).toBeInTheDocument();
     });
 
-    it('does not open Calendar component when focusing on an input inside given openWidgetsOnFocus = false', () => {
-      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus={false} />);
+    it('does not open Calendar component when focusing on an input inside given openWidgetsOnFocus = false', async () => {
+      const { container } = await render(<DateTimeRangePicker openWidgetsOnFocus={false} />);
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
@@ -523,10 +527,12 @@ describe('DateTimeRangePicker', () => {
       expect(calendar2).toBeFalsy();
     });
 
-    it('does not open Calendar component when focusing on an input inside given shouldOpenWidgets function returning false', () => {
+    it('does not open Calendar component when focusing on an input inside given shouldOpenWidgets function returning false', async () => {
       const shouldOpenWidgets = () => false;
 
-      const { container } = render(<DateTimeRangePicker shouldOpenWidgets={shouldOpenWidgets} />);
+      const { container } = await render(
+        <DateTimeRangePicker shouldOpenWidgets={shouldOpenWidgets} />,
+      );
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
@@ -540,8 +546,8 @@ describe('DateTimeRangePicker', () => {
       expect(calendar2).toBeFalsy();
     });
 
-    it('does not open Calendar component when focusing on a select element', () => {
-      const { container } = render(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
+    it('does not open Calendar component when focusing on a select element', async () => {
+      const { container } = await render(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
 
       const calendar = container.querySelector('.react-calendar');
       const select = container.querySelector('select[name="month"]') as HTMLSelectElement;
@@ -557,8 +563,8 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('handles opening Clock component when focusing on an input inside properly', () => {
-    it('opens Clock component when focusing on an input inside by default', () => {
-      const { container } = render(<DateTimeRangePicker />);
+    it('opens Clock component when focusing on an input inside by default', async () => {
+      const { container } = await render(<DateTimeRangePicker />);
 
       const clock = container.querySelector('.react-clock');
       const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
@@ -572,8 +578,8 @@ describe('DateTimeRangePicker', () => {
       expect(clock2).toBeInTheDocument();
     });
 
-    it('opens Clock component when focusing on an input inside given openWidgetsOnFocus = true', () => {
-      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus />);
+    it('opens Clock component when focusing on an input inside given openWidgetsOnFocus = true', async () => {
+      const { container } = await render(<DateTimeRangePicker openWidgetsOnFocus />);
 
       const clock = container.querySelector('.react-clock');
       const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
@@ -587,8 +593,8 @@ describe('DateTimeRangePicker', () => {
       expect(clock2).toBeInTheDocument();
     });
 
-    it('does not open Clock component when focusing on an input inside given openWidgetsOnFocus = false', () => {
-      const { container } = render(<DateTimeRangePicker openWidgetsOnFocus={false} />);
+    it('does not open Clock component when focusing on an input inside given openWidgetsOnFocus = false', async () => {
+      const { container } = await render(<DateTimeRangePicker openWidgetsOnFocus={false} />);
 
       const clock = container.querySelector('.react-clock');
       const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
@@ -602,10 +608,12 @@ describe('DateTimeRangePicker', () => {
       expect(clock2).toBeFalsy();
     });
 
-    it('does not open Clock component when focusing on an input inside given shouldOpenWidgets function returning false', () => {
+    it('does not open Clock component when focusing on an input inside given shouldOpenWidgets function returning false', async () => {
       const shouldOpenWidgets = () => false;
 
-      const { container } = render(<DateTimeRangePicker shouldOpenWidgets={shouldOpenWidgets} />);
+      const { container } = await render(
+        <DateTimeRangePicker shouldOpenWidgets={shouldOpenWidgets} />,
+      );
 
       const clock = container.querySelector('.react-clock');
       const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
@@ -619,8 +627,8 @@ describe('DateTimeRangePicker', () => {
       expect(clock2).toBeFalsy();
     });
 
-    it('does not open Clock component when focusing on a select element', () => {
-      const { container } = render(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
+    it('does not open Clock component when focusing on a select element', async () => {
+      const { container } = await render(<DateTimeRangePicker format="dd.MMMM.yyyy hh:mm:ss a" />);
 
       const clock = container.querySelector('.react-clock');
       const select = container.querySelector('select[name="amPm"]') as HTMLSelectElement;
@@ -636,7 +644,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar component when clicked outside', async () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     await userEvent.click(document.body);
 
@@ -646,7 +654,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar component when focused outside', async () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     fireEvent.focusIn(document.body);
 
@@ -656,7 +664,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar component when tapped outside', async () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     fireEvent.touchStart(document.body);
 
@@ -666,7 +674,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock component when clicked outside', async () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     await userEvent.click(document.body);
 
@@ -676,7 +684,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock component when focused outside', async () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     fireEvent.focusIn(document.body);
 
@@ -686,7 +694,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock component when tapped outside', async () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     fireEvent.touchStart(document.body);
 
@@ -695,8 +703,8 @@ describe('DateTimeRangePicker', () => {
     );
   });
 
-  it('does not close Calendar component when focused within date inputs', () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+  it('does not close Calendar component when focused within date inputs', async () => {
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
     const monthInput = customInputs[0] as HTMLInputElement;
@@ -711,7 +719,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('does not close Clock component when focused within time inputs', async () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
     const hourInput = customInputs[3] as HTMLInputElement;
@@ -730,7 +738,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Clock when Calendar is opened by a click on the calendar icon', async () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     const clock = container.querySelector('.react-clock');
     const button = container.querySelector(
@@ -746,8 +754,8 @@ describe('DateTimeRangePicker', () => {
     );
   });
 
-  it('opens Calendar component, followed by Clock component, when focusing on inputs inside', () => {
-    const { container } = render(<DateTimeRangePicker />);
+  it('opens Calendar component, followed by Clock component, when focusing on inputs inside', async () => {
+    const { container } = await render(<DateTimeRangePicker />);
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
@@ -767,7 +775,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar when changing value by default', async () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     const [firstTile, secondTile] = container.querySelectorAll(
       '.react-calendar__tile',
@@ -787,7 +795,7 @@ describe('DateTimeRangePicker', () => {
   });
 
   it('closes Calendar when changing value with prop closeWidgets = true', async () => {
-    const { container } = render(<DateTimeRangePicker closeWidgets isCalendarOpen />);
+    const { container } = await render(<DateTimeRangePicker closeWidgets isCalendarOpen />);
 
     const [firstTile, secondTile] = container.querySelectorAll(
       '.react-calendar__tile',
@@ -806,8 +814,8 @@ describe('DateTimeRangePicker', () => {
     );
   });
 
-  it('does not close Calendar when changing value with prop closeWidgets = false', () => {
-    const { container } = render(<DateTimeRangePicker closeWidgets={false} isCalendarOpen />);
+  it('does not close Calendar when changing value with prop closeWidgets = false', async () => {
+    const { container } = await render(<DateTimeRangePicker closeWidgets={false} isCalendarOpen />);
 
     const [firstTile, secondTile] = container.querySelectorAll(
       '.react-calendar__tile',
@@ -826,10 +834,10 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not close Calendar when changing value with shouldCloseWidgets function returning false', () => {
+  it('does not close Calendar when changing value with shouldCloseWidgets function returning false', async () => {
     const shouldCloseWidgets = () => false;
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeRangePicker isCalendarOpen shouldCloseWidgets={shouldCloseWidgets} />,
     );
 
@@ -850,8 +858,8 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not close Calendar when changing value using inputs', () => {
-    const { container } = render(<DateTimeRangePicker isCalendarOpen />);
+  it('does not close Calendar when changing value using inputs', async () => {
+    const { container } = await render(<DateTimeRangePicker isCalendarOpen />);
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
@@ -864,8 +872,8 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not close Clock when changing value using inputs', () => {
-    const { container } = render(<DateTimeRangePicker isClockOpen />);
+  it('does not close Clock when changing value using inputs', async () => {
+    const { container } = await render(<DateTimeRangePicker isClockOpen />);
 
     const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
@@ -878,11 +886,11 @@ describe('DateTimeRangePicker', () => {
     expect(clock).toBeInTheDocument();
   });
 
-  it('calls onChange callback when changing value', () => {
+  it('calls onChange callback when changing value', async () => {
     const value = new Date(2023, 0, 31, 21, 40, 11);
     const onChange = vi.fn();
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeRangePicker maxDetail="second" onChange={onChange} value={value} />,
     );
 
@@ -895,7 +903,7 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([new Date(2023, 0, 1, 21, 40, 11), null]);
   });
 
-  it('calls onChange callback with merged new date & old time when calling internal onDateChange given Date', () => {
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given Date', async () => {
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -906,7 +914,7 @@ describe('DateTimeRangePicker', () => {
     const nextValueFrom = new Date(2019, 0, 1, hours, minutes, seconds, ms);
     const valueTo = new Date(2019, 6, 17);
 
-    const { container, getByRole } = render(
+    const { container, getByRole } = await render(
       <DateTimeRangePicker isCalendarOpen onChange={onChange} value={[valueFrom, valueTo]} />,
     );
 
@@ -943,7 +951,7 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
   });
 
-  it('calls onChange callback with merged new date & old time when calling internal onDateChange given ISO string', () => {
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given ISO string', async () => {
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -954,7 +962,7 @@ describe('DateTimeRangePicker', () => {
     const nextValueFrom = new Date(2019, 0, 1, hours, minutes, seconds, ms);
     const valueTo = new Date(2019, 6, 17);
 
-    const { container, getByRole } = render(
+    const { container, getByRole } = await render(
       <DateTimeRangePicker isCalendarOpen onChange={onChange} value={[valueFrom, valueTo]} />,
     );
 
@@ -991,7 +999,7 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
   });
 
-  it('calls onChange callback with merged new date & old time when calling internal onDateChange given Date', () => {
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given Date', async () => {
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -1002,7 +1010,7 @@ describe('DateTimeRangePicker', () => {
     const valueTo = new Date(2019, 6, 17, hours, minutes, seconds, ms);
     const nextValueTo = new Date(2019, 0, 1, hours, minutes, seconds, ms);
 
-    const { container, getByRole } = render(
+    const { container, getByRole } = await render(
       <DateTimeRangePicker isCalendarOpen onChange={onChange} value={[valueFrom, valueTo]} />,
     );
 
@@ -1032,7 +1040,7 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
   });
 
-  it('calls onChange callback with merged new date & old time when calling internal onDateChange given ISO string', () => {
+  it('calls onChange callback with merged new date & old time when calling internal onDateChange given ISO string', async () => {
     const hours = 21;
     const minutes = 40;
     const seconds = 11;
@@ -1043,7 +1051,7 @@ describe('DateTimeRangePicker', () => {
     const valueTo = new Date(2019, 6, 17, hours, minutes, seconds, ms);
     const nextValueTo = new Date(2019, 0, 1, hours, minutes, seconds, ms);
 
-    const { container, getByRole } = render(
+    const { container, getByRole } = await render(
       <DateTimeRangePicker isCalendarOpen onChange={onChange} value={[valueFrom, valueTo]} />,
     );
 
@@ -1073,11 +1081,11 @@ describe('DateTimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
   });
 
-  it('calls onInvalidChange callback when changing value to an invalid one', () => {
+  it('calls onInvalidChange callback when changing value to an invalid one', async () => {
     const value = new Date(2023, 0, 31, 21, 40, 11);
     const onInvalidChange = vi.fn();
 
-    const { container } = render(
+    const { container } = await render(
       <DateTimeRangePicker maxDetail="second" onInvalidChange={onInvalidChange} value={value} />,
     );
 
@@ -1090,10 +1098,10 @@ describe('DateTimeRangePicker', () => {
     expect(onInvalidChange).toHaveBeenCalled();
   });
 
-  it('clears the value when clicking on a button', () => {
+  it('clears the value when clicking on a button', async () => {
     const onChange = vi.fn();
 
-    const { container } = render(<DateTimeRangePicker onChange={onChange} />);
+    const { container } = await render(<DateTimeRangePicker onChange={onChange} />);
 
     const calendar = container.querySelector('.react-calendar');
     const button = container.querySelector(
@@ -1108,10 +1116,10 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('onChangeFrom', () => {
-    it('calls onChange properly given no initial value', () => {
+    it('calls onChange properly given no initial value', async () => {
       const onChange = vi.fn();
 
-      const { container } = render(
+      const { container } = await render(
         <DateTimeRangePicker format="M/d/y H:m:s" maxDetail="second" onChange={onChange} />,
       );
 
@@ -1153,11 +1161,11 @@ describe('DateTimeRangePicker', () => {
       expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
     });
 
-    it('calls onChange properly given single initial value', () => {
+    it('calls onChange properly given single initial value', async () => {
       const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      const { container } = render(
+      const { container } = await render(
         <DateTimeRangePicker
           format="M/d/y H:m:s"
           maxDetail="second"
@@ -1204,13 +1212,13 @@ describe('DateTimeRangePicker', () => {
       expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
     });
 
-    it('calls onChange properly given initial value as an array', () => {
+    it('calls onChange properly given initial value as an array', async () => {
       const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo] as [Date, Date];
 
-      const { container } = render(
+      const { container } = await render(
         <DateTimeRangePicker
           format="M/d/y H:m:s"
           maxDetail="second"
@@ -1259,10 +1267,10 @@ describe('DateTimeRangePicker', () => {
   });
 
   describe('onChangeTo', () => {
-    it('calls onChange properly given no initial value', () => {
+    it('calls onChange properly given no initial value', async () => {
       const onChange = vi.fn();
 
-      const { container } = render(
+      const { container } = await render(
         <DateTimeRangePicker format="M/d/y H:m:s" maxDetail="second" onChange={onChange} />,
       );
 
@@ -1303,11 +1311,11 @@ describe('DateTimeRangePicker', () => {
       expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
     });
 
-    it('calls onChange properly given single initial value', () => {
+    it('calls onChange properly given single initial value', async () => {
       const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      const { container } = render(
+      const { container } = await render(
         <DateTimeRangePicker
           format="M/d/y H:m:s"
           maxDetail="second"
@@ -1354,13 +1362,13 @@ describe('DateTimeRangePicker', () => {
       expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
     });
 
-    it('calls onChange properly given initial value as an array', () => {
+    it('calls onChange properly given initial value as an array', async () => {
       const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo] as [Date, Date];
 
-      const { container } = render(
+      const { container } = await render(
         <DateTimeRangePicker
           format="M/d/y H:m:s"
           maxDetail="second"
@@ -1407,10 +1415,10 @@ describe('DateTimeRangePicker', () => {
       expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
     });
   });
-  it('calls onClick callback when clicked a page (sample of mouse events family)', () => {
+  it('calls onClick callback when clicked a page (sample of mouse events family)', async () => {
     const onClick = vi.fn();
 
-    const { container } = render(<DateTimeRangePicker onClick={onClick} />);
+    const { container } = await render(<DateTimeRangePicker onClick={onClick} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
     fireEvent.click(wrapper);
@@ -1418,10 +1426,10 @@ describe('DateTimeRangePicker', () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('calls onTouchStart callback when touched a page (sample of touch events family)', () => {
+  it('calls onTouchStart callback when touched a page (sample of touch events family)', async () => {
     const onTouchStart = vi.fn();
 
-    const { container } = render(<DateTimeRangePicker onTouchStart={onTouchStart} />);
+    const { container } = await render(<DateTimeRangePicker onTouchStart={onTouchStart} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
     fireEvent.touchStart(wrapper);
