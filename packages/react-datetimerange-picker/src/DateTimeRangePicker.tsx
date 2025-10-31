@@ -782,12 +782,15 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
           onChange={onChangeFrom}
           value={valueFrom}
         />
-        <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
+        <span className={`${baseClassName}__range-divider`} data-testid="range-divider">
+          {rangeDivider}
+        </span>
         <DateTimeInput {...commonProps} name={`${name}_to`} onChange={onChangeTo} value={valueTo} />
         {clearIcon !== null && (
           <button
             aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
+            data-testid="clear-button"
             disabled={disabled}
             onClick={clear}
             onFocus={stopPropagation}
@@ -801,6 +804,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
             aria-expanded={isCalendarOpen || false}
             aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
+            data-testid="calendar-button"
             disabled={disabled}
             onClick={toggleCalendar}
             onFocus={stopPropagation}
