@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 import DateTimeRangePicker from './DateTimeRangePicker.js';
 
@@ -1236,6 +1236,7 @@ describe('DateTimeRangePicker', () => {
           format="M/d/y H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openWidgetsOnFocus={false}
         />,
       );
 
@@ -1262,8 +1263,9 @@ describe('DateTimeRangePicker', () => {
         await userEvent.fill(secondInput, '45');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
+      });
     });
 
     it('calls onChange properly given single initial value', async () => {
@@ -1276,6 +1278,7 @@ describe('DateTimeRangePicker', () => {
           format="M/d/y H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openWidgetsOnFocus={false}
           value={value}
         />,
       );
@@ -1303,8 +1306,9 @@ describe('DateTimeRangePicker', () => {
         await userEvent.fill(secondInput, '45');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
+      });
     });
 
     it('calls onChange properly given initial value as an array', async () => {
@@ -1319,6 +1323,7 @@ describe('DateTimeRangePicker', () => {
           format="M/d/y H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openWidgetsOnFocus={false}
           value={value}
         />,
       );
@@ -1346,8 +1351,9 @@ describe('DateTimeRangePicker', () => {
         await userEvent.fill(secondInput, '45');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
+      });
     });
   });
 
@@ -1361,6 +1367,7 @@ describe('DateTimeRangePicker', () => {
           format="M/d/y H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openWidgetsOnFocus={false}
         />,
       );
 
@@ -1387,8 +1394,9 @@ describe('DateTimeRangePicker', () => {
         await userEvent.fill(secondInput, '45');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
+      });
     });
 
     it('calls onChange properly given single initial value', async () => {
@@ -1401,6 +1409,7 @@ describe('DateTimeRangePicker', () => {
           format="M/d/y H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openWidgetsOnFocus={false}
           value={value}
         />,
       );
@@ -1428,8 +1437,9 @@ describe('DateTimeRangePicker', () => {
         await userEvent.fill(secondInput, '45');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
+      });
     });
 
     it('calls onChange properly given initial value as an array', async () => {
@@ -1444,6 +1454,7 @@ describe('DateTimeRangePicker', () => {
           format="M/d/y H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openWidgetsOnFocus={false}
           value={value}
         />,
       );
@@ -1471,8 +1482,9 @@ describe('DateTimeRangePicker', () => {
         await userEvent.fill(secondInput, '45');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
+      await vi.waitFor(() => {
+        expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
+      });
     });
   });
 
