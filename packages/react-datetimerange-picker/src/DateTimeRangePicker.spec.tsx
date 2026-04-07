@@ -446,7 +446,7 @@ describe('DateTimeRangePicker', () => {
 
     expect(calendar).not.toBeInTheDocument();
 
-    rerender(<DateTimeRangePicker {...defaultProps} isCalendarOpen />);
+    await rerender(<DateTimeRangePicker {...defaultProps} isCalendarOpen />);
 
     const calendar2 = container.querySelector('.react-calendar');
 
@@ -460,7 +460,7 @@ describe('DateTimeRangePicker', () => {
 
     expect(clock).not.toBeInTheDocument();
 
-    rerender(<DateTimeRangePicker {...defaultProps} isClockOpen />);
+    await rerender(<DateTimeRangePicker {...defaultProps} isClockOpen />);
 
     const clock2 = container.querySelector('.react-clock');
 
