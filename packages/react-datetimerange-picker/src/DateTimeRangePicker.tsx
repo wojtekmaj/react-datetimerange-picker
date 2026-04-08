@@ -698,8 +698,8 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
         target &&
         wrapperEl &&
         !wrapperEl.contains(target) &&
-        (!calendarWrapperEl || !calendarWrapperEl.contains(target)) &&
-        (!clockWrapperEl || !clockWrapperEl.contains(target))
+        !calendarWrapperEl?.contains(target) &&
+        !clockWrapperEl?.contains(target)
       ) {
         closeWidgets({ reason: 'outsideAction' });
       }
