@@ -133,6 +133,12 @@ export type DateTimeRangePickerProps = {
    */
   closeWidgets?: boolean;
   /**
+   * `form` attribute for the custom day, month, year, hour, minute, second, and AM/PM inputs.
+   *
+   * @example 'my-form'
+   */
+  customInputsForm?: string;
+  /**
    * `data-testid` attribute for the main React-DateTimeRange-Picker `<div>` element.
    *
    * @example 'datetimerange-picker'
@@ -416,6 +422,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
     clearAriaLabel,
     clearIcon = ClearIcon,
     closeWidgets: shouldCloseWidgetsOnSelect = true,
+    customInputsForm,
     'data-testid': dataTestid,
     dayAriaLabel,
     dayPlaceholder,
@@ -761,6 +768,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
       ...ariaLabelProps,
       ...placeholderProps,
       className: `${baseClassName}__inputGroup`,
+      customInputsForm,
       disabled,
       format,
       isWidgetOpen: isCalendarOpen || isClockOpen,
