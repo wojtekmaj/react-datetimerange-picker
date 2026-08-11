@@ -4,9 +4,9 @@ import '@wojtekmaj/react-datetimerange-picker/dist/DateTimeRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import ValidityOptions from './ValidityOptions.js';
-import MaxDetailOptions from './MaxDetailOptions.js';
 import LocaleOptions from './LocaleOptions.js';
+import MaxDetailOptions from './MaxDetailOptions.js';
+import ValidityOptions from './ValidityOptions.js';
 import ValueOptions from './ValueOptions.js';
 import ViewOptions from './ViewOptions.js';
 
