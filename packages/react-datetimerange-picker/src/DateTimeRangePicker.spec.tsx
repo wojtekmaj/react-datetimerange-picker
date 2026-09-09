@@ -631,7 +631,7 @@ describe('DateTimeRangePicker', () => {
       const { container } = await render(<DateTimeRangePicker {...defaultProps} />);
 
       const clock = container.querySelector('.react-clock');
-      const input = page.getByRole('spinbutton', { name: /hour/ }).first();
+      const input = page.getByRole('spinbutton', { name: 'hour' }).first();
 
       expect(clock).not.toBeInTheDocument();
 
@@ -650,7 +650,7 @@ describe('DateTimeRangePicker', () => {
       );
 
       const clock = container.querySelector('.react-clock');
-      const input = page.getByRole('spinbutton', { name: /hour/ }).first();
+      const input = page.getByRole('spinbutton', { name: 'hour' }).first();
 
       expect(clock).not.toBeInTheDocument();
 
@@ -669,7 +669,7 @@ describe('DateTimeRangePicker', () => {
       );
 
       const clock = container.querySelector('.react-clock');
-      const input = page.getByRole('spinbutton', { name: /hour/ }).first();
+      const input = page.getByRole('spinbutton', { name: 'hour' }).first();
 
       expect(clock).not.toBeInTheDocument();
 
@@ -690,7 +690,7 @@ describe('DateTimeRangePicker', () => {
       );
 
       const clock = container.querySelector('.react-clock');
-      const input = page.getByRole('spinbutton', { name: /hour/ }).first();
+      const input = page.getByRole('spinbutton', { name: 'hour' }).first();
 
       expect(clock).not.toBeInTheDocument();
 
