@@ -471,6 +471,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
   const wrapper = useRef<HTMLDivElement>(null);
   const calendarWrapper = useRef<HTMLDivElement>(null);
   const clockWrapper = useRef<HTMLDivElement>(null);
+  const [activeClockRangePart, setActiveClockRangePart] = useState<'from' | 'to' | null>(null);
 
   useEffect(() => {
     setIsCalendarOpen(isCalendarOpenProps);
@@ -505,6 +506,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
 
       setIsCalendarOpen(false);
 
+      setActiveClockRangePart(null);
       if (onCalendarClose) {
         onCalendarClose();
       }
@@ -545,6 +547,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
 
       setIsClockOpen(false);
 
+      setActiveClockRangePart(null);
       if (onClockClose) {
         onClockClose();
       }
@@ -556,6 +559,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
     ({ reason }: { reason: CloseReason }) => {
       closeCalendar({ reason });
       closeClock({ reason });
+      setActiveClockRangePart(null);
     },
     [closeCalendar, closeClock],
   );
@@ -579,7 +583,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
   }
 
   function onChangeTo(valueTo: Date | null, closeCalendar: boolean) {
-    const [valueFrom] = Array.isArray(value) ? value : [value];
+    const [valueFrom, valueTo] = Array.isArray(value) ? value : [value];
 
     const valueFromDate = valueFrom ? new Date(valueFrom) : null;
 
@@ -783,17 +787,26 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
 
     return (
       <div className={`${baseClassName}__wrapper`}>
-        <DateTimeInput
-          {...commonProps}
-          autoFocus={autoFocus}
-          name={`${name}_from`}
-          onChange={onChangeFrom}
-          value={valueFrom}
-        />
+        <div onFocus={() => setActiveClockRangePart('from')}>
+          <DateTimeInput
+            {...commonProps}
+            autoFocus={autoFocus}
+            name={`${name}_from`}
+            onChange={onChangeFrom}
+            value={valueFrom}
+          />
+        </div>
         <span className={`${baseClassName}__range-divider`} data-testid="range-divider">
           {rangeDivider}
         </span>
-        <DateTimeInput {...commonProps} name={`${name}_to`} onChange={onChangeTo} value={valueTo} />
+        <div onFocus={() => setActiveClockRangePart('to')}>
+          <DateTimeInput
+            {...commonProps}
+            name={`${name}_to`}
+            onChange={onChangeTo}
+            value={valueTo}
+          />
+        </div>
         {clearIcon !== null && (
           <button
             aria-label={clearAriaLabel}
@@ -884,12 +897,14 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
 
+    const clockValue = activeClockRangePart === 'to' ? valueTo : valueFrom;
+
     const clock = (
       <Clock
         locale={locale}
         renderMinuteHand={maxDetailIndex > 0}
         renderSecondHand={maxDetailIndex > 1}
-        value={valueFrom}
+        value={clockValue}
         {...clockProps}
       />
     );
