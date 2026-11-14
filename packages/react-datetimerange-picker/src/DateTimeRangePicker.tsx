@@ -677,7 +677,9 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' && !event.defaultPrevented) {
+        event.preventDefault();
+
         closeWidgets({ reason: 'escape' });
       }
     },
