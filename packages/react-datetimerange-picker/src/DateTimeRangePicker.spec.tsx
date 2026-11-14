@@ -440,14 +440,6 @@ describe('DateTimeRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('renders Clock component when given isClockOpen flag', async () => {
-    const { container } = await render(<DateTimeRangePicker {...defaultProps} isClockOpen />);
-
-    const clock = container.querySelector('.react-clock');
-
-    expect(clock).toBeInTheDocument();
-  });
-
   it('does not render Calendar component when given disableCalendar & isCalendarOpen flags', async () => {
     const { container } = await render(
       <DateTimeRangePicker {...defaultProps} disableCalendar isCalendarOpen />,
@@ -456,6 +448,48 @@ describe('DateTimeRangePicker', () => {
     const calendar = container.querySelector('.react-calendar');
 
     expect(calendar).not.toBeInTheDocument();
+  });
+
+  it.each`
+    renderInPortal
+    ${false}
+    ${true}
+  `(
+    'does not render Calendar component when given disabled & isCalendarOpen flags (portal: $renderInPortal)',
+    async ({ renderInPortal }) => {
+      const portalContainer = renderInPortal ? document.body : undefined;
+      const props = { ...defaultProps, isCalendarOpen: true, portalContainer };
+
+      const { container, rerender } = await render(<DateTimeRangePicker {...props} disabled />);
+
+      const widgetContainer = portalContainer || container;
+
+      expect(widgetContainer.querySelector('.react-calendar')).not.toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'false');
+
+      await rerender(<DateTimeRangePicker {...props} />);
+
+      expect(widgetContainer.querySelector('.react-calendar')).toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'true');
+
+      await rerender(<DateTimeRangePicker {...props} disabled />);
+
+      expect(widgetContainer.querySelector('.react-calendar')).not.toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'false');
+
+      await rerender(<DateTimeRangePicker {...props} />);
+
+      expect(widgetContainer.querySelector('.react-calendar')).toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'true');
+    },
+  );
+
+  it('renders Clock component when given isClockOpen flag', async () => {
+    const { container } = await render(<DateTimeRangePicker {...defaultProps} isClockOpen />);
+
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
   });
 
   it('does not render Clock component when given disableClock & isClockOpen flags', async () => {
@@ -467,6 +501,36 @@ describe('DateTimeRangePicker', () => {
 
     expect(clock).not.toBeInTheDocument();
   });
+
+  it.each`
+    renderInPortal
+    ${false}
+    ${true}
+  `(
+    'does not render Clock component when given disabled & isClockOpen flags (portal: $renderInPortal)',
+    async ({ renderInPortal }) => {
+      const portalContainer = renderInPortal ? document.body : undefined;
+      const props = { ...defaultProps, isClockOpen: true, portalContainer };
+
+      const { container, rerender } = await render(<DateTimeRangePicker {...props} disabled />);
+
+      const widgetContainer = portalContainer || container;
+
+      expect(widgetContainer.querySelector('.react-clock')).not.toBeInTheDocument();
+
+      await rerender(<DateTimeRangePicker {...props} />);
+
+      expect(widgetContainer.querySelector('.react-clock')).toBeInTheDocument();
+
+      await rerender(<DateTimeRangePicker {...props} disabled />);
+
+      expect(widgetContainer.querySelector('.react-clock')).not.toBeInTheDocument();
+
+      await rerender(<DateTimeRangePicker {...props} />);
+
+      expect(widgetContainer.querySelector('.react-clock')).toBeInTheDocument();
+    },
+  );
 
   it('opens Calendar component when given isCalendarOpen flag by changing props', async () => {
     const { container, rerender } = await render(<DateTimeRangePicker {...defaultProps} />);
