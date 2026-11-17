@@ -830,7 +830,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
   }
 
   function renderCalendar() {
-    if (isCalendarOpen === null || disableCalendar) {
+    if (!isCalendarOpen || disableCalendar) {
       return null;
     }
 
@@ -860,16 +860,7 @@ export default function DateTimeRangePicker(props: DateTimeRangePickerProps): Re
       )
     ) : (
       <Fit>
-        <div
-          ref={(ref) => {
-            if (ref && !isCalendarOpen) {
-              ref.removeAttribute('style');
-            }
-          }}
-          className={classNames}
-        >
-          {calendar}
-        </div>
+        <div className={classNames}>{calendar}</div>
       </Fit>
     );
   }

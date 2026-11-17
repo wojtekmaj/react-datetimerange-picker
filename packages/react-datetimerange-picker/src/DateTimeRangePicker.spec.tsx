@@ -8,13 +8,13 @@ import DateTimeRangePicker from './DateTimeRangePicker.js';
 import type { Locator } from 'vitest/browser';
 
 async function waitForElementToBeRemovedOrHidden(callback: () => HTMLElement | null) {
-  const element = callback();
+  await vi.waitFor(() => {
+    const element = callback();
 
-  if (element) {
-    await vi.waitFor(() =>
-      expect(element).toHaveAttribute('class', expect.stringContaining('--closed')),
-    );
-  }
+    if (element) {
+      expect(element).toHaveAttribute('class', expect.stringContaining('--closed'));
+    }
+  });
 }
 
 describe('DateTimeRangePicker', () => {

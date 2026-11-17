@@ -109,7 +109,6 @@
   z-index: 1;
 }
 
-.react-datetimerange-picker__calendar--closed,
 .react-datetimerange-picker__clock--closed {
   display: none;
 }
